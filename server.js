@@ -23,15 +23,36 @@ let db = null;
 async function connectDB() {
   if (!process.env.MONGO_URI) return;
   try {
-    const client = new MongoClient(process.env.MONGO_URI, {
-      tls: true,
-      tlsAllowInvalidCertificates: true
-    });
+    const client = new MongoClient(process.env.MONGO_URI);
     await client.connect();
     db = client.db("epnp_csat");
-    console.log("Connected to MongoDB");
+    await db.command({ ping: 1 });
+    console.log("Connected to MongoDB successfully");
+    await autoSeed();
   } catch (err) {
     console.error("MongoDB connection failed, falling back to local file storage:", err.message);
+    db = null;
+  }
+}
+
+async function autoSeed() {
+  if (!db) return;
+  const col = db.collection("responses");
+  const count = await col.countDocuments();
+  if (count > 0) {
+    console.log(`MongoDB already has ${count} responses, skipping seed`);
+    return;
+  }
+  const seedFile = path.join(__dirname, "data", "seed-data.json");
+  if (!fs.existsSync(seedFile)) return;
+  try {
+    const seedData = JSON.parse(fs.readFileSync(seedFile, "utf8"));
+    if (seedData.length > 0) {
+      await col.insertMany(seedData);
+      console.log(`Auto-seeded ${seedData.length} responses into MongoDB`);
+    }
+  } catch (err) {
+    console.error("Auto-seed failed:", err.message);
   }
 }
 

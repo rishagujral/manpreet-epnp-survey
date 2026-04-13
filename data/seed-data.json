@@ -1,0 +1,72 @@
+[
+  {
+    "id": "ae766edc-cfed-4b73-86e0-09478b7140dc",
+    "email": "gujral.manpreet@bcg.com",
+    "serviceLines": ["Strategic Sourcing", "EP&P Operations", "Source to Pay Excellence"],
+    "satisfaction": { "strategic_sourcing": "Satisfied", "ep_p_operations": "Satisfied", "source_to_pay_excellence": "Dissatisfied" },
+    "overallSatisfaction": "Very Satisfied",
+    "improvement": "Good job in making the claude webpage",
+    "recognition": "Manpreet Gujral",
+    "submittedAt": "2026-04-13T12:45:50.914Z"
+  },
+  {
+    "id": "15ced201-4452-416a-a997-b10c0540f3fb",
+    "email": "gujral.manpreet@bcg.com",
+    "serviceLines": ["Strategic Sourcing", "EP&P Operations", "Source to Pay Excellence"],
+    "satisfaction": { "strategic_sourcing": "Satisfied", "ep_p_operations": "Satisfied", "source_to_pay_excellence": "Dissatisfied" },
+    "overallSatisfaction": "Very Satisfied",
+    "improvement": "Good job in making the claude webpage",
+    "recognition": "Manpreet Gujral",
+    "submittedAt": "2026-04-13T12:46:15.520Z"
+  },
+  {
+    "id": "9c3959ce-29f6-4a26-8c9b-8d9cc1f9d97f",
+    "email": "gujral.manpreet@bcg.com",
+    "serviceLines": ["Strategic Sourcing", "EP&P Operations", "Source to Pay Excellence"],
+    "satisfaction": { "strategic_sourcing": "Satisfied", "ep_p_operations": "Satisfied", "source_to_pay_excellence": "Dissatisfied" },
+    "overallSatisfaction": "Very Satisfied",
+    "improvement": "Good job in making the claude webpage",
+    "recognition": "Manpreet Gujral",
+    "submittedAt": "2026-04-13T12:46:21.696Z"
+  },
+  {
+    "id": "c0a21856-c519-4ff1-a4b9-27966ec06769",
+    "email": "gujral.manpreet@bcg.com",
+    "serviceLines": ["Strategic Sourcing", "EP&P Operations", "Source to Pay Excellence"],
+    "satisfaction": { "strategic_sourcing": "Satisfied", "ep_p_operations": "Satisfied", "source_to_pay_excellence": "Dissatisfied" },
+    "overallSatisfaction": "Very Satisfied",
+    "improvement": "Good job in making the claude webpage",
+    "recognition": "Manpreet Gujral",
+    "submittedAt": "2026-04-13T12:46:48.643Z"
+  },
+  {
+    "id": "f07f4fa7-6e6a-4e42-b75a-bf2bf465ad44",
+    "email": "gujral.manpreet@bcg.com",
+    "serviceLines": ["Strategic Sourcing", "EP&P Operations", "Source to Pay Excellence"],
+    "satisfaction": { "strategic_sourcing": "Neutral", "ep_p_operations": "Satisfied", "source_to_pay_excellence": "Satisfied" },
+    "overallSatisfaction": "Satisfied",
+    "improvement": "Manpreet is lovely",
+    "recognition": "Everyone",
+    "submittedAt": "2026-04-13T13:09:35.419Z"
+  },
+  {
+    "id": "f50e9271-55ec-494e-b179-98e2c96e0e8f",
+    "email": "gujral.manpreet@bcg.com",
+    "serviceLines": ["Strategic Sourcing", "EP&P Operations", "Source to Pay Excellence"],
+    "satisfaction": { "strategic_sourcing": "Satisfied", "ep_p_operations": "Satisfied", "source_to_pay_excellence": "Very Satisfied" },
+    "overallSatisfaction": "Very Satisfied",
+    "improvement": "All is good",
+    "recognition": "Yes- Manpreet is amazing for making this using Claude",
+    "submittedAt": "2026-04-13T13:56:52.220Z"
+  },
+  {
+    "id": "e1f83177-785c-451e-8e03-5e5c3d867e6d",
+    "email": "srivastava.anshul@bcg.com",
+    "serviceLines": ["Strategic Sourcing", "EP&P Operations", "Source to Pay Excellence"],
+    "satisfaction": { "strategic_sourcing": "Very Satisfied", "ep_p_operations": "Very Satisfied", "source_to_pay_excellence": "Very Satisfied" },
+    "overallSatisfaction": "Very Satisfied",
+    "improvement": "Great",
+    "recognition": "Charu",
+    "submittedAt": "2026-04-13T14:18:39.568Z"
+  }
+]
