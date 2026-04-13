@@ -22,10 +22,17 @@ let db = null;
 
 async function connectDB() {
   if (!process.env.MONGO_URI) return;
-  const client = new MongoClient(process.env.MONGO_URI);
-  await client.connect();
-  db = client.db("epnp_csat");
-  console.log("Connected to MongoDB");
+  try {
+    const client = new MongoClient(process.env.MONGO_URI, {
+      tls: true,
+      tlsAllowInvalidCertificates: true
+    });
+    await client.connect();
+    db = client.db("epnp_csat");
+    console.log("Connected to MongoDB");
+  } catch (err) {
+    console.error("MongoDB connection failed, falling back to local file storage:", err.message);
+  }
 }
 
 const dataDir = path.join(root, "data");
