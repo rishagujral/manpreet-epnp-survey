@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Share EP&P Survey</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <div class="page">
+    <div class="card">
+      <div class="brand">EP&P</div>
+      <h1>Share the Survey</h1>
+      <p>Copy the survey link below and share it with your colleagues via email, Teams, or any channel.</p>
+
+      <!-- Copy survey link -->
+      <div class="section">
+        <h2>Survey Link</h2>
+        <div class="copy-row">
+          <input type="text" id="surveyLink" readonly class="copy-input" />
+          <button class="btn" onclick="copyLink('surveyLink')">Copy</button>
+        </div>
+        <p id="copiedMsg" class="copied-msg hidden">Copied to clipboard!</p>
+      </div>
+
+      <!-- Copy dashboard link -->
+      <div class="section">
+        <h2>Dashboard Link</h2>
+        <p class="muted">Share this so others can view the results too.</p>
+        <div class="copy-row">
+          <input type="text" id="dashLink" readonly class="copy-input" />
+          <button class="btn" onclick="copyLink('dashLink')">Copy</button>
+        </div>
+        <p id="copiedMsg2" class="copied-msg hidden">Copied to clipboard!</p>
+      </div>
+
+      <!-- Quick compose -->
+      <div class="section">
+        <h2>Quick Email Compose</h2>
+        <p class="muted">Enter email addresses and we'll open your email client with a pre-filled message.</p>
+        <label for="emailList">Email addresses (comma separated)</label>
+        <textarea id="emailList" rows="3" placeholder="alice@bcg.com, bob@bcg.com, charlie@bcg.com"></textarea>
+        <div style="margin-top:12px">
+          <button class="btn" onclick="openMailto()">Open in Email Client</button>
+          <button class="btn btn-outline" onclick="copyEmailBody()" style="margin-left:8px">Copy Email Body</button>
+        </div>
+        <p id="copiedBody" class="copied-msg hidden">Email body copied!</p>
+      </div>
+
+      <div class="section" style="border-top:none;margin-top:8px">
+        <a href="/output/dashboard.html" class="muted">Back to Dashboard</a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const base = window.location.origin;
+    document.getElementById("surveyLink").value = base + "/output/survey.html";
+    document.getElementById("dashLink").value = base + "/output/dashboard.html";
+
+    function copyLink(inputId) {
+      const input = document.getElementById(inputId);
+      navigator.clipboard.writeText(input.value);
+      const msg = inputId === "surveyLink" ? document.getElementById("copiedMsg") : document.getElementById("copiedMsg2");
+      msg.classList.remove("hidden");
+      setTimeout(() => msg.classList.add("hidden"), 2000);
+    }
+
+    function getEmailBody() {
+      const link = document.getElementById("surveyLink").value;
+      return "Hi,\n\nAs an important internal client of the EP&P team, your input is critical to help us improve our services.\n\nPlease take two minutes to complete this CSAT survey and share your feedback by May 1st, 2026:\n\n" + link + "\n\nThank you!\nEP&P Team";
+    }
+
+    function openMailto() {
+      const emails = document.getElementById("emailList").value.trim();
+      if (!emails) { alert("Please enter at least one email address."); return; }
+      const subject = encodeURIComponent("EP&P CSAT Survey - Your Feedback Matters");
+      const body = encodeURIComponent(getEmailBody());
+      window.location.href = "mailto:" + encodeURIComponent(emails) + "?subject=" + subject + "&body=" + body;
+    }
+
+    function copyEmailBody() {
+      navigator.clipboard.writeText(getEmailBody().replace(/\\n/g, "\n"));
+      const msg = document.getElementById("copiedBody");
+      msg.classList.remove("hidden");
+      setTimeout(() => msg.classList.add("hidden"), 2000);
+    }
+  </script>
+</body>
+</html>

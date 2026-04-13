@@ -1,0 +1,14 @@
+services:
+  - type: web
+    name: epnp-csat-survey
+    runtime: node
+    plan: free
+    buildCommand: npm install && npm run build-survey
+    startCommand: node server.js
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: MONGO_URI
+        sync: false
+      - key: BASE_URL
+        sync: false

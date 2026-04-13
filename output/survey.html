@@ -1,0 +1,236 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>EP&P Questionnaire</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <div class="page">
+    <div class="card">
+      <div class="brand">EP&P</div>
+      <h1>EP&P Questionnaire</h1>
+
+      <form id="surveyForm">
+
+        <!-- PAGE 1 -->
+        <section class="section">
+          <h2>Page 1</h2>
+          <p>As an important internal client of EP&P team, your input is critical to help us improve our services and measure our impact to you.</p>
+          <p>Please take two minutes to complete this CSAT survey and share your feedback by May 1st, 2026.</p>
+          <label for="email">Please enter your email.</label>
+          <input id="email" name="email" type="email" required placeholder="name@bcg.com" />
+        </section>
+
+        <!-- PAGE 2: Service line checkboxes -->
+        <section class="section">
+          <h2>Page 2</h2>
+          <p>We are soliciting input across all service lines of EP&P; please mark below which ones you have used and help us answer the following questions</p>
+
+          
+            <div class="service-block">
+              <label class="checkbox-row">
+                <input type="checkbox" name="serviceLines" value="Strategic Sourcing" data-slkey="strategic_sourcing" class="sl-checkbox" />
+                <span><strong>Strategic Sourcing</strong></span>
+              </label>
+              <p class="service-desc">Supports contract negotiations, renewals, supplier selection, and bidding processes to help you get the best value</p>
+            </div>
+          
+            <div class="service-block">
+              <label class="checkbox-row">
+                <input type="checkbox" name="serviceLines" value="EP&P Operations" data-slkey="ep_p_operations" class="sl-checkbox" />
+                <span><strong>EP&P Operations</strong></span>
+              </label>
+              <p class="service-desc">Handles invoice processing, payments, and day-to-day procurement support (supplier management, service desk etc.) to keep operations running smoothly</p>
+            </div>
+          
+            <div class="service-block">
+              <label class="checkbox-row">
+                <input type="checkbox" name="serviceLines" value="Source to Pay Excellence" data-slkey="source_to_pay_excellence" class="sl-checkbox" />
+                <span><strong>Source to Pay Excellence</strong></span>
+              </label>
+              <p class="service-desc">Leads Coupa rollout, system support, and continuous improvements to enhance your procurement experience</p>
+            </div>
+          
+        </section>
+
+        <!-- PAGE 3: Per-service-line satisfaction + overall + text -->
+        <section class="section">
+          <h2>Page 3</h2>
+          <p><strong>How satisfied are you with the services offered by the EP&P team in your market?</strong></p>
+
+          
+            <div class="question rating-group" data-slkey="strategic_sourcing">
+              <p class="sl-label">Strategic Sourcing</p>
+              <div class="ratings">
+                
+                  <label class="radio-pill">
+                    <input type="radio" name="satisfaction_strategic_sourcing" value="Very Satisfied" disabled />
+                    <span>Very Satisfied</span>
+                  </label>
+                
+                  <label class="radio-pill">
+                    <input type="radio" name="satisfaction_strategic_sourcing" value="Satisfied" disabled />
+                    <span>Satisfied</span>
+                  </label>
+                
+                  <label class="radio-pill">
+                    <input type="radio" name="satisfaction_strategic_sourcing" value="Neutral" disabled />
+                    <span>Neutral</span>
+                  </label>
+                
+                  <label class="radio-pill">
+                    <input type="radio" name="satisfaction_strategic_sourcing" value="Dissatisfied" disabled />
+                    <span>Dissatisfied</span>
+                  </label>
+                
+                  <label class="radio-pill">
+                    <input type="radio" name="satisfaction_strategic_sourcing" value="Very Dissatisfied" disabled />
+                    <span>Very Dissatisfied</span>
+                  </label>
+                
+                  <label class="radio-pill">
+                    <input type="radio" name="satisfaction_strategic_sourcing" value="N/A" disabled />
+                    <span>N/A</span>
+                  </label>
+                
+              </div>
+            </div>
+          
+            <div class="question rating-group" data-slkey="ep_p_operations">
+              <p class="sl-label">EP&P Operations</p>
+              <div class="ratings">
+                
+                  <label class="radio-pill">
+                    <input type="radio" name="satisfaction_ep_p_operations" value="Very Satisfied" disabled />
+                    <span>Very Satisfied</span>
+                  </label>
+                
+                  <label class="radio-pill">
+                    <input type="radio" name="satisfaction_ep_p_operations" value="Satisfied" disabled />
+                    <span>Satisfied</span>
+                  </label>
+                
+                  <label class="radio-pill">
+                    <input type="radio" name="satisfaction_ep_p_operations" value="Neutral" disabled />
+                    <span>Neutral</span>
+                  </label>
+                
+                  <label class="radio-pill">
+                    <input type="radio" name="satisfaction_ep_p_operations" value="Dissatisfied" disabled />
+                    <span>Dissatisfied</span>
+                  </label>
+                
+                  <label class="radio-pill">
+                    <input type="radio" name="satisfaction_ep_p_operations" value="Very Dissatisfied" disabled />
+                    <span>Very Dissatisfied</span>
+                  </label>
+                
+                  <label class="radio-pill">
+                    <input type="radio" name="satisfaction_ep_p_operations" value="N/A" disabled />
+                    <span>N/A</span>
+                  </label>
+                
+              </div>
+            </div>
+          
+            <div class="question rating-group" data-slkey="source_to_pay_excellence">
+              <p class="sl-label">Source to Pay Excellence</p>
+              <div class="ratings">
+                
+                  <label class="radio-pill">
+                    <input type="radio" name="satisfaction_source_to_pay_excellence" value="Very Satisfied" disabled />
+                    <span>Very Satisfied</span>
+                  </label>
+                
+                  <label class="radio-pill">
+                    <input type="radio" name="satisfaction_source_to_pay_excellence" value="Satisfied" disabled />
+                    <span>Satisfied</span>
+                  </label>
+                
+                  <label class="radio-pill">
+                    <input type="radio" name="satisfaction_source_to_pay_excellence" value="Neutral" disabled />
+                    <span>Neutral</span>
+                  </label>
+                
+                  <label class="radio-pill">
+                    <input type="radio" name="satisfaction_source_to_pay_excellence" value="Dissatisfied" disabled />
+                    <span>Dissatisfied</span>
+                  </label>
+                
+                  <label class="radio-pill">
+                    <input type="radio" name="satisfaction_source_to_pay_excellence" value="Very Dissatisfied" disabled />
+                    <span>Very Dissatisfied</span>
+                  </label>
+                
+                  <label class="radio-pill">
+                    <input type="radio" name="satisfaction_source_to_pay_excellence" value="N/A" disabled />
+                    <span>N/A</span>
+                  </label>
+                
+              </div>
+            </div>
+          
+
+          <div class="question">
+            <p><strong>Overall, how satisfied are you with the service provided by the EP&P team in your market?</strong></p>
+            <div class="ratings">
+              
+                <label class="radio-pill">
+                  <input type="radio" name="overall_satisfaction" value="Very Satisfied" required />
+                  <span>Very Satisfied</span>
+                </label>
+              
+                <label class="radio-pill">
+                  <input type="radio" name="overall_satisfaction" value="Satisfied" required />
+                  <span>Satisfied</span>
+                </label>
+              
+                <label class="radio-pill">
+                  <input type="radio" name="overall_satisfaction" value="Neutral" required />
+                  <span>Neutral</span>
+                </label>
+              
+                <label class="radio-pill">
+                  <input type="radio" name="overall_satisfaction" value="Dissatisfied" required />
+                  <span>Dissatisfied</span>
+                </label>
+              
+                <label class="radio-pill">
+                  <input type="radio" name="overall_satisfaction" value="Very Dissatisfied" required />
+                  <span>Very Dissatisfied</span>
+                </label>
+              
+            </div>
+          </div>
+
+          <div class="question">
+            <label for="improvement"><strong>How can our EP&P team improve services provided to you?</strong></label>
+            <textarea id="improvement" name="improvement" rows="4" placeholder="Your suggestions..."></textarea>
+          </div>
+        </section>
+
+        <!-- PAGE 4: Recognition -->
+        <section class="section">
+          <h2>Page 4</h2>
+          <div class="question">
+            <label for="recognition"><strong>Would you like to highlight any EP&P members who have gone above and beyond in providing you with exceptional service?</strong></label>
+            <textarea id="recognition" name="recognition" rows="4" placeholder="Name any team members..."></textarea>
+          </div>
+        </section>
+
+        <button type="submit" class="btn">Submit survey</button>
+      </form>
+
+      <div id="thankYou" class="hidden success">
+        <h2>Thank you!</h2>
+        <p>Your response has been recorded. We appreciate your feedback.</p>
+        <p style="margin-top:16px"><a href="/output/dashboard.html" class="btn" style="text-decoration:none;display:inline-block">View Dashboard</a></p>
+      </div>
+    </div>
+  </div>
+
+  <script src="/app.js"></script>
+</body>
+</html>

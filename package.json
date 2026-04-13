@@ -1,0 +1,19 @@
+{
+  "name": "epnp-csat-survey",
+  "version": "1.0.0",
+  "description": "EP&P CSAT survey with dashboard and email notifications",
+  "main": "server.js",
+  "scripts": {
+    "build-survey": "node scripts/build-survey.js",
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "mammoth": "^1.8.0",
+    "mongodb": "^7.1.1",
+    "nodemailer": "^6.9.14",
+    "uuid": "^10.0.0"
+  }
+}

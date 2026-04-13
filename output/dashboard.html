@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>EP&P CSAT Dashboard</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="/styles.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+</head>
+<body>
+  <div class="page">
+    <div class="card">
+      <div class="brand">EP&P</div>
+      <h1>EP&P CSAT Dashboard</h1>
+      <p class="muted">Refresh this page anytime to see the latest results</p>
+      <p style="margin-top:12px"><a href="/output/invite.html" class="btn" style="text-decoration:none;display:inline-block">Share Survey</a></p>
+
+      <!-- Summary stats -->
+      <div class="stats" id="stats"></div>
+
+      <!-- Charts row -->
+      <div class="section">
+        <h2>Key Highlights</h2>
+        <div class="chart-row">
+          <div class="chart-box">
+            <h3>Overall Satisfaction</h3>
+            <canvas id="chartOverall"></canvas>
+          </div>
+          <div class="chart-box">
+            <h3>Per Service Line</h3>
+            <canvas id="chartServiceLine"></canvas>
+          </div>
+        </div>
+        <div class="chart-row">
+          <div class="chart-box">
+            <h3>Service Line Usage</h3>
+            <canvas id="chartUsage"></canvas>
+          </div>
+          <div class="chart-box" id="recognitionBox">
+            <h3>Recognised Team Members</h3>
+            <ul id="recognitionList"></ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Individual responses -->
+      <div class="section">
+        <h2>All Responses</h2>
+        <div id="responses"></div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const SCORE_MAP = { "Very Satisfied": 5, "Satisfied": 4, "Neutral": 3, "Dissatisfied": 2, "Very Dissatisfied": 1 };
+    const COLORS = ["#178a4b","#34d399","#fbbf24","#f87171","#9333ea","#3b82f6"];
+
+    function nameFromEmail(email) {
+      const local = (email || "").split("@")[0] || "";
+      return local.split(".").map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(" ");
+    }
+
+    function formatDate(iso) {
+      const d = new Date(iso);
+      return d.toLocaleDateString("en-GB", { day:"numeric", month:"short", year:"numeric", hour:"2-digit", minute:"2-digit" });
+    }
+
+    async function loadDashboard() {
+      const res = await fetch("/api/dashboard");
+      if (!res.ok) { document.body.innerHTML = '<div class="page"><div class="card"><h1>No data yet</h1></div></div>'; return; }
+      const data = await res.json();
+      const responses = data.responses || [];
+
+      // --- Stats ---
+      document.getElementById("stats").innerHTML =
+        '<div class="stat"><div class="stat-number">' + data.totalResponses + '</div><div class="stat-label">Total Responses</div></div>' +
+        '<div class="stat"><div class="stat-number">' + data.averageScore + '</div><div class="stat-label">Avg Overall Satisfaction</div></div>';
+
+      // --- Overall satisfaction pie ---
+      const overallCounts = {};
+      responses.forEach(r => { const v = r.overallSatisfaction || "N/A"; overallCounts[v] = (overallCounts[v] || 0) + 1; });
+      new Chart(document.getElementById("chartOverall"), {
+        type: "doughnut",
+        data: {
+          labels: Object.keys(overallCounts),
+          datasets: [{ data: Object.values(overallCounts), backgroundColor: COLORS }]
+        },
+        options: { responsive: true, plugins: { legend: { position: "bottom" } } }
+      });
+
+      // --- Per service line avg bar ---
+      const SL_KEYS = [{"key":"strategic_sourcing","label":"Strategic Sourcing"},{"key":"ep_p_operations","label":"EP&P Operations"},{"key":"source_to_pay_excellence","label":"Source to Pay Excellence"}];
+      const slAvgs = SL_KEYS.map(sl => {
+        const scores = responses.map(r => SCORE_MAP[(r.satisfaction || {})[sl.key]]).filter(v => v !== undefined);
+        return scores.length ? (scores.reduce((a,b) => a+b, 0) / scores.length).toFixed(1) : 0;
+      });
+      new Chart(document.getElementById("chartServiceLine"), {
+        type: "bar",
+        data: {
+          labels: SL_KEYS.map(s => s.label),
+          datasets: [{ label: "Avg Score (out of 5)", data: slAvgs, backgroundColor: ["#178a4b","#3b82f6","#fbbf24"] }]
+        },
+        options: { responsive: true, scales: { y: { min: 0, max: 5 } }, plugins: { legend: { display: false } } }
+      });
+
+      // --- Service line usage bar ---
+      const usageCounts = {};
+      SL_KEYS.forEach(sl => usageCounts[sl.label] = 0);
+      responses.forEach(r => (r.serviceLines || []).forEach(s => { if (usageCounts[s] !== undefined) usageCounts[s]++; }));
+      new Chart(document.getElementById("chartUsage"), {
+        type: "bar",
+        data: {
+          labels: Object.keys(usageCounts),
+          datasets: [{ label: "Respondents", data: Object.values(usageCounts), backgroundColor: ["#178a4b","#3b82f6","#fbbf24"] }]
+        },
+        options: { responsive: true, indexAxis: "y", plugins: { legend: { display: false } } }
+      });
+
+      // --- Recognition list ---
+      const recognitions = responses.map(r => r.recognition).filter(Boolean);
+      const recList = document.getElementById("recognitionList");
+      if (recognitions.length) {
+        recList.innerHTML = recognitions.map(r => '<li>' + r + '</li>').join("");
+      } else {
+        recList.innerHTML = '<li class="muted">No recognitions yet</li>';
+      }
+
+      // --- Individual responses ---
+      const container = document.getElementById("responses");
+      container.innerHTML = responses.map(r => {
+        const name = nameFromEmail(r.email);
+        const satEntries = Object.entries(r.satisfaction || {}).map(([k,v]) => {
+          const label = SL_KEYS.find(s => s.key === k);
+          return (label ? label.label : k) + ": " + v;
+        }).join(", ") || "-";
+        return '<div class="response-card">' +
+          '<div class="response-header"><strong>' + name + '</strong> <span class="muted">' + r.email + '</span></div>' +
+          '<div class="response-meta">' + formatDate(r.submittedAt) + '</div>' +
+          '<div><strong>Service lines:</strong> ' + ((r.serviceLines || []).join(", ") || "-") + '</div>' +
+          '<div><strong>Per-team satisfaction:</strong> ' + satEntries + '</div>' +
+          '<div><strong>Overall satisfaction:</strong> ' + (r.overallSatisfaction || "-") + '</div>' +
+          (r.improvement ? '<div><strong>Improvement:</strong> ' + r.improvement + '</div>' : '') +
+          (r.recognition ? '<div><strong>Recognition:</strong> ' + r.recognition + '</div>' : '') +
+        '</div>';
+      }).join("");
+    }
+    loadDashboard();
+  </script>
+</body>
+</html>
