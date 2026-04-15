@@ -89,7 +89,7 @@
       });
 
       // --- Per service line avg bar ---
-      const SL_KEYS = [{"key":"strategic_sourcing","label":"Strategic Sourcing"},{"key":"ep_p_operations","label":"EP&P Operations"},{"key":"source_to_pay_excellence","label":"Source to Pay Excellence"}];
+      const SL_KEYS = [{"key":"strategic_sourcing","label":"Strategic Sourcing"},{"key":"buy_desk","label":"Buy Desk"},{"key":"contract_administration","label":"Contract Administration"},{"key":"service_desk","label":"Service Desk"},{"key":"supplier_onboarding","label":"Supplier Onboarding"},{"key":"accounts_payable","label":"Accounts Payable"}];
       const slAvgs = SL_KEYS.map(sl => {
         const scores = responses.map(r => SCORE_MAP[(r.satisfaction || {})[sl.key]]).filter(v => v !== undefined);
         return scores.length ? (scores.reduce((a,b) => a+b, 0) / scores.length).toFixed(1) : 0;

@@ -22,16 +22,25 @@ function defaultConfig(rawText) {
       "We are soliciting input across all service lines of EP&P; please mark below which ones you have used and help us answer the following questions",
     serviceLines: [
       "Strategic Sourcing",
-      "EP&P Operations",
-      "Source to Pay Excellence"
+      "Buy Desk",
+      "Contract Administration",
+      "Service Desk",
+      "Supplier Onboarding",
+      "Accounts Payable"
     ],
     serviceLineDescriptions: {
       "Strategic Sourcing":
-        "Supports contract negotiations, renewals, supplier selection, and bidding processes to help you get the best value",
-      "EP&P Operations":
-        "Handles invoice processing, payments, and day-to-day procurement support (supplier management, service desk etc.) to keep operations running smoothly",
-      "Source to Pay Excellence":
-        "Leads Coupa rollout, system support, and continuous improvements to enhance your procurement experience"
+        "Supports supplier selection, contract negotiations, renewals, and competitive bidding to help you achieve optimal value",
+      "Buy Desk":
+        "Provides purchase order support, requisition processing, and transactional buying assistance to enable efficient procurement execution",
+      "Contract Administration":
+        "Manages contract creation, review, storage, and compliance to ensure agreements are accurate and accessible",
+      "Service Desk":
+        "Acts as the first point of contact for procurement-related queries, issue resolution, and general support to ensure smooth operations",
+      "Supplier Onboarding":
+        "Facilitates supplier setup, documentation, and system enablement to ensure suppliers are ready for seamless engagement",
+      "Accounts Payable":
+        "Handles invoice processing, payments, and query resolution to ensure timely and accurate supplier payments"
     },
     satisfactionQuestion:
       "How satisfied are you with the services offered by the EP&P team in your market?",
