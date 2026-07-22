@@ -2,370 +2,467 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <title>EP&P Questionnaire</title>
+  <title>EP&amp;P GCH Region Questionnaire</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <link rel="stylesheet" href="/styles.css" />
+  <style>
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f5f7fa;
+      color: #1f2937;
+    }
+
+    .page {
+      min-height: 100vh;
+      padding: 32px 16px;
+    }
+
+    .card {
+      max-width: 900px;
+      margin: 0 auto;
+      background: #ffffff;
+      border-radius: 18px;
+      padding: 32px;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+    }
+
+    .brand {
+      display: inline-block;
+      padding: 6px 12px;
+      border-radius: 999px;
+      background: #e8f5ed;
+      color: #178a4b;
+      font-weight: 700;
+      margin-bottom: 16px;
+    }
+
+    h1, h2 { margin-top: 0; }
+
+    .section {
+      margin: 28px 0;
+      padding-top: 20px;
+      border-top: 1px solid #e5e7eb;
+    }
+
+    input[type="email"],
+    input[type="text"],
+    textarea {
+      width: 100%;
+      margin-top: 8px;
+      padding: 12px;
+      border: 1px solid #cbd5e1;
+      border-radius: 12px;
+      font-size: 14px;
+    }
+
+    .question { margin: 20px 0; }
+
+    .ratings {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 8px;
+    }
+
+    .ratings label,
+    .checkbox-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .radio-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 14px;
+      border: 1px solid #cbd5e1;
+      border-radius: 999px;
+      cursor: pointer;
+      font-size: 13px;
+      transition: background 0.15s, border-color 0.15s;
+    }
+
+    .radio-pill:hover { border-color: #178a4b; }
+
+    .radio-pill input[type="radio"]:checked + span { font-weight: 700; }
+
+    .radio-pill:has(input:checked) {
+      background: #e8f5ed;
+      border-color: #178a4b;
+    }
+
+    .sl-label {
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .disabled-group {
+      opacity: 0.4;
+      pointer-events: none;
+    }
+
+    .rating-group {
+      padding: 12px 16px;
+      border-radius: 12px;
+      background: #f8fafc;
+      margin-bottom: 12px;
+    }
+
+    .service-block {
+      background: #f8fafc;
+      padding: 14px;
+      border-radius: 14px;
+      margin-bottom: 12px;
+    }
+
+    .btn {
+      background: #178a4b;
+      color: white;
+      border: 0;
+      border-radius: 12px;
+      padding: 14px 22px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    .btn:hover { opacity: 0.95; }
+
+    .btn-outline {
+      background: white;
+      color: #178a4b;
+      border: 2px solid #178a4b;
+    }
+
+    .btn-outline:hover { background: #e8f5ed; }
+
+    .success {
+      margin-top: 24px;
+      padding: 24px;
+      background: #ecfdf3;
+      border-radius: 14px;
+    }
+
+    .hidden { display: none; }
+
+    .progress-bar-container {
+      background: #e5e7eb;
+      border-radius: 999px;
+      height: 8px;
+      margin-bottom: 24px;
+      overflow: hidden;
+    }
+
+    .progress-bar-fill {
+      height: 100%;
+      background: #178a4b;
+      border-radius: 999px;
+      transition: width 0.4s ease;
+    }
+
+    .page-nav {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 24px;
+    }
+
+    .page-indicator {
+      text-align: center;
+      color: #64748b;
+      font-size: 13px;
+      margin-bottom: 8px;
+    }
+
+    .error-msg {
+      color: #dc2626;
+      font-size: 13px;
+      margin-top: 4px;
+    }
+  </style>
 </head>
 <body>
   <div class="page">
     <div class="card">
-      <div class="brand">EP&P</div>
-      <h1>EP&P Questionnaire</h1>
+      <div class="brand">EP&amp;P</div>
+      <h1>EP&amp;P GCH Region Questionnaire</h1>
 
-      <form id="surveyForm">
+      <div class="page-indicator" id="pageIndicator">Page 1 of 4</div>
+      <div class="progress-bar-container">
+        <div class="progress-bar-fill" id="progressBar" style="width: 25%"></div>
+      </div>
 
-        <!-- PAGE 1 -->
-        <section class="section">
-          <h2>Page 1</h2>
-          <p>As an important internal client of EP&P team, your input is critical to help us improve our services and measure our impact to you.</p>
-          <p>Please take two minutes to complete this CSAT survey and share your feedback by May 1st, 2026.</p>
-          <label for="email">Please enter your email.</label>
+      <form id="surveyForm" novalidate>
+
+        <!-- PAGE 1: Introduction -->
+        <section class="survey-page" id="surveyPage1">
+          <h2>Introduction</h2>
+          <p>As an important internal client of EP&amp;P GCH region, your input is critical to help us improve our services and measure our impact to you.</p>
+          <p>Please take two minutes to complete this CSAT survey and share your feedback by <strong>October 15th, 2026</strong>.</p>
+          <label for="email"><strong>Please enter your email.</strong></label>
           <input id="email" name="email" type="email" required placeholder="name@bcg.com" />
+          <p class="error-msg hidden" id="emailError">Please enter a valid email address.</p>
+
+          <div class="page-nav">
+            <span></span>
+            <button type="button" class="btn" onclick="goToPage(2)">Next &rarr;</button>
+          </div>
         </section>
 
         <!-- PAGE 2: Service line checkboxes -->
-        <section class="section">
-          <h2>Page 2</h2>
-          <p>We are soliciting input across all service lines of EP&P; please mark below which ones you have used and help us answer the following questions</p>
+        <section class="survey-page hidden" id="surveyPage2">
+          <h2>Service Lines</h2>
+          <p>We are soliciting input across all service lines of EP&amp;P; please mark below which ones you have used and help us answer the following questions</p>
 
-          
-            <div class="service-block">
-              <label class="checkbox-row">
-                <input type="checkbox" name="serviceLines" value="Strategic Sourcing" data-slkey="strategic_sourcing" class="sl-checkbox" />
-                <span><strong>Strategic Sourcing</strong></span>
-              </label>
-              <p class="service-desc">Supports supplier selection, contract negotiations, renewals, and competitive bidding to help you achieve optimal value</p>
-            </div>
-          
-            <div class="service-block">
-              <label class="checkbox-row">
-                <input type="checkbox" name="serviceLines" value="Buy Desk" data-slkey="buy_desk" class="sl-checkbox" />
-                <span><strong>Buy Desk</strong></span>
-              </label>
-              <p class="service-desc">Provides purchase order support, requisition processing, and transactional buying assistance to enable efficient procurement execution</p>
-            </div>
-          
-            <div class="service-block">
-              <label class="checkbox-row">
-                <input type="checkbox" name="serviceLines" value="Contract Administration" data-slkey="contract_administration" class="sl-checkbox" />
-                <span><strong>Contract Administration</strong></span>
-              </label>
-              <p class="service-desc">Manages contract creation, review, storage, and compliance to ensure agreements are accurate and accessible</p>
-            </div>
-          
-            <div class="service-block">
-              <label class="checkbox-row">
-                <input type="checkbox" name="serviceLines" value="Service Desk" data-slkey="service_desk" class="sl-checkbox" />
-                <span><strong>Service Desk</strong></span>
-              </label>
-              <p class="service-desc">Acts as the first point of contact for procurement-related queries, issue resolution, and general support to ensure smooth operations</p>
-            </div>
-          
-            <div class="service-block">
-              <label class="checkbox-row">
-                <input type="checkbox" name="serviceLines" value="Supplier Onboarding" data-slkey="supplier_onboarding" class="sl-checkbox" />
-                <span><strong>Supplier Onboarding</strong></span>
-              </label>
-              <p class="service-desc">Facilitates supplier setup, documentation, and system enablement to ensure suppliers are ready for seamless engagement</p>
-            </div>
-          
-            <div class="service-block">
-              <label class="checkbox-row">
-                <input type="checkbox" name="serviceLines" value="Accounts Payable" data-slkey="accounts_payable" class="sl-checkbox" />
-                <span><strong>Accounts Payable</strong></span>
-              </label>
-              <p class="service-desc">Handles invoice processing, payments, and query resolution to ensure timely and accurate supplier payments</p>
-            </div>
-          
+          <div class="service-block">
+            <label class="checkbox-row">
+              <input type="checkbox" name="serviceLines" value="Supplier Onboarding" data-slkey="supplier_onboarding" class="sl-checkbox" />
+              <span><strong>Supplier Onboarding</strong></span>
+            </label>
+          </div>
+
+          <div class="service-block">
+            <label class="checkbox-row">
+              <input type="checkbox" name="serviceLines" value="Service Desk" data-slkey="service_desk" class="sl-checkbox" />
+              <span><strong>Service Desk</strong></span>
+            </label>
+          </div>
+
+          <div class="service-block">
+            <label class="checkbox-row">
+              <input type="checkbox" name="serviceLines" value="Accounts Payable" data-slkey="accounts_payable" class="sl-checkbox" />
+              <span><strong>Accounts Payable</strong></span>
+            </label>
+          </div>
+
+          <div class="service-block">
+            <label class="checkbox-row">
+              <input type="checkbox" name="serviceLines" value="Buy Desk" data-slkey="buy_desk" class="sl-checkbox" />
+              <span><strong>Buy Desk</strong></span>
+            </label>
+          </div>
+
+          <div class="service-block">
+            <label class="checkbox-row">
+              <input type="checkbox" name="serviceLines" value="Sourcing" data-slkey="sourcing" class="sl-checkbox" />
+              <span><strong>Sourcing</strong></span>
+            </label>
+          </div>
+
+          <div class="service-block">
+            <label class="checkbox-row">
+              <input type="checkbox" name="serviceLines" value="Risk Screening" data-slkey="risk_screening" class="sl-checkbox" />
+              <span><strong>Risk Screening</strong></span>
+            </label>
+          </div>
+
+          <div class="page-nav">
+            <button type="button" class="btn btn-outline" onclick="goToPage(1)">&larr; Back</button>
+            <button type="button" class="btn" onclick="goToPage(3)">Next &rarr;</button>
+          </div>
         </section>
 
-        <!-- PAGE 3: Per-service-line satisfaction + overall + text -->
-        <section class="section">
-          <h2>Page 3</h2>
-          <p><strong>How satisfied are you with the services offered by the EP&P team in your market?</strong></p>
+        <!-- PAGE 3: Per-service-line satisfaction + follow-up text questions -->
+        <section class="survey-page hidden" id="surveyPage3">
+          <h2>Satisfaction</h2>
+          <p><strong>How satisfied are you with the services offered by the EP&amp;P team in your market?</strong></p>
 
-          
-            <div class="question rating-group" data-slkey="strategic_sourcing">
-              <p class="sl-label">Strategic Sourcing</p>
-              <div class="ratings">
-                
-                  <label class="radio-pill">
-                    <input type="radio" name="satisfaction_strategic_sourcing" value="Very Satisfied" disabled />
-                    <span>Very Satisfied</span>
-                  </label>
-                
-                  <label class="radio-pill">
-                    <input type="radio" name="satisfaction_strategic_sourcing" value="Satisfied" disabled />
-                    <span>Satisfied</span>
-                  </label>
-                
-                  <label class="radio-pill">
-                    <input type="radio" name="satisfaction_strategic_sourcing" value="Neutral" disabled />
-                    <span>Neutral</span>
-                  </label>
-                
-                  <label class="radio-pill">
-                    <input type="radio" name="satisfaction_strategic_sourcing" value="Dissatisfied" disabled />
-                    <span>Dissatisfied</span>
-                  </label>
-                
-                  <label class="radio-pill">
-                    <input type="radio" name="satisfaction_strategic_sourcing" value="Very Dissatisfied" disabled />
-                    <span>Very Dissatisfied</span>
-                  </label>
-                
-                  <label class="radio-pill">
-                    <input type="radio" name="satisfaction_strategic_sourcing" value="N/A" disabled />
-                    <span>N/A</span>
-                  </label>
-                
-              </div>
-            </div>
-          
-            <div class="question rating-group" data-slkey="buy_desk">
-              <p class="sl-label">Buy Desk</p>
-              <div class="ratings">
-                
-                  <label class="radio-pill">
-                    <input type="radio" name="satisfaction_buy_desk" value="Very Satisfied" disabled />
-                    <span>Very Satisfied</span>
-                  </label>
-                
-                  <label class="radio-pill">
-                    <input type="radio" name="satisfaction_buy_desk" value="Satisfied" disabled />
-                    <span>Satisfied</span>
-                  </label>
-                
-                  <label class="radio-pill">
-                    <input type="radio" name="satisfaction_buy_desk" value="Neutral" disabled />
-                    <span>Neutral</span>
-                  </label>
-                
-                  <label class="radio-pill">
-                    <input type="radio" name="satisfaction_buy_desk" value="Dissatisfied" disabled />
-                    <span>Dissatisfied</span>
-                  </label>
-                
-                  <label class="radio-pill">
-                    <input type="radio" name="satisfaction_buy_desk" value="Very Dissatisfied" disabled />
-                    <span>Very Dissatisfied</span>
-                  </label>
-                
-                  <label class="radio-pill">
-                    <input type="radio" name="satisfaction_buy_desk" value="N/A" disabled />
-                    <span>N/A</span>
-                  </label>
-                
-              </div>
-            </div>
-          
-            <div class="question rating-group" data-slkey="contract_administration">
-              <p class="sl-label">Contract Administration</p>
-              <div class="ratings">
-                
-                  <label class="radio-pill">
-                    <input type="radio" name="satisfaction_contract_administration" value="Very Satisfied" disabled />
-                    <span>Very Satisfied</span>
-                  </label>
-                
-                  <label class="radio-pill">
-                    <input type="radio" name="satisfaction_contract_administration" value="Satisfied" disabled />
-                    <span>Satisfied</span>
-                  </label>
-                
-                  <label class="radio-pill">
-                    <input type="radio" name="satisfaction_contract_administration" value="Neutral" disabled />
-                    <span>Neutral</span>
-                  </label>
-                
-                  <label class="radio-pill">
-                    <input type="radio" name="satisfaction_contract_administration" value="Dissatisfied" disabled />
-                    <span>Dissatisfied</span>
-                  </label>
-                
-                  <label class="radio-pill">
-                    <input type="radio" name="satisfaction_contract_administration" value="Very Dissatisfied" disabled />
-                    <span>Very Dissatisfied</span>
-                  </label>
-                
-                  <label class="radio-pill">
-                    <input type="radio" name="satisfaction_contract_administration" value="N/A" disabled />
-                    <span>N/A</span>
-                  </label>
-                
-              </div>
-            </div>
-          
-            <div class="question rating-group" data-slkey="service_desk">
-              <p class="sl-label">Service Desk</p>
-              <div class="ratings">
-                
-                  <label class="radio-pill">
-                    <input type="radio" name="satisfaction_service_desk" value="Very Satisfied" disabled />
-                    <span>Very Satisfied</span>
-                  </label>
-                
-                  <label class="radio-pill">
-                    <input type="radio" name="satisfaction_service_desk" value="Satisfied" disabled />
-                    <span>Satisfied</span>
-                  </label>
-                
-                  <label class="radio-pill">
-                    <input type="radio" name="satisfaction_service_desk" value="Neutral" disabled />
-                    <span>Neutral</span>
-                  </label>
-                
-                  <label class="radio-pill">
-                    <input type="radio" name="satisfaction_service_desk" value="Dissatisfied" disabled />
-                    <span>Dissatisfied</span>
-                  </label>
-                
-                  <label class="radio-pill">
-                    <input type="radio" name="satisfaction_service_desk" value="Very Dissatisfied" disabled />
-                    <span>Very Dissatisfied</span>
-                  </label>
-                
-                  <label class="radio-pill">
-                    <input type="radio" name="satisfaction_service_desk" value="N/A" disabled />
-                    <span>N/A</span>
-                  </label>
-                
-              </div>
-            </div>
-          
-            <div class="question rating-group" data-slkey="supplier_onboarding">
-              <p class="sl-label">Supplier Onboarding</p>
-              <div class="ratings">
-                
-                  <label class="radio-pill">
-                    <input type="radio" name="satisfaction_supplier_onboarding" value="Very Satisfied" disabled />
-                    <span>Very Satisfied</span>
-                  </label>
-                
-                  <label class="radio-pill">
-                    <input type="radio" name="satisfaction_supplier_onboarding" value="Satisfied" disabled />
-                    <span>Satisfied</span>
-                  </label>
-                
-                  <label class="radio-pill">
-                    <input type="radio" name="satisfaction_supplier_onboarding" value="Neutral" disabled />
-                    <span>Neutral</span>
-                  </label>
-                
-                  <label class="radio-pill">
-                    <input type="radio" name="satisfaction_supplier_onboarding" value="Dissatisfied" disabled />
-                    <span>Dissatisfied</span>
-                  </label>
-                
-                  <label class="radio-pill">
-                    <input type="radio" name="satisfaction_supplier_onboarding" value="Very Dissatisfied" disabled />
-                    <span>Very Dissatisfied</span>
-                  </label>
-                
-                  <label class="radio-pill">
-                    <input type="radio" name="satisfaction_supplier_onboarding" value="N/A" disabled />
-                    <span>N/A</span>
-                  </label>
-                
-              </div>
-            </div>
-          
-            <div class="question rating-group" data-slkey="accounts_payable">
-              <p class="sl-label">Accounts Payable</p>
-              <div class="ratings">
-                
-                  <label class="radio-pill">
-                    <input type="radio" name="satisfaction_accounts_payable" value="Very Satisfied" disabled />
-                    <span>Very Satisfied</span>
-                  </label>
-                
-                  <label class="radio-pill">
-                    <input type="radio" name="satisfaction_accounts_payable" value="Satisfied" disabled />
-                    <span>Satisfied</span>
-                  </label>
-                
-                  <label class="radio-pill">
-                    <input type="radio" name="satisfaction_accounts_payable" value="Neutral" disabled />
-                    <span>Neutral</span>
-                  </label>
-                
-                  <label class="radio-pill">
-                    <input type="radio" name="satisfaction_accounts_payable" value="Dissatisfied" disabled />
-                    <span>Dissatisfied</span>
-                  </label>
-                
-                  <label class="radio-pill">
-                    <input type="radio" name="satisfaction_accounts_payable" value="Very Dissatisfied" disabled />
-                    <span>Very Dissatisfied</span>
-                  </label>
-                
-                  <label class="radio-pill">
-                    <input type="radio" name="satisfaction_accounts_payable" value="N/A" disabled />
-                    <span>N/A</span>
-                  </label>
-                
-              </div>
-            </div>
-          
-
-          <div class="question">
-            <p><strong>Overall, how satisfied are you with the service provided by the EP&P team in your market?</strong></p>
+          <div class="question rating-group" data-slkey="supplier_onboarding">
+            <p class="sl-label">Supplier Onboarding</p>
             <div class="ratings">
-              
-                <label class="radio-pill">
-                  <input type="radio" name="overall_satisfaction" value="Very Satisfied" required />
-                  <span>Very Satisfied</span>
-                </label>
-              
-                <label class="radio-pill">
-                  <input type="radio" name="overall_satisfaction" value="Satisfied" required />
-                  <span>Satisfied</span>
-                </label>
-              
-                <label class="radio-pill">
-                  <input type="radio" name="overall_satisfaction" value="Neutral" required />
-                  <span>Neutral</span>
-                </label>
-              
-                <label class="radio-pill">
-                  <input type="radio" name="overall_satisfaction" value="Dissatisfied" required />
-                  <span>Dissatisfied</span>
-                </label>
-              
-                <label class="radio-pill">
-                  <input type="radio" name="overall_satisfaction" value="Very Dissatisfied" required />
-                  <span>Very Dissatisfied</span>
-                </label>
-              
+              <label class="radio-pill"><input type="radio" name="satisfaction_supplier_onboarding" value="Very Satisfied" disabled /><span>Very Satisfied</span></label>
+              <label class="radio-pill"><input type="radio" name="satisfaction_supplier_onboarding" value="Satisfied" disabled /><span>Satisfied</span></label>
+              <label class="radio-pill"><input type="radio" name="satisfaction_supplier_onboarding" value="Neutral" disabled /><span>Neutral</span></label>
+              <label class="radio-pill"><input type="radio" name="satisfaction_supplier_onboarding" value="Dissatisfied" disabled /><span>Dissatisfied</span></label>
+              <label class="radio-pill"><input type="radio" name="satisfaction_supplier_onboarding" value="Very Dissatisfied" disabled /><span>Very Dissatisfied</span></label>
+              <label class="radio-pill"><input type="radio" name="satisfaction_supplier_onboarding" value="N/A" disabled /><span>N/A</span></label>
+            </div>
+          </div>
+
+          <div class="question rating-group" data-slkey="service_desk">
+            <p class="sl-label">Service Desk</p>
+            <div class="ratings">
+              <label class="radio-pill"><input type="radio" name="satisfaction_service_desk" value="Very Satisfied" disabled /><span>Very Satisfied</span></label>
+              <label class="radio-pill"><input type="radio" name="satisfaction_service_desk" value="Satisfied" disabled /><span>Satisfied</span></label>
+              <label class="radio-pill"><input type="radio" name="satisfaction_service_desk" value="Neutral" disabled /><span>Neutral</span></label>
+              <label class="radio-pill"><input type="radio" name="satisfaction_service_desk" value="Dissatisfied" disabled /><span>Dissatisfied</span></label>
+              <label class="radio-pill"><input type="radio" name="satisfaction_service_desk" value="Very Dissatisfied" disabled /><span>Very Dissatisfied</span></label>
+              <label class="radio-pill"><input type="radio" name="satisfaction_service_desk" value="N/A" disabled /><span>N/A</span></label>
+            </div>
+          </div>
+
+          <div class="question rating-group" data-slkey="accounts_payable">
+            <p class="sl-label">Accounts Payable</p>
+            <div class="ratings">
+              <label class="radio-pill"><input type="radio" name="satisfaction_accounts_payable" value="Very Satisfied" disabled /><span>Very Satisfied</span></label>
+              <label class="radio-pill"><input type="radio" name="satisfaction_accounts_payable" value="Satisfied" disabled /><span>Satisfied</span></label>
+              <label class="radio-pill"><input type="radio" name="satisfaction_accounts_payable" value="Neutral" disabled /><span>Neutral</span></label>
+              <label class="radio-pill"><input type="radio" name="satisfaction_accounts_payable" value="Dissatisfied" disabled /><span>Dissatisfied</span></label>
+              <label class="radio-pill"><input type="radio" name="satisfaction_accounts_payable" value="Very Dissatisfied" disabled /><span>Very Dissatisfied</span></label>
+              <label class="radio-pill"><input type="radio" name="satisfaction_accounts_payable" value="N/A" disabled /><span>N/A</span></label>
+            </div>
+          </div>
+
+          <div class="question rating-group" data-slkey="buy_desk">
+            <p class="sl-label">Buy Desk</p>
+            <div class="ratings">
+              <label class="radio-pill"><input type="radio" name="satisfaction_buy_desk" value="Very Satisfied" disabled /><span>Very Satisfied</span></label>
+              <label class="radio-pill"><input type="radio" name="satisfaction_buy_desk" value="Satisfied" disabled /><span>Satisfied</span></label>
+              <label class="radio-pill"><input type="radio" name="satisfaction_buy_desk" value="Neutral" disabled /><span>Neutral</span></label>
+              <label class="radio-pill"><input type="radio" name="satisfaction_buy_desk" value="Dissatisfied" disabled /><span>Dissatisfied</span></label>
+              <label class="radio-pill"><input type="radio" name="satisfaction_buy_desk" value="Very Dissatisfied" disabled /><span>Very Dissatisfied</span></label>
+              <label class="radio-pill"><input type="radio" name="satisfaction_buy_desk" value="N/A" disabled /><span>N/A</span></label>
+            </div>
+          </div>
+
+          <div class="question rating-group" data-slkey="sourcing">
+            <p class="sl-label">Sourcing</p>
+            <div class="ratings">
+              <label class="radio-pill"><input type="radio" name="satisfaction_sourcing" value="Very Satisfied" disabled /><span>Very Satisfied</span></label>
+              <label class="radio-pill"><input type="radio" name="satisfaction_sourcing" value="Satisfied" disabled /><span>Satisfied</span></label>
+              <label class="radio-pill"><input type="radio" name="satisfaction_sourcing" value="Neutral" disabled /><span>Neutral</span></label>
+              <label class="radio-pill"><input type="radio" name="satisfaction_sourcing" value="Dissatisfied" disabled /><span>Dissatisfied</span></label>
+              <label class="radio-pill"><input type="radio" name="satisfaction_sourcing" value="Very Dissatisfied" disabled /><span>Very Dissatisfied</span></label>
+              <label class="radio-pill"><input type="radio" name="satisfaction_sourcing" value="N/A" disabled /><span>N/A</span></label>
+            </div>
+          </div>
+
+          <div class="question rating-group" data-slkey="risk_screening">
+            <p class="sl-label">Risk Screening</p>
+            <div class="ratings">
+              <label class="radio-pill"><input type="radio" name="satisfaction_risk_screening" value="Very Satisfied" disabled /><span>Very Satisfied</span></label>
+              <label class="radio-pill"><input type="radio" name="satisfaction_risk_screening" value="Satisfied" disabled /><span>Satisfied</span></label>
+              <label class="radio-pill"><input type="radio" name="satisfaction_risk_screening" value="Neutral" disabled /><span>Neutral</span></label>
+              <label class="radio-pill"><input type="radio" name="satisfaction_risk_screening" value="Dissatisfied" disabled /><span>Dissatisfied</span></label>
+              <label class="radio-pill"><input type="radio" name="satisfaction_risk_screening" value="Very Dissatisfied" disabled /><span>Very Dissatisfied</span></label>
+              <label class="radio-pill"><input type="radio" name="satisfaction_risk_screening" value="N/A" disabled /><span>N/A</span></label>
             </div>
           </div>
 
           <div class="question">
-            <label for="improvement"><strong>How can our EP&P team improve services provided to you?</strong></label>
-            <textarea id="improvement" name="improvement" rows="4" placeholder="Your suggestions..."></textarea>
+            <label for="workedWell"><strong>If satisfied, what worked well?</strong></label>
+            <textarea id="workedWell" name="workedWell" rows="4" placeholder="Tell us what worked well..."></textarea>
+          </div>
+
+          <div class="question">
+            <label for="couldImprove"><strong>If dissatisfied, what could be improved?</strong></label>
+            <textarea id="couldImprove" name="couldImprove" rows="4" placeholder="Tell us what could be improved..."></textarea>
+          </div>
+
+          <div class="question">
+            <label for="placeholder1"><strong>Placeholder question</strong></label>
+            <textarea id="placeholder1" name="placeholder1" rows="4" placeholder="Your response..."></textarea>
+          </div>
+
+          <div class="question">
+            <label for="placeholder2"><strong>Placeholder question</strong></label>
+            <textarea id="placeholder2" name="placeholder2" rows="4" placeholder="Your response..."></textarea>
+          </div>
+
+          <div class="page-nav">
+            <button type="button" class="btn btn-outline" onclick="goToPage(2)">&larr; Back</button>
+            <button type="button" class="btn" onclick="goToPage(4)">Next &rarr;</button>
           </div>
         </section>
 
         <!-- PAGE 4: Recognition -->
-        <section class="section">
-          <h2>Page 4</h2>
+        <section class="survey-page hidden" id="surveyPage4">
+          <h2>Recognition</h2>
           <div class="question">
-            <label for="recognition"><strong>Would you like to highlight any EP&P members who have gone above and beyond in providing you with exceptional service?</strong></label>
+            <label for="recognition"><strong>Would you like to highlight any EP&amp;P members who have gone above and beyond in providing you with exceptional service?</strong></label>
             <textarea id="recognition" name="recognition" rows="4" placeholder="Name any team members..."></textarea>
+          </div>
+
+          <div class="page-nav">
+            <button type="button" class="btn btn-outline" onclick="goToPage(3)">&larr; Back</button>
+            <button type="submit" class="btn">Submit Survey</button>
           </div>
         </section>
 
-        <button type="submit" class="btn">Submit survey</button>
       </form>
 
-      <div id="thankYou" class="hidden success">
-        <h2>Thank you!</h2>
-        <p>Your response has been recorded. We appreciate your feedback.</p>
-        <p style="margin-top:16px"><a href="/output/dashboard.html" class="btn" style="text-decoration:none;display:inline-block">View Dashboard</a></p>
+      <div id="thankYou" class="hidden success" style="text-align:center;">
+        <h2 style="color:#178a4b;">Thank you! &#127881;</h2>
+        <p style="font-size:17px;">Your response has been recorded. We appreciate your feedback.</p>
+        <p style="margin-top:12px; color:#64748b;">You may now close this tab.</p>
       </div>
     </div>
   </div>
 
-  <script src="/app.js"></script>
+  <script>
+    (function() {
+      var currentPage = 1;
+      var totalPages = 4;
+      var form = document.getElementById("surveyForm");
+      var thankYou = document.getElementById("thankYou");
+      var checkboxes = form.querySelectorAll(".sl-checkbox");
+
+      function syncRatingGroups() {
+        checkboxes.forEach(function(cb) {
+          var key = cb.dataset.slkey;
+          var group = form.querySelector('.rating-group[data-slkey="' + key + '"]');
+          if (!group) return;
+          var radios = group.querySelectorAll('input[type="radio"]');
+          if (cb.checked) {
+            group.classList.remove("disabled-group");
+            radios.forEach(function(r) { r.disabled = false; });
+          } else {
+            group.classList.add("disabled-group");
+            radios.forEach(function(r) { r.disabled = true; r.checked = false; });
+          }
+        });
+      }
+
+      checkboxes.forEach(function(cb) { cb.addEventListener("change", syncRatingGroups); });
+      syncRatingGroups();
+
+      function showPage(n) {
+        for (var i = 1; i <= totalPages; i++) {
+          var el = document.getElementById("surveyPage" + i);
+          if (el) el.classList.toggle("hidden", i !== n);
+        }
+        currentPage = n;
+        document.getElementById("pageIndicator").textContent = "Page " + n + " of " + totalPages;
+        document.getElementById("progressBar").style.width = (n / totalPages * 100) + "%";
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+
+      function validatePage(n) {
+        if (n === 1) {
+          var emailInput = document.getElementById("email");
+          var emailError = document.getElementById("emailError");
+          var emailVal = emailInput.value.trim();
+          if (!emailVal || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailVal)) {
+            emailError.classList.remove("hidden");
+            emailInput.focus();
+            return false;
+          }
+          emailError.classList.add("hidden");
+        }
+        return true;
+      }
+
+      window.goToPage = function(n) {
+        if (n > currentPage) {
+          if (!validatePage(currentPage)) return;
+        }
+        showPage(n);
+      };
+
+      form.addEventListener("submit", function(e) {
+        e.preventDefault();
+        if (!validatePage(currentPage)) return;
+
+        form.classList.add("hidden");
+        document.getElementById("pageIndicator").classList.add("hidden");
+        document.querySelector(".progress-bar-container").classList.add("hidden");
+        thankYou.classList.remove("hidden");
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      });
+
+      showPage(1);
+    })();
+  </script>
 </body>
 </html>
