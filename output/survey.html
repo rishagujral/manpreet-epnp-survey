@@ -111,6 +111,30 @@
       margin-bottom: 12px;
     }
 
+    .sl-feedback {
+      margin-top: 12px;
+      padding-top: 12px;
+      border-top: 1px solid #e5e7eb;
+    }
+
+    .sl-feedback label {
+      display: block;
+      font-size: 13px;
+      font-weight: 600;
+      color: #374151;
+      margin-top: 10px;
+    }
+
+    .sl-feedback label:first-child {
+      margin-top: 0;
+    }
+
+    .sl-feedback textarea {
+      margin-top: 4px;
+      font-size: 13px;
+      padding: 10px;
+    }
+
     .service-block {
       background: #f8fafc;
       padding: 14px;
@@ -263,7 +287,7 @@
           </div>
         </section>
 
-        <!-- PAGE 3: Per-service-line satisfaction + follow-up text questions -->
+        <!-- PAGE 3: Per-service-line satisfaction + per-SL feedback text boxes -->
         <section class="survey-page hidden" id="surveyPage3">
           <h2>Satisfaction</h2>
           <p><strong>How satisfied are you with the services offered by the EP&amp;P team in your market?</strong></p>
@@ -278,6 +302,12 @@
               <label class="radio-pill"><input type="radio" name="satisfaction_supplier_onboarding" value="Very Dissatisfied" disabled /><span>Very Dissatisfied</span></label>
               <label class="radio-pill"><input type="radio" name="satisfaction_supplier_onboarding" value="N/A" disabled /><span>N/A</span></label>
             </div>
+            <div class="sl-feedback">
+              <label>Please let us know what worked well for you</label>
+              <textarea name="worked_well_supplier_onboarding" rows="2" placeholder="What worked well..."></textarea>
+              <label>What can be improved</label>
+              <textarea name="improve_supplier_onboarding" rows="2" placeholder="What can be improved..."></textarea>
+            </div>
           </div>
 
           <div class="question rating-group" data-slkey="service_desk">
@@ -289,6 +319,12 @@
               <label class="radio-pill"><input type="radio" name="satisfaction_service_desk" value="Dissatisfied" disabled /><span>Dissatisfied</span></label>
               <label class="radio-pill"><input type="radio" name="satisfaction_service_desk" value="Very Dissatisfied" disabled /><span>Very Dissatisfied</span></label>
               <label class="radio-pill"><input type="radio" name="satisfaction_service_desk" value="N/A" disabled /><span>N/A</span></label>
+            </div>
+            <div class="sl-feedback">
+              <label>Please let us know what worked well for you</label>
+              <textarea name="worked_well_service_desk" rows="2" placeholder="What worked well..."></textarea>
+              <label>What can be improved</label>
+              <textarea name="improve_service_desk" rows="2" placeholder="What can be improved..."></textarea>
             </div>
           </div>
 
@@ -302,6 +338,12 @@
               <label class="radio-pill"><input type="radio" name="satisfaction_accounts_payable" value="Very Dissatisfied" disabled /><span>Very Dissatisfied</span></label>
               <label class="radio-pill"><input type="radio" name="satisfaction_accounts_payable" value="N/A" disabled /><span>N/A</span></label>
             </div>
+            <div class="sl-feedback">
+              <label>Please let us know what worked well for you</label>
+              <textarea name="worked_well_accounts_payable" rows="2" placeholder="What worked well..."></textarea>
+              <label>What can be improved</label>
+              <textarea name="improve_accounts_payable" rows="2" placeholder="What can be improved..."></textarea>
+            </div>
           </div>
 
           <div class="question rating-group" data-slkey="buy_desk">
@@ -313,6 +355,12 @@
               <label class="radio-pill"><input type="radio" name="satisfaction_buy_desk" value="Dissatisfied" disabled /><span>Dissatisfied</span></label>
               <label class="radio-pill"><input type="radio" name="satisfaction_buy_desk" value="Very Dissatisfied" disabled /><span>Very Dissatisfied</span></label>
               <label class="radio-pill"><input type="radio" name="satisfaction_buy_desk" value="N/A" disabled /><span>N/A</span></label>
+            </div>
+            <div class="sl-feedback">
+              <label>Please let us know what worked well for you</label>
+              <textarea name="worked_well_buy_desk" rows="2" placeholder="What worked well..."></textarea>
+              <label>What can be improved</label>
+              <textarea name="improve_buy_desk" rows="2" placeholder="What can be improved..."></textarea>
             </div>
           </div>
 
@@ -326,6 +374,12 @@
               <label class="radio-pill"><input type="radio" name="satisfaction_sourcing" value="Very Dissatisfied" disabled /><span>Very Dissatisfied</span></label>
               <label class="radio-pill"><input type="radio" name="satisfaction_sourcing" value="N/A" disabled /><span>N/A</span></label>
             </div>
+            <div class="sl-feedback">
+              <label>Please let us know what worked well for you</label>
+              <textarea name="worked_well_sourcing" rows="2" placeholder="What worked well..."></textarea>
+              <label>What can be improved</label>
+              <textarea name="improve_sourcing" rows="2" placeholder="What can be improved..."></textarea>
+            </div>
           </div>
 
           <div class="question rating-group" data-slkey="risk_screening">
@@ -338,26 +392,22 @@
               <label class="radio-pill"><input type="radio" name="satisfaction_risk_screening" value="Very Dissatisfied" disabled /><span>Very Dissatisfied</span></label>
               <label class="radio-pill"><input type="radio" name="satisfaction_risk_screening" value="N/A" disabled /><span>N/A</span></label>
             </div>
-          </div>
-
-          <div class="question">
-            <label for="workedWell"><strong>If satisfied, what worked well?</strong></label>
-            <textarea id="workedWell" name="workedWell" rows="4" placeholder="Tell us what worked well..."></textarea>
-          </div>
-
-          <div class="question">
-            <label for="couldImprove"><strong>If dissatisfied, what could be improved?</strong></label>
-            <textarea id="couldImprove" name="couldImprove" rows="4" placeholder="Tell us what could be improved..."></textarea>
+            <div class="sl-feedback">
+              <label>Please let us know what worked well for you</label>
+              <textarea name="worked_well_risk_screening" rows="2" placeholder="What worked well..."></textarea>
+              <label>What can be improved</label>
+              <textarea name="improve_risk_screening" rows="2" placeholder="What can be improved..."></textarea>
+            </div>
           </div>
 
           <div class="question">
             <label for="placeholder1"><strong>Placeholder question</strong></label>
-            <textarea id="placeholder1" name="placeholder1" rows="4" placeholder="Your response..."></textarea>
+            <textarea id="placeholder1" name="placeholder1" rows="3" placeholder="Your response..."></textarea>
           </div>
 
           <div class="question">
             <label for="placeholder2"><strong>Placeholder question</strong></label>
-            <textarea id="placeholder2" name="placeholder2" rows="4" placeholder="Your response..."></textarea>
+            <textarea id="placeholder2" name="placeholder2" rows="3" placeholder="Your response..."></textarea>
           </div>
 
           <div class="page-nav">
@@ -404,12 +454,16 @@
           var group = form.querySelector('.rating-group[data-slkey="' + key + '"]');
           if (!group) return;
           var radios = group.querySelectorAll('input[type="radio"]');
+          var textareas = group.querySelectorAll('textarea');
           if (cb.checked) {
             group.classList.remove("disabled-group");
+            group.classList.remove("hidden");
             radios.forEach(function(r) { r.disabled = false; });
           } else {
             group.classList.add("disabled-group");
+            group.classList.add("hidden");
             radios.forEach(function(r) { r.disabled = true; r.checked = false; });
+            textareas.forEach(function(t) { t.value = ""; });
           }
         });
       }
