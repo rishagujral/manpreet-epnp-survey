@@ -458,10 +458,12 @@
           var radios = group.querySelectorAll('input[type="radio"]');
           var textareas = group.querySelectorAll('textarea');
           if (cb.checked) {
+            group.style.display = "";
             group.classList.remove("disabled-group");
             group.classList.remove("hidden");
             radios.forEach(function(r) { r.disabled = false; });
           } else {
+            group.style.display = "none";
             group.classList.add("disabled-group");
             group.classList.add("hidden");
             radios.forEach(function(r) { r.disabled = true; r.checked = false; });
@@ -504,6 +506,7 @@
           if (!validatePage(currentPage)) return;
         }
         showPage(n);
+        if (n === 3) syncRatingGroups();
       };
 
       form.addEventListener("submit", function(e) {
