@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <title>EP&amp;P GCH Region Questionnaire</title>
+  <title>EP&amp;P &ndash; GCH System Survey</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <style>
     * { box-sizing: border-box; }
@@ -95,44 +95,39 @@
     }
 
     .sl-label {
-      font-weight: 600;
-      margin-bottom: 4px;
-    }
-
-    .disabled-group {
-      opacity: 0.4;
-      pointer-events: none;
+      font-weight: 700;
+      font-size: 17px;
+      margin-bottom: 6px;
+      color: #178a4b;
     }
 
     .rating-group {
-      padding: 12px 16px;
-      border-radius: 12px;
+      padding: 16px 18px;
+      border-radius: 14px;
       background: #f8fafc;
-      margin-bottom: 12px;
+      margin-bottom: 16px;
+      border: 1px solid #e5e7eb;
     }
 
-    .sl-feedback {
-      margin-top: 12px;
-      padding-top: 12px;
-      border-top: 1px solid #e5e7eb;
-    }
-
-    .sl-feedback label {
+    .sl-question-label {
       display: block;
-      font-size: 13px;
+      font-size: 14px;
       font-weight: 600;
       color: #374151;
-      margin-top: 10px;
+      margin-top: 16px;
+      margin-bottom: 2px;
     }
 
-    .sl-feedback label:first-child {
-      margin-top: 0;
+    .sl-question-label:first-of-type {
+      margin-top: 8px;
     }
 
-    .sl-feedback textarea {
-      margin-top: 4px;
-      font-size: 13px;
-      padding: 10px;
+    .sl-text-label {
+      display: block;
+      font-size: 14px;
+      font-weight: 600;
+      color: #374151;
+      margin-top: 16px;
     }
 
     .service-block {
@@ -209,8 +204,8 @@
 <body>
   <div class="page">
     <div class="card">
-      <div class="brand">EP&amp;P</div>
-      <h1>EP&amp;P GCH Region Questionnaire</h1>
+      <div class="brand">Enterprise Procurement &amp; Payables</div>
+      <h1>EP&amp;P &ndash; GCH System Survey</h1>
 
       <div class="page-indicator" id="pageIndicator">Page 1 of 4</div>
       <div class="progress-bar-container">
@@ -287,129 +282,236 @@
           </div>
         </section>
 
-        <!-- PAGE 3: Per-service-line satisfaction + per-SL feedback text boxes -->
+        <!-- PAGE 3: Per-service-line unique questions -->
         <section class="survey-page hidden" id="surveyPage3">
-          <h2>Satisfaction</h2>
-          <p><strong>How satisfied are you with the services offered by the EP&amp;P team in your market?</strong></p>
+          <h2>Your Feedback</h2>
 
-          <div class="question rating-group" data-slkey="supplier_onboarding">
+          <!-- ===== SUPPLIER ONBOARDING ===== -->
+          <div class="rating-group" data-slkey="supplier_onboarding">
             <p class="sl-label">Supplier Onboarding</p>
+
+            <span class="sl-question-label">1. How satisfied are you with the service provided by the Supplier Onboarding team?</span>
             <div class="ratings">
-              <label class="radio-pill"><input type="radio" name="satisfaction_supplier_onboarding" value="Very Satisfied" disabled /><span>Very Satisfied</span></label>
-              <label class="radio-pill"><input type="radio" name="satisfaction_supplier_onboarding" value="Satisfied" disabled /><span>Satisfied</span></label>
-              <label class="radio-pill"><input type="radio" name="satisfaction_supplier_onboarding" value="Neutral" disabled /><span>Neutral</span></label>
-              <label class="radio-pill"><input type="radio" name="satisfaction_supplier_onboarding" value="Dissatisfied" disabled /><span>Dissatisfied</span></label>
-              <label class="radio-pill"><input type="radio" name="satisfaction_supplier_onboarding" value="Very Dissatisfied" disabled /><span>Very Dissatisfied</span></label>
-              <label class="radio-pill"><input type="radio" name="satisfaction_supplier_onboarding" value="N/A" disabled /><span>N/A</span></label>
+              <label class="radio-pill"><input type="radio" name="so_q1" value="Very Satisfied" disabled /><span>Very Satisfied</span></label>
+              <label class="radio-pill"><input type="radio" name="so_q1" value="Satisfied" disabled /><span>Satisfied</span></label>
+              <label class="radio-pill"><input type="radio" name="so_q1" value="Neutral" disabled /><span>Neutral</span></label>
+              <label class="radio-pill"><input type="radio" name="so_q1" value="Dissatisfied" disabled /><span>Dissatisfied</span></label>
+              <label class="radio-pill"><input type="radio" name="so_q1" value="Very Dissatisfied" disabled /><span>Very Dissatisfied</span></label>
+              <label class="radio-pill"><input type="radio" name="so_q1" value="N/A" disabled /><span>N/A</span></label>
             </div>
-            <div class="sl-feedback">
-              <label>Please let us know what worked well for you, and what can be improved</label>
-              <textarea name="feedback_supplier_onboarding" rows="3" placeholder="Your feedback..."></textarea>
-              <label>Placeholder question</label>
-              <textarea name="placeholder1_supplier_onboarding" rows="2" placeholder="Your response..."></textarea>
-              <label>Placeholder question</label>
-              <textarea name="placeholder2_supplier_onboarding" rows="2" placeholder="Your response..."></textarea>
+
+            <span class="sl-question-label">2. How clear were the onboarding process and guidelines provided?</span>
+            <div class="ratings">
+              <label class="radio-pill"><input type="radio" name="so_q2" value="Very Satisfied" disabled /><span>Very Satisfied</span></label>
+              <label class="radio-pill"><input type="radio" name="so_q2" value="Satisfied" disabled /><span>Satisfied</span></label>
+              <label class="radio-pill"><input type="radio" name="so_q2" value="Neutral" disabled /><span>Neutral</span></label>
+              <label class="radio-pill"><input type="radio" name="so_q2" value="Dissatisfied" disabled /><span>Dissatisfied</span></label>
+              <label class="radio-pill"><input type="radio" name="so_q2" value="Very Dissatisfied" disabled /><span>Very Dissatisfied</span></label>
+              <label class="radio-pill"><input type="radio" name="so_q2" value="N/A" disabled /><span>N/A</span></label>
             </div>
+
+            <span class="sl-question-label">3. How effectively did the Onboarding team support you throughout the process?</span>
+            <div class="ratings">
+              <label class="radio-pill"><input type="radio" name="so_q3" value="Very Satisfied" disabled /><span>Very Satisfied</span></label>
+              <label class="radio-pill"><input type="radio" name="so_q3" value="Satisfied" disabled /><span>Satisfied</span></label>
+              <label class="radio-pill"><input type="radio" name="so_q3" value="Neutral" disabled /><span>Neutral</span></label>
+              <label class="radio-pill"><input type="radio" name="so_q3" value="Dissatisfied" disabled /><span>Dissatisfied</span></label>
+              <label class="radio-pill"><input type="radio" name="so_q3" value="Very Dissatisfied" disabled /><span>Very Dissatisfied</span></label>
+              <label class="radio-pill"><input type="radio" name="so_q3" value="N/A" disabled /><span>N/A</span></label>
+            </div>
+
+            <label class="sl-text-label">4. What could be improved?</label>
+            <textarea name="so_improve" rows="3" placeholder="Your suggestions..."></textarea>
           </div>
 
-          <div class="question rating-group" data-slkey="service_desk">
+          <!-- ===== SERVICE DESK ===== -->
+          <div class="rating-group" data-slkey="service_desk">
             <p class="sl-label">Service Desk</p>
+
+            <span class="sl-question-label">1. How satisfied are you with Service Desk?</span>
             <div class="ratings">
-              <label class="radio-pill"><input type="radio" name="satisfaction_service_desk" value="Very Satisfied" disabled /><span>Very Satisfied</span></label>
-              <label class="radio-pill"><input type="radio" name="satisfaction_service_desk" value="Satisfied" disabled /><span>Satisfied</span></label>
-              <label class="radio-pill"><input type="radio" name="satisfaction_service_desk" value="Neutral" disabled /><span>Neutral</span></label>
-              <label class="radio-pill"><input type="radio" name="satisfaction_service_desk" value="Dissatisfied" disabled /><span>Dissatisfied</span></label>
-              <label class="radio-pill"><input type="radio" name="satisfaction_service_desk" value="Very Dissatisfied" disabled /><span>Very Dissatisfied</span></label>
-              <label class="radio-pill"><input type="radio" name="satisfaction_service_desk" value="N/A" disabled /><span>N/A</span></label>
+              <label class="radio-pill"><input type="radio" name="sd_q1" value="Very Satisfied" disabled /><span>Very Satisfied</span></label>
+              <label class="radio-pill"><input type="radio" name="sd_q1" value="Satisfied" disabled /><span>Satisfied</span></label>
+              <label class="radio-pill"><input type="radio" name="sd_q1" value="Neutral" disabled /><span>Neutral</span></label>
+              <label class="radio-pill"><input type="radio" name="sd_q1" value="Dissatisfied" disabled /><span>Dissatisfied</span></label>
+              <label class="radio-pill"><input type="radio" name="sd_q1" value="Very Dissatisfied" disabled /><span>Very Dissatisfied</span></label>
+              <label class="radio-pill"><input type="radio" name="sd_q1" value="N/A" disabled /><span>N/A</span></label>
             </div>
-            <div class="sl-feedback">
-              <label>Please let us know what worked well for you, and what can be improved</label>
-              <textarea name="feedback_service_desk" rows="3" placeholder="Your feedback..."></textarea>
-              <label>Placeholder question</label>
-              <textarea name="placeholder1_service_desk" rows="2" placeholder="Your response..."></textarea>
-              <label>Placeholder question</label>
-              <textarea name="placeholder2_service_desk" rows="2" placeholder="Your response..."></textarea>
+
+            <span class="sl-question-label">2. How effective was the Service Desk team in addressing your queries?</span>
+            <div class="ratings">
+              <label class="radio-pill"><input type="radio" name="sd_q2" value="Very Satisfied" disabled /><span>Very Satisfied</span></label>
+              <label class="radio-pill"><input type="radio" name="sd_q2" value="Satisfied" disabled /><span>Satisfied</span></label>
+              <label class="radio-pill"><input type="radio" name="sd_q2" value="Neutral" disabled /><span>Neutral</span></label>
+              <label class="radio-pill"><input type="radio" name="sd_q2" value="Dissatisfied" disabled /><span>Dissatisfied</span></label>
+              <label class="radio-pill"><input type="radio" name="sd_q2" value="Very Dissatisfied" disabled /><span>Very Dissatisfied</span></label>
+              <label class="radio-pill"><input type="radio" name="sd_q2" value="N/A" disabled /><span>N/A</span></label>
             </div>
+
+            <span class="sl-question-label">3. Were the communications received clear and helpful?</span>
+            <div class="ratings">
+              <label class="radio-pill"><input type="radio" name="sd_q3" value="Very Satisfied" disabled /><span>Very Satisfied</span></label>
+              <label class="radio-pill"><input type="radio" name="sd_q3" value="Satisfied" disabled /><span>Satisfied</span></label>
+              <label class="radio-pill"><input type="radio" name="sd_q3" value="Neutral" disabled /><span>Neutral</span></label>
+              <label class="radio-pill"><input type="radio" name="sd_q3" value="Dissatisfied" disabled /><span>Dissatisfied</span></label>
+              <label class="radio-pill"><input type="radio" name="sd_q3" value="Very Dissatisfied" disabled /><span>Very Dissatisfied</span></label>
+              <label class="radio-pill"><input type="radio" name="sd_q3" value="N/A" disabled /><span>N/A</span></label>
+            </div>
+
+            <label class="sl-text-label">4. What could be improved?</label>
+            <textarea name="sd_improve" rows="3" placeholder="Your suggestions..."></textarea>
           </div>
 
-          <div class="question rating-group" data-slkey="accounts_payable">
+          <!-- ===== ACCOUNTS PAYABLE ===== -->
+          <div class="rating-group" data-slkey="accounts_payable">
             <p class="sl-label">Accounts Payable</p>
+
+            <span class="sl-question-label">1. How satisfied are you with AP services?</span>
             <div class="ratings">
-              <label class="radio-pill"><input type="radio" name="satisfaction_accounts_payable" value="Very Satisfied" disabled /><span>Very Satisfied</span></label>
-              <label class="radio-pill"><input type="radio" name="satisfaction_accounts_payable" value="Satisfied" disabled /><span>Satisfied</span></label>
-              <label class="radio-pill"><input type="radio" name="satisfaction_accounts_payable" value="Neutral" disabled /><span>Neutral</span></label>
-              <label class="radio-pill"><input type="radio" name="satisfaction_accounts_payable" value="Dissatisfied" disabled /><span>Dissatisfied</span></label>
-              <label class="radio-pill"><input type="radio" name="satisfaction_accounts_payable" value="Very Dissatisfied" disabled /><span>Very Dissatisfied</span></label>
-              <label class="radio-pill"><input type="radio" name="satisfaction_accounts_payable" value="N/A" disabled /><span>N/A</span></label>
+              <label class="radio-pill"><input type="radio" name="ap_q1" value="Very Satisfied" disabled /><span>Very Satisfied</span></label>
+              <label class="radio-pill"><input type="radio" name="ap_q1" value="Satisfied" disabled /><span>Satisfied</span></label>
+              <label class="radio-pill"><input type="radio" name="ap_q1" value="Neutral" disabled /><span>Neutral</span></label>
+              <label class="radio-pill"><input type="radio" name="ap_q1" value="Dissatisfied" disabled /><span>Dissatisfied</span></label>
+              <label class="radio-pill"><input type="radio" name="ap_q1" value="Very Dissatisfied" disabled /><span>Very Dissatisfied</span></label>
+              <label class="radio-pill"><input type="radio" name="ap_q1" value="N/A" disabled /><span>N/A</span></label>
             </div>
-            <div class="sl-feedback">
-              <label>Please let us know what worked well for you, and what can be improved</label>
-              <textarea name="feedback_accounts_payable" rows="3" placeholder="Your feedback..."></textarea>
-              <label>Placeholder question</label>
-              <textarea name="placeholder1_accounts_payable" rows="2" placeholder="Your response..."></textarea>
-              <label>Placeholder question</label>
-              <textarea name="placeholder2_accounts_payable" rows="2" placeholder="Your response..."></textarea>
+
+            <span class="sl-question-label">2. How easy was it to review and/or approve the invoices?</span>
+            <div class="ratings">
+              <label class="radio-pill"><input type="radio" name="ap_q2" value="Very Satisfied" disabled /><span>Very Satisfied</span></label>
+              <label class="radio-pill"><input type="radio" name="ap_q2" value="Satisfied" disabled /><span>Satisfied</span></label>
+              <label class="radio-pill"><input type="radio" name="ap_q2" value="Neutral" disabled /><span>Neutral</span></label>
+              <label class="radio-pill"><input type="radio" name="ap_q2" value="Dissatisfied" disabled /><span>Dissatisfied</span></label>
+              <label class="radio-pill"><input type="radio" name="ap_q2" value="Very Dissatisfied" disabled /><span>Very Dissatisfied</span></label>
+              <label class="radio-pill"><input type="radio" name="ap_q2" value="N/A" disabled /><span>N/A</span></label>
             </div>
+
+            <span class="sl-question-label">3. How clear was the process to check the status of your invoice?</span>
+            <div class="ratings">
+              <label class="radio-pill"><input type="radio" name="ap_q3" value="Very Satisfied" disabled /><span>Very Satisfied</span></label>
+              <label class="radio-pill"><input type="radio" name="ap_q3" value="Satisfied" disabled /><span>Satisfied</span></label>
+              <label class="radio-pill"><input type="radio" name="ap_q3" value="Neutral" disabled /><span>Neutral</span></label>
+              <label class="radio-pill"><input type="radio" name="ap_q3" value="Dissatisfied" disabled /><span>Dissatisfied</span></label>
+              <label class="radio-pill"><input type="radio" name="ap_q3" value="Very Dissatisfied" disabled /><span>Very Dissatisfied</span></label>
+              <label class="radio-pill"><input type="radio" name="ap_q3" value="N/A" disabled /><span>N/A</span></label>
+            </div>
+
+            <label class="sl-text-label">4. What could be improved?</label>
+            <textarea name="ap_improve" rows="3" placeholder="Your suggestions..."></textarea>
           </div>
 
-          <div class="question rating-group" data-slkey="buy_desk">
+          <!-- ===== BUY DESK ===== -->
+          <div class="rating-group" data-slkey="buy_desk">
             <p class="sl-label">Buy Desk</p>
+
+            <span class="sl-question-label">1. How satisfied are you with BD services?</span>
             <div class="ratings">
-              <label class="radio-pill"><input type="radio" name="satisfaction_buy_desk" value="Very Satisfied" disabled /><span>Very Satisfied</span></label>
-              <label class="radio-pill"><input type="radio" name="satisfaction_buy_desk" value="Satisfied" disabled /><span>Satisfied</span></label>
-              <label class="radio-pill"><input type="radio" name="satisfaction_buy_desk" value="Neutral" disabled /><span>Neutral</span></label>
-              <label class="radio-pill"><input type="radio" name="satisfaction_buy_desk" value="Dissatisfied" disabled /><span>Dissatisfied</span></label>
-              <label class="radio-pill"><input type="radio" name="satisfaction_buy_desk" value="Very Dissatisfied" disabled /><span>Very Dissatisfied</span></label>
-              <label class="radio-pill"><input type="radio" name="satisfaction_buy_desk" value="N/A" disabled /><span>N/A</span></label>
+              <label class="radio-pill"><input type="radio" name="bd_q1" value="Very Satisfied" disabled /><span>Very Satisfied</span></label>
+              <label class="radio-pill"><input type="radio" name="bd_q1" value="Satisfied" disabled /><span>Satisfied</span></label>
+              <label class="radio-pill"><input type="radio" name="bd_q1" value="Neutral" disabled /><span>Neutral</span></label>
+              <label class="radio-pill"><input type="radio" name="bd_q1" value="Dissatisfied" disabled /><span>Dissatisfied</span></label>
+              <label class="radio-pill"><input type="radio" name="bd_q1" value="Very Dissatisfied" disabled /><span>Very Dissatisfied</span></label>
+              <label class="radio-pill"><input type="radio" name="bd_q1" value="N/A" disabled /><span>N/A</span></label>
             </div>
-            <div class="sl-feedback">
-              <label>Please let us know what worked well for you, and what can be improved</label>
-              <textarea name="feedback_buy_desk" rows="3" placeholder="Your feedback..."></textarea>
-              <label>Placeholder question</label>
-              <textarea name="placeholder1_buy_desk" rows="2" placeholder="Your response..."></textarea>
-              <label>Placeholder question</label>
-              <textarea name="placeholder2_buy_desk" rows="2" placeholder="Your response..."></textarea>
+
+            <span class="sl-question-label">2. How easy was it to submit a Sourcing Support Request Form (SSRF)?</span>
+            <div class="ratings">
+              <label class="radio-pill"><input type="radio" name="bd_q2" value="Very Satisfied" disabled /><span>Very Satisfied</span></label>
+              <label class="radio-pill"><input type="radio" name="bd_q2" value="Satisfied" disabled /><span>Satisfied</span></label>
+              <label class="radio-pill"><input type="radio" name="bd_q2" value="Neutral" disabled /><span>Neutral</span></label>
+              <label class="radio-pill"><input type="radio" name="bd_q2" value="Dissatisfied" disabled /><span>Dissatisfied</span></label>
+              <label class="radio-pill"><input type="radio" name="bd_q2" value="Very Dissatisfied" disabled /><span>Very Dissatisfied</span></label>
+              <label class="radio-pill"><input type="radio" name="bd_q2" value="N/A" disabled /><span>N/A</span></label>
             </div>
+
+            <span class="sl-question-label">3. How helpful was the Buy Desk in supporting your request?</span>
+            <div class="ratings">
+              <label class="radio-pill"><input type="radio" name="bd_q3" value="Very Satisfied" disabled /><span>Very Satisfied</span></label>
+              <label class="radio-pill"><input type="radio" name="bd_q3" value="Satisfied" disabled /><span>Satisfied</span></label>
+              <label class="radio-pill"><input type="radio" name="bd_q3" value="Neutral" disabled /><span>Neutral</span></label>
+              <label class="radio-pill"><input type="radio" name="bd_q3" value="Dissatisfied" disabled /><span>Dissatisfied</span></label>
+              <label class="radio-pill"><input type="radio" name="bd_q3" value="Very Dissatisfied" disabled /><span>Very Dissatisfied</span></label>
+              <label class="radio-pill"><input type="radio" name="bd_q3" value="N/A" disabled /><span>N/A</span></label>
+            </div>
+
+            <label class="sl-text-label">4. What could be improved?</label>
+            <textarea name="bd_improve" rows="3" placeholder="Your suggestions..."></textarea>
           </div>
 
-          <div class="question rating-group" data-slkey="sourcing">
+          <!-- ===== SOURCING ===== -->
+          <div class="rating-group" data-slkey="sourcing">
             <p class="sl-label">Sourcing</p>
+
+            <span class="sl-question-label">1. How satisfied are you with the support received from the Sourcing team?</span>
             <div class="ratings">
-              <label class="radio-pill"><input type="radio" name="satisfaction_sourcing" value="Very Satisfied" disabled /><span>Very Satisfied</span></label>
-              <label class="radio-pill"><input type="radio" name="satisfaction_sourcing" value="Satisfied" disabled /><span>Satisfied</span></label>
-              <label class="radio-pill"><input type="radio" name="satisfaction_sourcing" value="Neutral" disabled /><span>Neutral</span></label>
-              <label class="radio-pill"><input type="radio" name="satisfaction_sourcing" value="Dissatisfied" disabled /><span>Dissatisfied</span></label>
-              <label class="radio-pill"><input type="radio" name="satisfaction_sourcing" value="Very Dissatisfied" disabled /><span>Very Dissatisfied</span></label>
-              <label class="radio-pill"><input type="radio" name="satisfaction_sourcing" value="N/A" disabled /><span>N/A</span></label>
+              <label class="radio-pill"><input type="radio" name="src_q1" value="Very Satisfied" disabled /><span>Very Satisfied</span></label>
+              <label class="radio-pill"><input type="radio" name="src_q1" value="Satisfied" disabled /><span>Satisfied</span></label>
+              <label class="radio-pill"><input type="radio" name="src_q1" value="Neutral" disabled /><span>Neutral</span></label>
+              <label class="radio-pill"><input type="radio" name="src_q1" value="Dissatisfied" disabled /><span>Dissatisfied</span></label>
+              <label class="radio-pill"><input type="radio" name="src_q1" value="Very Dissatisfied" disabled /><span>Very Dissatisfied</span></label>
+              <label class="radio-pill"><input type="radio" name="src_q1" value="N/A" disabled /><span>N/A</span></label>
             </div>
-            <div class="sl-feedback">
-              <label>Please let us know what worked well for you, and what can be improved</label>
-              <textarea name="feedback_sourcing" rows="3" placeholder="Your feedback..."></textarea>
-              <label>Placeholder question</label>
-              <textarea name="placeholder1_sourcing" rows="2" placeholder="Your response..."></textarea>
-              <label>Placeholder question</label>
-              <textarea name="placeholder2_sourcing" rows="2" placeholder="Your response..."></textarea>
+
+            <span class="sl-question-label">2. How well did the Sourcing team understand your business needs?</span>
+            <div class="ratings">
+              <label class="radio-pill"><input type="radio" name="src_q2" value="Very Satisfied" disabled /><span>Very Satisfied</span></label>
+              <label class="radio-pill"><input type="radio" name="src_q2" value="Satisfied" disabled /><span>Satisfied</span></label>
+              <label class="radio-pill"><input type="radio" name="src_q2" value="Neutral" disabled /><span>Neutral</span></label>
+              <label class="radio-pill"><input type="radio" name="src_q2" value="Dissatisfied" disabled /><span>Dissatisfied</span></label>
+              <label class="radio-pill"><input type="radio" name="src_q2" value="Very Dissatisfied" disabled /><span>Very Dissatisfied</span></label>
+              <label class="radio-pill"><input type="radio" name="src_q2" value="N/A" disabled /><span>N/A</span></label>
             </div>
+
+            <span class="sl-question-label">3. How effective was the collaboration?</span>
+            <div class="ratings">
+              <label class="radio-pill"><input type="radio" name="src_q3" value="Very Satisfied" disabled /><span>Very Satisfied</span></label>
+              <label class="radio-pill"><input type="radio" name="src_q3" value="Satisfied" disabled /><span>Satisfied</span></label>
+              <label class="radio-pill"><input type="radio" name="src_q3" value="Neutral" disabled /><span>Neutral</span></label>
+              <label class="radio-pill"><input type="radio" name="src_q3" value="Dissatisfied" disabled /><span>Dissatisfied</span></label>
+              <label class="radio-pill"><input type="radio" name="src_q3" value="Very Dissatisfied" disabled /><span>Very Dissatisfied</span></label>
+              <label class="radio-pill"><input type="radio" name="src_q3" value="N/A" disabled /><span>N/A</span></label>
+            </div>
+
+            <label class="sl-text-label">4. What could be improved?</label>
+            <textarea name="src_improve" rows="3" placeholder="Your suggestions..."></textarea>
           </div>
 
-          <div class="question rating-group" data-slkey="risk_screening">
+          <!-- ===== RISK SCREENING ===== -->
+          <div class="rating-group" data-slkey="risk_screening">
             <p class="sl-label">Risk Screening</p>
+
+            <span class="sl-question-label">1. How satisfied are you with Risk Screening services?</span>
             <div class="ratings">
-              <label class="radio-pill"><input type="radio" name="satisfaction_risk_screening" value="Very Satisfied" disabled /><span>Very Satisfied</span></label>
-              <label class="radio-pill"><input type="radio" name="satisfaction_risk_screening" value="Satisfied" disabled /><span>Satisfied</span></label>
-              <label class="radio-pill"><input type="radio" name="satisfaction_risk_screening" value="Neutral" disabled /><span>Neutral</span></label>
-              <label class="radio-pill"><input type="radio" name="satisfaction_risk_screening" value="Dissatisfied" disabled /><span>Dissatisfied</span></label>
-              <label class="radio-pill"><input type="radio" name="satisfaction_risk_screening" value="Very Dissatisfied" disabled /><span>Very Dissatisfied</span></label>
-              <label class="radio-pill"><input type="radio" name="satisfaction_risk_screening" value="N/A" disabled /><span>N/A</span></label>
+              <label class="radio-pill"><input type="radio" name="rs_q1" value="Very Satisfied" disabled /><span>Very Satisfied</span></label>
+              <label class="radio-pill"><input type="radio" name="rs_q1" value="Satisfied" disabled /><span>Satisfied</span></label>
+              <label class="radio-pill"><input type="radio" name="rs_q1" value="Neutral" disabled /><span>Neutral</span></label>
+              <label class="radio-pill"><input type="radio" name="rs_q1" value="Dissatisfied" disabled /><span>Dissatisfied</span></label>
+              <label class="radio-pill"><input type="radio" name="rs_q1" value="Very Dissatisfied" disabled /><span>Very Dissatisfied</span></label>
+              <label class="radio-pill"><input type="radio" name="rs_q1" value="N/A" disabled /><span>N/A</span></label>
             </div>
-            <div class="sl-feedback">
-              <label>Please let us know what worked well for you, and what can be improved</label>
-              <textarea name="feedback_risk_screening" rows="3" placeholder="Your feedback..."></textarea>
-              <label>Placeholder question</label>
-              <textarea name="placeholder1_risk_screening" rows="2" placeholder="Your response..."></textarea>
-              <label>Placeholder question</label>
-              <textarea name="placeholder2_risk_screening" rows="2" placeholder="Your response..."></textarea>
+
+            <span class="sl-question-label">2. How easy was it to submit a Risk Screening request?</span>
+            <div class="ratings">
+              <label class="radio-pill"><input type="radio" name="rs_q2" value="Very Satisfied" disabled /><span>Very Satisfied</span></label>
+              <label class="radio-pill"><input type="radio" name="rs_q2" value="Satisfied" disabled /><span>Satisfied</span></label>
+              <label class="radio-pill"><input type="radio" name="rs_q2" value="Neutral" disabled /><span>Neutral</span></label>
+              <label class="radio-pill"><input type="radio" name="rs_q2" value="Dissatisfied" disabled /><span>Dissatisfied</span></label>
+              <label class="radio-pill"><input type="radio" name="rs_q2" value="Very Dissatisfied" disabled /><span>Very Dissatisfied</span></label>
+              <label class="radio-pill"><input type="radio" name="rs_q2" value="N/A" disabled /><span>N/A</span></label>
             </div>
+
+            <span class="sl-question-label">3. Were your requests handled in a timely manner?</span>
+            <div class="ratings">
+              <label class="radio-pill"><input type="radio" name="rs_q3" value="Very Satisfied" disabled /><span>Very Satisfied</span></label>
+              <label class="radio-pill"><input type="radio" name="rs_q3" value="Satisfied" disabled /><span>Satisfied</span></label>
+              <label class="radio-pill"><input type="radio" name="rs_q3" value="Neutral" disabled /><span>Neutral</span></label>
+              <label class="radio-pill"><input type="radio" name="rs_q3" value="Dissatisfied" disabled /><span>Dissatisfied</span></label>
+              <label class="radio-pill"><input type="radio" name="rs_q3" value="Very Dissatisfied" disabled /><span>Very Dissatisfied</span></label>
+              <label class="radio-pill"><input type="radio" name="rs_q3" value="N/A" disabled /><span>N/A</span></label>
+            </div>
+
+            <label class="sl-text-label">4. What could be improved?</label>
+            <textarea name="rs_improve" rows="3" placeholder="Your suggestions..."></textarea>
           </div>
 
           <div class="page-nav">
@@ -459,12 +561,10 @@
           var textareas = group.querySelectorAll('textarea');
           if (cb.checked) {
             group.style.display = "";
-            group.classList.remove("disabled-group");
             group.classList.remove("hidden");
             radios.forEach(function(r) { r.disabled = false; });
           } else {
             group.style.display = "none";
-            group.classList.add("disabled-group");
             group.classList.add("hidden");
             radios.forEach(function(r) { r.disabled = true; r.checked = false; });
             textareas.forEach(function(t) { t.value = ""; });
