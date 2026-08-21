@@ -1,43 +1,187 @@
 {
-  "title": "EP&P Questionnaire",
-  "introText": "As an important internal client of EP&P team, your input is critical to help us improve our services and measure our impact to you.",
-  "instructionText": "Please take two minutes to complete this CSAT survey and share your feedback by May 1st, 2026.",
+  "title": "EP&P CSAT Survey - Source to Pay & Coupa",
+  "introText": "As an important internal client of EP&P in GCH, your input is critical to help us improve our services and measure our impact to you.",
+  "instructionText": "Please take two minutes to complete this CSAT survey about the Source to Pay process and Coupa and share your feedback.",
   "emailPrompt": "Please enter your email.",
-  "serviceLinePrompt": "We are soliciting input across all service lines of EP&P; please mark below which ones you have used and help us answer the following questions",
-  "serviceLines": [
-    "Strategic Sourcing",
-    "Buy Desk",
-    "Contract Administration",
-    "Service Desk",
-    "Supplier Onboarding",
-    "Accounts Payable"
-  ],
-  "serviceLineDescriptions": {
-    "Strategic Sourcing": "Supports supplier selection, contract negotiations, renewals, and competitive bidding to help you achieve optimal value",
-    "Buy Desk": "Provides purchase order support, requisition processing, and transactional buying assistance to enable efficient procurement execution",
-    "Contract Administration": "Manages contract creation, review, storage, and compliance to ensure agreements are accurate and accessible",
-    "Service Desk": "Acts as the first point of contact for procurement-related queries, issue resolution, and general support to ensure smooth operations",
-    "Supplier Onboarding": "Facilitates supplier setup, documentation, and system enablement to ensure suppliers are ready for seamless engagement",
-    "Accounts Payable": "Handles invoice processing, payments, and query resolution to ensure timely and accurate supplier payments"
+  "overallQuestion": {
+    "id": "overall_s2p",
+    "text": "Overall, are you satisfied with the Source-to-Pay process and the Coupa platform?",
+    "options": [
+      "Very Satisfied",
+      "Satisfied",
+      "Neutral",
+      "Dissatisfied",
+      "Very Dissatisfied"
+    ]
   },
-  "satisfactionQuestion": "How satisfied are you with the services offered by the EP&P team in your market?",
-  "satisfactionOptions": [
-    "Very Satisfied",
-    "Satisfied",
-    "Neutral",
-    "Dissatisfied",
-    "Very Dissatisfied",
-    "N/A"
+  "additionalGeneralQuestions": [],
+  "serviceLinePrompt": "Please mark below the Service Line(s) you have used and help us answer the related questions",
+  "serviceLines": [
+    {
+      "key": "supplier_onboarding",
+      "label": "Supplier Onboarding",
+      "description": "Facilitates supplier setup, documentation, and system enablement to ensure suppliers are ready for seamless engagement.",
+      "questions": [
+        {
+          "id": "q1",
+          "type": "rating",
+          "text": "How clear were the onboarding process and guidelines/training provided?"
+        },
+        {
+          "id": "q2",
+          "type": "rating",
+          "text": "How effectively did the Onboarding team support you throughout the process?"
+        },
+        {
+          "id": "q3",
+          "type": "rating",
+          "text": "Was the turn-around time aligned with your expectations?"
+        },
+        {
+          "id": "q4",
+          "type": "text",
+          "text": "What went well and what could be improved?"
+        }
+      ]
+    },
+    {
+      "key": "service_desk",
+      "label": "Service Desk",
+      "description": "Acts as the first point of contact for procurement-related queries, issue resolution, and general support to ensure smooth operations.",
+      "questions": [
+        {
+          "id": "q1",
+          "type": "rating",
+          "text": "How effective was the Service Desk team in addressing your queries?"
+        },
+        {
+          "id": "q2",
+          "type": "rating",
+          "text": "How responsive was the Service Desk team to your queries?"
+        },
+        {
+          "id": "q3",
+          "type": "text",
+          "text": "What went well and what could be improved?"
+        }
+      ]
+    },
+    {
+      "key": "accounts_payable",
+      "label": "Accounts Payable",
+      "description": "Handles invoice processing, payments, and query resolution to ensure timely and accurate supplier payments.",
+      "questions": [
+        {
+          "id": "q1",
+          "type": "rating",
+          "text": "How easy was it to review and/or approve the invoices?"
+        },
+        {
+          "id": "q2",
+          "type": "rating",
+          "text": "How clear was the process to check the status of your invoice?"
+        },
+        {
+          "id": "q3",
+          "type": "rating",
+          "text": "Were the invoices you submitted and/or approved processed on time?"
+        },
+        {
+          "id": "q4",
+          "type": "text",
+          "text": "What went well and what could be improved?"
+        }
+      ]
+    },
+    {
+      "key": "buy_desk",
+      "label": "Buy Desk",
+      "description": "Sourcing support for purchases below CNY 700k. Provides purchase order support, requisition processing, and transactional buying assistance to enable efficient procurement execution.",
+      "questions": [
+        {
+          "id": "q1",
+          "type": "rating",
+          "text": "How easy was it to submit a Sourcing Support Request Form (SSRF)?"
+        },
+        {
+          "id": "q2",
+          "type": "rating",
+          "text": "How helpful was the Buy Desk in supporting your request?"
+        },
+        {
+          "id": "q3",
+          "type": "yesno",
+          "text": "If you submitted a SSRF before agreeing the commercials with the supplier, was the Buy Desk able to negotiate a better deal?"
+        },
+        {
+          "id": "q4",
+          "type": "text",
+          "text": "What went well and what could be improved?"
+        }
+      ]
+    },
+    {
+      "key": "sourcing",
+      "label": "Sourcing",
+      "description": "Sourcing support for purchases above CNY 700k. Supports supplier selection, contract negotiations, renewals, and competitive bidding to help you achieve optimal value.",
+      "questions": [
+        {
+          "id": "q1",
+          "type": "rating",
+          "text": "How well did the Sourcing team understand your business needs?"
+        },
+        {
+          "id": "q2",
+          "type": "rating",
+          "text": "How effective was the collaboration and communication with the team?"
+        },
+        {
+          "id": "q3",
+          "type": "yesno",
+          "text": "If you submitted a SSRF before agreeing the commercials with the supplier, was the Sourcing team able to negotiate a better deal?"
+        },
+        {
+          "id": "q4",
+          "type": "text",
+          "text": "What went well and what could be improved?"
+        }
+      ]
+    },
+    {
+      "key": "risk_screening",
+      "label": "Risk Screening",
+      "description": "Supports risk screening requests as part of the sourcing and supplier management process.",
+      "questions": [
+        {
+          "id": "q1",
+          "type": "rating",
+          "text": "How easy was it to submit a Risk Screening request?"
+        },
+        {
+          "id": "q2",
+          "type": "rating",
+          "text": "Were your requests handled in a timely manner?"
+        },
+        {
+          "id": "q3",
+          "type": "text",
+          "text": "What went well and what could be improved?"
+        }
+      ]
+    }
   ],
-  "overallSatisfactionQuestion": "Overall, how satisfied are you with the service provided by the EP&P team in your market?",
-  "overallSatisfactionOptions": [
+  "ratingOptions": [
     "Very Satisfied",
     "Satisfied",
     "Neutral",
     "Dissatisfied",
     "Very Dissatisfied"
   ],
-  "improvementQuestion": "How can our EP&P team improve services provided to you?",
+  "yesNoOptions": [
+    "Yes",
+    "No",
+    "Not Applicable"
+  ],
   "recognitionQuestion": "Would you like to highlight any EP&P members who have gone above and beyond in providing you with exceptional service?",
-  "rawImportedText": "EP&P Questionnaire\n\nPage 1:\n\nAs an important internal client of EP&P team, your input is critical to help us improve our services and measure our impact to you.\n\nPlease take two minutes to complete this CSAT survey and share your feedback by May 1st, 2026.\n\nPlease enter your email.\n\n\n\n---------------------------------------------------------------------------------------------------------------------------------\n\n\n\nPage 2:\n\nWe are soliciting input across all service lines of EP&P; please mark below which ones you have used and help us answer the following questions\n\nResponse options:\n\nStrategic Sourcing: Supports supplier selection, contract negotiations, renewals, and competitive bidding to help you achieve optimal value\n\nBuy Desk (for markets with purchase orders): Provides purchase order support, requisition processing, and transactional buying assistance to enable efficient procurement execution\n\nContract Administration: Manages contract creation, review, storage, and compliance to ensure agreements are accurate and accessible\n\nService Desk: Acts as the first point of contact for procurement-related queries, issue resolution, and general support to ensure smooth operations\n\nSupplier Onboarding: Facilitates supplier setup, documentation, and system enablement to ensure suppliers are ready for seamless engagement\n\nAccounts Payable: Handles invoice processing, payments, and query resolution to ensure timely and accurate supplier payments\n\n--------------------------------------------------------------------------------------------------------------------------------\n\nPage 3:\n\nHow satisfied are you with the services offered by the EP&P team in your market?\n\nStrategic sourcing \n\nResponse options: Very Satisfied, Satisfied, Neutral, Dissatisfied, Very Dissatisfied, N/A\n\n\n\nB) Buy Desk\n\nResponse options: Very Satisfied, Satisfied, Neutral, Dissatisfied, Very Dissatisfied\n\n\n\nC) Contract Administration Response options: Very Satisfied, Satisfied, Neutral, Dissatisfied, Very Dissatisfied\n\n\n\nd) Service Desk \n\nResponse options: Very Satisfied, Satisfied, Neutral, Dissatisfied, Very Dissatisfied, N/A\n\n\n\ne) Supplier Onboarding\n\nResponse options: Very Satisfied, Satisfied, Neutral, Dissatisfied, Very Dissatisfied\n\n\n\nf) Accounts Payable \n\nResponse options: Very Satisfied, Satisfied, Neutral, Dissatisfied, Very Dissatisfied\n\n\n\nOverall, how satisfied are you with the service provided by the EP&P team in your market?\n\nResponse options: Very Satisfied, Satisfied, Neutral, Dissatisfied, Very Dissatisfied\n\n\n\nHow can our EP&P team improve services provided to you?\n\nSpace for text\n\n\n\n---------------------------------------------------------------------------------------------------------------------------\n\nPage 4:\n\nWould you like to highlight any EP&P members who have gone above and beyond in providing you with exceptional service?\n\nSpace for text\n\n\n\n"
+  "rawImportedText": "EP&P GCH region Questionnaire \n\n\n\nPage:1\n\nIntroduction:\n\nAs an important internal client of EP&P GCH region, your input is critical to help us improve our services and measure our impact to you.\n\nPlease take two minutes to complete this CSAT survey and share your feedback by October 15th, 2026.\n\nPlease enter your email.Space for text\n\n\n\n--------------------------------------------------------------------------------------------------------------------------------\n\n\n\nPage2:\n\nWe are soliciting input across all service lines of EP&P; please mark below which ones you have used and help us answer the following questions\n\nSupplier Onboarding\n\nService Desk\n\nAccounts Payable\n\nBuy Desk\n\nSourcing\n\nRisk Screening\n\n\n\n---------------------------------------------------------------------------------------------------------------------------------\n\nPage 3:\n\nHow satisfied are you with the services offered by the EP&P team in your market?\n\nResponse options: Very Satisfied, Satisfied, Neutral, Dissatisfied, Very Dissatisfied, N/A\n\n\n\nIf satisfied, what worked well. \n\nSpace for text\n\n\n\nIf dissatisfied, what could be improved. \n\nSpace for text\n\n\n\nPlaceholder question:\n\nSpace for text\n\n\n\nPlaceholder question:\n\nSpace for text\n\n---------------------------------------------------------------------------------------------------------------------------\n\nPage 4:\n\nWould you like to highlight any EP&P members who have gone above and beyond in providing you with exceptional service?Space for text\n\n\n\n\n\n"
 }

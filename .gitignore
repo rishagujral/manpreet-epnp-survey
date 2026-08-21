@@ -1,3 +1,7 @@
 node_modules/
 .env
 data/responses.json
+server-log.txt
+tunnel-log.txt
+tunnel-out.txt
+input/extracted.txt

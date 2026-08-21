@@ -144,10 +144,13 @@ app.post("/api/submit", async (req, res) => {
     const submission = {
       id: uuidv4(),
       email: String(body.email).trim(),
-      serviceLines: Array.isArray(body.serviceLines) ? body.serviceLines : [],
-      satisfaction: body.satisfaction || {},
       overallSatisfaction: body.overallSatisfaction || "",
-      improvement: String(body.improvement || "").trim(),
+      branch: body.branch === "detailed" ? "detailed" : "quick",
+      serviceLines: Array.isArray(body.serviceLines) ? body.serviceLines : [],
+      serviceLineResponses:
+        body.serviceLineResponses && typeof body.serviceLineResponses === "object"
+          ? body.serviceLineResponses
+          : {},
       recognition: String(body.recognition || "").trim(),
       submittedAt: new Date().toISOString()
     };
@@ -156,10 +159,15 @@ app.post("/api/submit", async (req, res) => {
     res.json({ ok: true });
 
     const dashboardLink = buildDashboardLink();
-    const satisfactionText = Object.entries(submission.satisfaction)
-      .map(([k, v]) => `${k}: ${v}`)
-      .join(", ");
     const serviceLines = submission.serviceLines.join(", ") || "-";
+    const detailText = Object.entries(submission.serviceLineResponses)
+      .map(([slKey, answers]) => {
+        const answerText = Object.entries(answers)
+          .map(([qid, ans]) => `${qid}: ${ans}`)
+          .join("; ");
+        return `${slKey} (${answerText})`;
+      })
+      .join(" | ") || "-";
 
     if (process.env.ADMIN_EMAIL) {
       sendEmail({
@@ -168,10 +176,10 @@ app.post("/api/submit", async (req, res) => {
         html: `
           <h2>New EP&P CSAT response</h2>
           <p><strong>Email:</strong> ${submission.email}</p>
-          <p><strong>Service lines:</strong> ${serviceLines}</p>
-          <p><strong>Per-team satisfaction:</strong> ${satisfactionText || "-"}</p>
           <p><strong>Overall satisfaction:</strong> ${submission.overallSatisfaction || "-"}</p>
-          <p><strong>Improvement suggestions:</strong> ${submission.improvement || "-"}</p>
+          <p><strong>Branch:</strong> ${submission.branch}</p>
+          <p><strong>Service lines:</strong> ${serviceLines}</p>
+          <p><strong>Detailed responses:</strong> ${detailText}</p>
           <p><strong>Recognition:</strong> ${submission.recognition || "-"}</p>
           <p><strong>Dashboard:</strong> <a href="${dashboardLink}">${dashboardLink}</a></p>
         `

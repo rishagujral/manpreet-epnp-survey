@@ -263,3 +263,86 @@ textarea {
 .btn-outline:hover {
   background: #e8f5ed;
 }
+
+/* --------- Multi-step survey navigation --------- */
+
+.step {
+  display: none;
+}
+
+.step.active-step {
+  display: block;
+  animation: fadeIn 0.2s ease-in;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.nav-row {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 28px;
+}
+
+.nav-row-end {
+  justify-content: flex-end;
+}
+
+.sl-block {
+  padding: 16px 18px;
+  border-radius: 14px;
+  background: #f8fafc;
+  margin-bottom: 16px;
+}
+
+.sl-block h3 {
+  margin-top: 0;
+  margin-bottom: 4px;
+  color: #178a4b;
+}
+
+.sl-block.hidden {
+  display: none;
+}
+
+.sl-reminder {
+  margin: 0 0 14px 0;
+  padding: 10px 14px;
+  background: #fff7ed;
+  border-left: 3px solid #f59e0b;
+  border-radius: 8px;
+  font-size: 13px;
+  color: #7c4a03;
+}
+
+/* --------- Dashboard: per-question response detail --------- */
+
+.sl-response {
+  margin-top: 10px;
+  padding: 12px 14px;
+  background: #f8fafc;
+  border-radius: 12px;
+}
+
+.sl-response-title {
+  font-weight: 700;
+  color: #178a4b;
+  margin-bottom: 6px;
+}
+
+.qa-row {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 6px;
+  font-size: 14px;
+}
+
+.qa-q {
+  color: #64748b;
+}
+
+.qa-a {
+  font-weight: 600;
+}

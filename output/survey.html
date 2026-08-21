@@ -2,626 +2,603 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <title>EP&amp;P &ndash; GCH System Survey</title>
+  <title>EP&P CSAT Survey - Source to Pay & Coupa</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <style>
-    * { box-sizing: border-box; }
-
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #f5f7fa;
-      color: #1f2937;
-    }
-
-    .page {
-      min-height: 100vh;
-      padding: 32px 16px;
-    }
-
-    .card {
-      max-width: 900px;
-      margin: 0 auto;
-      background: #ffffff;
-      border-radius: 18px;
-      padding: 32px;
-      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
-    }
-
-    .brand {
-      display: inline-block;
-      padding: 6px 12px;
-      border-radius: 999px;
-      background: #e8f5ed;
-      color: #178a4b;
-      font-weight: 700;
-      margin-bottom: 16px;
-    }
-
-    h1, h2 { margin-top: 0; }
-
-    .section {
-      margin: 28px 0;
-      padding-top: 20px;
-      border-top: 1px solid #e5e7eb;
-    }
-
-    input[type="email"],
-    input[type="text"],
-    textarea {
-      width: 100%;
-      margin-top: 8px;
-      padding: 12px;
-      border: 1px solid #cbd5e1;
-      border-radius: 12px;
-      font-size: 14px;
-    }
-
-    .question { margin: 20px 0; }
-
-    .ratings {
-      display: flex;
-      gap: 12px;
-      flex-wrap: wrap;
-      margin-top: 8px;
-    }
-
-    .ratings label,
-    .checkbox-row {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .radio-pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      padding: 6px 14px;
-      border: 1px solid #cbd5e1;
-      border-radius: 999px;
-      cursor: pointer;
-      font-size: 13px;
-      transition: background 0.15s, border-color 0.15s;
-    }
-
-    .radio-pill:hover { border-color: #178a4b; }
-
-    .radio-pill input[type="radio"]:checked + span { font-weight: 700; }
-
-    .radio-pill:has(input:checked) {
-      background: #e8f5ed;
-      border-color: #178a4b;
-    }
-
-    .sl-label {
-      font-weight: 700;
-      font-size: 17px;
-      margin-bottom: 6px;
-      color: #178a4b;
-    }
-
-    .rating-group {
-      padding: 16px 18px;
-      border-radius: 14px;
-      background: #f8fafc;
-      margin-bottom: 16px;
-      border: 1px solid #e5e7eb;
-    }
-
-    .sl-question-label {
-      display: block;
-      font-size: 14px;
-      font-weight: 600;
-      color: #374151;
-      margin-top: 16px;
-      margin-bottom: 2px;
-    }
-
-    .sl-question-label:first-of-type {
-      margin-top: 8px;
-    }
-
-    .sl-text-label {
-      display: block;
-      font-size: 14px;
-      font-weight: 600;
-      color: #374151;
-      margin-top: 16px;
-    }
-
-    .service-block {
-      background: #f8fafc;
-      padding: 14px;
-      border-radius: 14px;
-      margin-bottom: 12px;
-    }
-
-    .btn {
-      background: #178a4b;
-      color: white;
-      border: 0;
-      border-radius: 12px;
-      padding: 14px 22px;
-      font-size: 16px;
-      cursor: pointer;
-    }
-
-    .btn:hover { opacity: 0.95; }
-
-    .btn-outline {
-      background: white;
-      color: #178a4b;
-      border: 2px solid #178a4b;
-    }
-
-    .btn-outline:hover { background: #e8f5ed; }
-
-    .success {
-      margin-top: 24px;
-      padding: 24px;
-      background: #ecfdf3;
-      border-radius: 14px;
-    }
-
-    .hidden { display: none; }
-
-    .progress-bar-container {
-      background: #e5e7eb;
-      border-radius: 999px;
-      height: 8px;
-      margin-bottom: 24px;
-      overflow: hidden;
-    }
-
-    .progress-bar-fill {
-      height: 100%;
-      background: #178a4b;
-      border-radius: 999px;
-      transition: width 0.4s ease;
-    }
-
-    .page-nav {
-      display: flex;
-      justify-content: space-between;
-      margin-top: 24px;
-    }
-
-    .page-indicator {
-      text-align: center;
-      color: #64748b;
-      font-size: 13px;
-      margin-bottom: 8px;
-    }
-
-    .error-msg {
-      color: #dc2626;
-      font-size: 13px;
-      margin-top: 4px;
-    }
-  </style>
+  <link rel="stylesheet" href="/styles.css" />
 </head>
 <body>
   <div class="page">
     <div class="card">
-      <div class="brand">Enterprise Procurement &amp; Payables</div>
-      <h1>EP&amp;P &ndash; GCH System Survey</h1>
+      <div class="brand">EP&P</div>
+      <h1>EP&P CSAT Survey - Source to Pay & Coupa</h1>
 
-      <div class="page-indicator" id="pageIndicator">Page 1 of 4</div>
-      <div class="progress-bar-container">
-        <div class="progress-bar-fill" id="progressBar" style="width: 25%"></div>
-      </div>
+      <form id="surveyForm">
 
-      <form id="surveyForm" novalidate>
-
-        <!-- PAGE 1: Introduction -->
-        <section class="survey-page" id="surveyPage1">
-          <h2>Introduction</h2>
-          <p>As an important internal client of EP&amp;P GCH region, your input is critical to help us improve our services and measure our impact to you.</p>
-          <p>Please take two minutes to complete this CSAT survey and share your feedback by <strong>October 15th, 2026</strong>.</p>
-          <label for="email"><strong>Please enter your email.</strong></label>
+        <!-- STEP: landing -->
+        <section class="step active-step" data-step="landing">
+          <p>As an important internal client of EP&P in GCH, your input is critical to help us improve our services and measure our impact to you.</p>
+          <p>Please take two minutes to complete this CSAT survey about the Source to Pay process and Coupa and share your feedback.</p>
+          <label for="email">Please enter your email.</label>
           <input id="email" name="email" type="email" required placeholder="name@bcg.com" />
-          <p class="error-msg hidden" id="emailError">Please enter a valid email address.</p>
-
-          <div class="page-nav">
-            <span></span>
-            <button type="button" class="btn" onclick="goToPage(2)">Next &rarr;</button>
+          <div class="nav-row nav-row-end">
+            <button type="button" class="btn btn-next">Next</button>
           </div>
         </section>
 
-        <!-- PAGE 2: Service line checkboxes -->
-        <section class="survey-page hidden" id="surveyPage2">
+        <!-- STEP: general S2P / Coupa question -->
+        <section class="step" data-step="general">
+          <h2>Source to Pay & Coupa</h2>
+          <div class="question">
+            <p><strong>Overall, are you satisfied with the Source-to-Pay process and the Coupa platform?</strong></p>
+            <div class="ratings">
+              <label class="radio-pill">
+                <input type="radio" name="overall_s2p" value="Very Satisfied" required />
+                <span>Very Satisfied</span>
+              </label>
+              <label class="radio-pill">
+                <input type="radio" name="overall_s2p" value="Satisfied" required />
+                <span>Satisfied</span>
+              </label>
+              <label class="radio-pill">
+                <input type="radio" name="overall_s2p" value="Neutral" required />
+                <span>Neutral</span>
+              </label>
+              <label class="radio-pill">
+                <input type="radio" name="overall_s2p" value="Dissatisfied" required />
+                <span>Dissatisfied</span>
+              </label>
+              <label class="radio-pill">
+                <input type="radio" name="overall_s2p" value="Very Dissatisfied" required />
+                <span>Very Dissatisfied</span>
+              </label>
+            </div>
+          </div>
+          <div class="nav-row">
+            <button type="button" class="btn btn-outline btn-back">Back</button>
+            <button type="button" class="btn btn-next">Next</button>
+          </div>
+        </section>
+
+        <!-- STEP: service line selection (shown only if dissatisfied) -->
+        <section class="step" data-step="servicelines">
           <h2>Service Lines</h2>
-          <p>We are soliciting input across all service lines of EP&amp;P; please mark below which ones you have used and help us answer the following questions</p>
-
-          <div class="service-block">
-            <label class="checkbox-row">
-              <input type="checkbox" name="serviceLines" value="Supplier Onboarding" data-slkey="supplier_onboarding" class="sl-checkbox" />
-              <span><strong>Supplier Onboarding</strong></span>
-            </label>
-          </div>
-
-          <div class="service-block">
-            <label class="checkbox-row">
-              <input type="checkbox" name="serviceLines" value="Service Desk" data-slkey="service_desk" class="sl-checkbox" />
-              <span><strong>Service Desk</strong></span>
-            </label>
-          </div>
-
-          <div class="service-block">
-            <label class="checkbox-row">
-              <input type="checkbox" name="serviceLines" value="Accounts Payable" data-slkey="accounts_payable" class="sl-checkbox" />
-              <span><strong>Accounts Payable</strong></span>
-            </label>
-          </div>
-
-          <div class="service-block">
-            <label class="checkbox-row">
-              <input type="checkbox" name="serviceLines" value="Buy Desk" data-slkey="buy_desk" class="sl-checkbox" />
-              <span><strong>Buy Desk</strong></span>
-            </label>
-          </div>
-
-          <div class="service-block">
-            <label class="checkbox-row">
-              <input type="checkbox" name="serviceLines" value="Sourcing" data-slkey="sourcing" class="sl-checkbox" />
-              <span><strong>Sourcing</strong></span>
-            </label>
-          </div>
-
-          <div class="service-block">
-            <label class="checkbox-row">
-              <input type="checkbox" name="serviceLines" value="Risk Screening" data-slkey="risk_screening" class="sl-checkbox" />
-              <span><strong>Risk Screening</strong></span>
-            </label>
-          </div>
-
-          <div class="page-nav">
-            <button type="button" class="btn btn-outline" onclick="goToPage(1)">&larr; Back</button>
-            <button type="button" class="btn" onclick="goToPage(3)">Next &rarr;</button>
-          </div>
-        </section>
-
-        <!-- PAGE 3: Per-service-line unique questions -->
-        <section class="survey-page hidden" id="surveyPage3">
-          <h2>Your Feedback</h2>
-
-          <!-- ===== SUPPLIER ONBOARDING ===== -->
-          <div class="rating-group" data-slkey="supplier_onboarding">
-            <p class="sl-label">Supplier Onboarding</p>
-
-            <span class="sl-question-label">1. How satisfied are you with the service provided by the Supplier Onboarding team?</span>
-            <div class="ratings">
-              <label class="radio-pill"><input type="radio" name="so_q1" value="Very Satisfied" disabled /><span>Very Satisfied</span></label>
-              <label class="radio-pill"><input type="radio" name="so_q1" value="Satisfied" disabled /><span>Satisfied</span></label>
-              <label class="radio-pill"><input type="radio" name="so_q1" value="Neutral" disabled /><span>Neutral</span></label>
-              <label class="radio-pill"><input type="radio" name="so_q1" value="Dissatisfied" disabled /><span>Dissatisfied</span></label>
-              <label class="radio-pill"><input type="radio" name="so_q1" value="Very Dissatisfied" disabled /><span>Very Dissatisfied</span></label>
-              <label class="radio-pill"><input type="radio" name="so_q1" value="N/A" disabled /><span>N/A</span></label>
+          <p>Please mark below the Service Line(s) you have used and help us answer the related questions</p>
+          
+            <div class="service-block">
+              <label class="checkbox-row">
+                <input type="checkbox" name="serviceLines" value="Supplier Onboarding" data-slkey="supplier_onboarding" class="sl-checkbox" />
+                <span><strong>Supplier Onboarding</strong></span>
+              </label>
+              <p class="service-desc">Facilitates supplier setup, documentation, and system enablement to ensure suppliers are ready for seamless engagement.</p>
             </div>
-
-            <span class="sl-question-label">2. How clear were the onboarding process and guidelines provided?</span>
-            <div class="ratings">
-              <label class="radio-pill"><input type="radio" name="so_q2" value="Very Satisfied" disabled /><span>Very Satisfied</span></label>
-              <label class="radio-pill"><input type="radio" name="so_q2" value="Satisfied" disabled /><span>Satisfied</span></label>
-              <label class="radio-pill"><input type="radio" name="so_q2" value="Neutral" disabled /><span>Neutral</span></label>
-              <label class="radio-pill"><input type="radio" name="so_q2" value="Dissatisfied" disabled /><span>Dissatisfied</span></label>
-              <label class="radio-pill"><input type="radio" name="so_q2" value="Very Dissatisfied" disabled /><span>Very Dissatisfied</span></label>
-              <label class="radio-pill"><input type="radio" name="so_q2" value="N/A" disabled /><span>N/A</span></label>
+            <div class="service-block">
+              <label class="checkbox-row">
+                <input type="checkbox" name="serviceLines" value="Service Desk" data-slkey="service_desk" class="sl-checkbox" />
+                <span><strong>Service Desk</strong></span>
+              </label>
+              <p class="service-desc">Acts as the first point of contact for procurement-related queries, issue resolution, and general support to ensure smooth operations.</p>
             </div>
-
-            <span class="sl-question-label">3. How effectively did the Onboarding team support you throughout the process?</span>
-            <div class="ratings">
-              <label class="radio-pill"><input type="radio" name="so_q3" value="Very Satisfied" disabled /><span>Very Satisfied</span></label>
-              <label class="radio-pill"><input type="radio" name="so_q3" value="Satisfied" disabled /><span>Satisfied</span></label>
-              <label class="radio-pill"><input type="radio" name="so_q3" value="Neutral" disabled /><span>Neutral</span></label>
-              <label class="radio-pill"><input type="radio" name="so_q3" value="Dissatisfied" disabled /><span>Dissatisfied</span></label>
-              <label class="radio-pill"><input type="radio" name="so_q3" value="Very Dissatisfied" disabled /><span>Very Dissatisfied</span></label>
-              <label class="radio-pill"><input type="radio" name="so_q3" value="N/A" disabled /><span>N/A</span></label>
+            <div class="service-block">
+              <label class="checkbox-row">
+                <input type="checkbox" name="serviceLines" value="Accounts Payable" data-slkey="accounts_payable" class="sl-checkbox" />
+                <span><strong>Accounts Payable</strong></span>
+              </label>
+              <p class="service-desc">Handles invoice processing, payments, and query resolution to ensure timely and accurate supplier payments.</p>
             </div>
-
-            <label class="sl-text-label">4. What could be improved?</label>
-            <textarea name="so_improve" rows="3" placeholder="Your suggestions..."></textarea>
-          </div>
-
-          <!-- ===== SERVICE DESK ===== -->
-          <div class="rating-group" data-slkey="service_desk">
-            <p class="sl-label">Service Desk</p>
-
-            <span class="sl-question-label">1. How satisfied are you with Service Desk?</span>
-            <div class="ratings">
-              <label class="radio-pill"><input type="radio" name="sd_q1" value="Very Satisfied" disabled /><span>Very Satisfied</span></label>
-              <label class="radio-pill"><input type="radio" name="sd_q1" value="Satisfied" disabled /><span>Satisfied</span></label>
-              <label class="radio-pill"><input type="radio" name="sd_q1" value="Neutral" disabled /><span>Neutral</span></label>
-              <label class="radio-pill"><input type="radio" name="sd_q1" value="Dissatisfied" disabled /><span>Dissatisfied</span></label>
-              <label class="radio-pill"><input type="radio" name="sd_q1" value="Very Dissatisfied" disabled /><span>Very Dissatisfied</span></label>
-              <label class="radio-pill"><input type="radio" name="sd_q1" value="N/A" disabled /><span>N/A</span></label>
+            <div class="service-block">
+              <label class="checkbox-row">
+                <input type="checkbox" name="serviceLines" value="Buy Desk" data-slkey="buy_desk" class="sl-checkbox" />
+                <span><strong>Buy Desk</strong></span>
+              </label>
+              <p class="service-desc">Sourcing support for purchases below CNY 700k. Provides purchase order support, requisition processing, and transactional buying assistance to enable efficient procurement execution.</p>
             </div>
-
-            <span class="sl-question-label">2. How effective was the Service Desk team in addressing your queries?</span>
-            <div class="ratings">
-              <label class="radio-pill"><input type="radio" name="sd_q2" value="Very Satisfied" disabled /><span>Very Satisfied</span></label>
-              <label class="radio-pill"><input type="radio" name="sd_q2" value="Satisfied" disabled /><span>Satisfied</span></label>
-              <label class="radio-pill"><input type="radio" name="sd_q2" value="Neutral" disabled /><span>Neutral</span></label>
-              <label class="radio-pill"><input type="radio" name="sd_q2" value="Dissatisfied" disabled /><span>Dissatisfied</span></label>
-              <label class="radio-pill"><input type="radio" name="sd_q2" value="Very Dissatisfied" disabled /><span>Very Dissatisfied</span></label>
-              <label class="radio-pill"><input type="radio" name="sd_q2" value="N/A" disabled /><span>N/A</span></label>
+            <div class="service-block">
+              <label class="checkbox-row">
+                <input type="checkbox" name="serviceLines" value="Sourcing" data-slkey="sourcing" class="sl-checkbox" />
+                <span><strong>Sourcing</strong></span>
+              </label>
+              <p class="service-desc">Sourcing support for purchases above CNY 700k. Supports supplier selection, contract negotiations, renewals, and competitive bidding to help you achieve optimal value.</p>
             </div>
-
-            <span class="sl-question-label">3. Were the communications received clear and helpful?</span>
-            <div class="ratings">
-              <label class="radio-pill"><input type="radio" name="sd_q3" value="Very Satisfied" disabled /><span>Very Satisfied</span></label>
-              <label class="radio-pill"><input type="radio" name="sd_q3" value="Satisfied" disabled /><span>Satisfied</span></label>
-              <label class="radio-pill"><input type="radio" name="sd_q3" value="Neutral" disabled /><span>Neutral</span></label>
-              <label class="radio-pill"><input type="radio" name="sd_q3" value="Dissatisfied" disabled /><span>Dissatisfied</span></label>
-              <label class="radio-pill"><input type="radio" name="sd_q3" value="Very Dissatisfied" disabled /><span>Very Dissatisfied</span></label>
-              <label class="radio-pill"><input type="radio" name="sd_q3" value="N/A" disabled /><span>N/A</span></label>
+            <div class="service-block">
+              <label class="checkbox-row">
+                <input type="checkbox" name="serviceLines" value="Risk Screening" data-slkey="risk_screening" class="sl-checkbox" />
+                <span><strong>Risk Screening</strong></span>
+              </label>
+              <p class="service-desc">Supports risk screening requests as part of the sourcing and supplier management process.</p>
             </div>
-
-            <label class="sl-text-label">4. What could be improved?</label>
-            <textarea name="sd_improve" rows="3" placeholder="Your suggestions..."></textarea>
-          </div>
-
-          <!-- ===== ACCOUNTS PAYABLE ===== -->
-          <div class="rating-group" data-slkey="accounts_payable">
-            <p class="sl-label">Accounts Payable</p>
-
-            <span class="sl-question-label">1. How satisfied are you with AP services?</span>
-            <div class="ratings">
-              <label class="radio-pill"><input type="radio" name="ap_q1" value="Very Satisfied" disabled /><span>Very Satisfied</span></label>
-              <label class="radio-pill"><input type="radio" name="ap_q1" value="Satisfied" disabled /><span>Satisfied</span></label>
-              <label class="radio-pill"><input type="radio" name="ap_q1" value="Neutral" disabled /><span>Neutral</span></label>
-              <label class="radio-pill"><input type="radio" name="ap_q1" value="Dissatisfied" disabled /><span>Dissatisfied</span></label>
-              <label class="radio-pill"><input type="radio" name="ap_q1" value="Very Dissatisfied" disabled /><span>Very Dissatisfied</span></label>
-              <label class="radio-pill"><input type="radio" name="ap_q1" value="N/A" disabled /><span>N/A</span></label>
-            </div>
-
-            <span class="sl-question-label">2. How easy was it to review and/or approve the invoices?</span>
-            <div class="ratings">
-              <label class="radio-pill"><input type="radio" name="ap_q2" value="Very Satisfied" disabled /><span>Very Satisfied</span></label>
-              <label class="radio-pill"><input type="radio" name="ap_q2" value="Satisfied" disabled /><span>Satisfied</span></label>
-              <label class="radio-pill"><input type="radio" name="ap_q2" value="Neutral" disabled /><span>Neutral</span></label>
-              <label class="radio-pill"><input type="radio" name="ap_q2" value="Dissatisfied" disabled /><span>Dissatisfied</span></label>
-              <label class="radio-pill"><input type="radio" name="ap_q2" value="Very Dissatisfied" disabled /><span>Very Dissatisfied</span></label>
-              <label class="radio-pill"><input type="radio" name="ap_q2" value="N/A" disabled /><span>N/A</span></label>
-            </div>
-
-            <span class="sl-question-label">3. How clear was the process to check the status of your invoice?</span>
-            <div class="ratings">
-              <label class="radio-pill"><input type="radio" name="ap_q3" value="Very Satisfied" disabled /><span>Very Satisfied</span></label>
-              <label class="radio-pill"><input type="radio" name="ap_q3" value="Satisfied" disabled /><span>Satisfied</span></label>
-              <label class="radio-pill"><input type="radio" name="ap_q3" value="Neutral" disabled /><span>Neutral</span></label>
-              <label class="radio-pill"><input type="radio" name="ap_q3" value="Dissatisfied" disabled /><span>Dissatisfied</span></label>
-              <label class="radio-pill"><input type="radio" name="ap_q3" value="Very Dissatisfied" disabled /><span>Very Dissatisfied</span></label>
-              <label class="radio-pill"><input type="radio" name="ap_q3" value="N/A" disabled /><span>N/A</span></label>
-            </div>
-
-            <label class="sl-text-label">4. What could be improved?</label>
-            <textarea name="ap_improve" rows="3" placeholder="Your suggestions..."></textarea>
-          </div>
-
-          <!-- ===== BUY DESK ===== -->
-          <div class="rating-group" data-slkey="buy_desk">
-            <p class="sl-label">Buy Desk</p>
-
-            <span class="sl-question-label">1. How satisfied are you with BD services?</span>
-            <div class="ratings">
-              <label class="radio-pill"><input type="radio" name="bd_q1" value="Very Satisfied" disabled /><span>Very Satisfied</span></label>
-              <label class="radio-pill"><input type="radio" name="bd_q1" value="Satisfied" disabled /><span>Satisfied</span></label>
-              <label class="radio-pill"><input type="radio" name="bd_q1" value="Neutral" disabled /><span>Neutral</span></label>
-              <label class="radio-pill"><input type="radio" name="bd_q1" value="Dissatisfied" disabled /><span>Dissatisfied</span></label>
-              <label class="radio-pill"><input type="radio" name="bd_q1" value="Very Dissatisfied" disabled /><span>Very Dissatisfied</span></label>
-              <label class="radio-pill"><input type="radio" name="bd_q1" value="N/A" disabled /><span>N/A</span></label>
-            </div>
-
-            <span class="sl-question-label">2. How easy was it to submit a Sourcing Support Request Form (SSRF)?</span>
-            <div class="ratings">
-              <label class="radio-pill"><input type="radio" name="bd_q2" value="Very Satisfied" disabled /><span>Very Satisfied</span></label>
-              <label class="radio-pill"><input type="radio" name="bd_q2" value="Satisfied" disabled /><span>Satisfied</span></label>
-              <label class="radio-pill"><input type="radio" name="bd_q2" value="Neutral" disabled /><span>Neutral</span></label>
-              <label class="radio-pill"><input type="radio" name="bd_q2" value="Dissatisfied" disabled /><span>Dissatisfied</span></label>
-              <label class="radio-pill"><input type="radio" name="bd_q2" value="Very Dissatisfied" disabled /><span>Very Dissatisfied</span></label>
-              <label class="radio-pill"><input type="radio" name="bd_q2" value="N/A" disabled /><span>N/A</span></label>
-            </div>
-
-            <span class="sl-question-label">3. How helpful was the Buy Desk in supporting your request?</span>
-            <div class="ratings">
-              <label class="radio-pill"><input type="radio" name="bd_q3" value="Very Satisfied" disabled /><span>Very Satisfied</span></label>
-              <label class="radio-pill"><input type="radio" name="bd_q3" value="Satisfied" disabled /><span>Satisfied</span></label>
-              <label class="radio-pill"><input type="radio" name="bd_q3" value="Neutral" disabled /><span>Neutral</span></label>
-              <label class="radio-pill"><input type="radio" name="bd_q3" value="Dissatisfied" disabled /><span>Dissatisfied</span></label>
-              <label class="radio-pill"><input type="radio" name="bd_q3" value="Very Dissatisfied" disabled /><span>Very Dissatisfied</span></label>
-              <label class="radio-pill"><input type="radio" name="bd_q3" value="N/A" disabled /><span>N/A</span></label>
-            </div>
-
-            <label class="sl-text-label">4. What could be improved?</label>
-            <textarea name="bd_improve" rows="3" placeholder="Your suggestions..."></textarea>
-          </div>
-
-          <!-- ===== SOURCING ===== -->
-          <div class="rating-group" data-slkey="sourcing">
-            <p class="sl-label">Sourcing</p>
-
-            <span class="sl-question-label">1. How satisfied are you with the support received from the Sourcing team?</span>
-            <div class="ratings">
-              <label class="radio-pill"><input type="radio" name="src_q1" value="Very Satisfied" disabled /><span>Very Satisfied</span></label>
-              <label class="radio-pill"><input type="radio" name="src_q1" value="Satisfied" disabled /><span>Satisfied</span></label>
-              <label class="radio-pill"><input type="radio" name="src_q1" value="Neutral" disabled /><span>Neutral</span></label>
-              <label class="radio-pill"><input type="radio" name="src_q1" value="Dissatisfied" disabled /><span>Dissatisfied</span></label>
-              <label class="radio-pill"><input type="radio" name="src_q1" value="Very Dissatisfied" disabled /><span>Very Dissatisfied</span></label>
-              <label class="radio-pill"><input type="radio" name="src_q1" value="N/A" disabled /><span>N/A</span></label>
-            </div>
-
-            <span class="sl-question-label">2. How well did the Sourcing team understand your business needs?</span>
-            <div class="ratings">
-              <label class="radio-pill"><input type="radio" name="src_q2" value="Very Satisfied" disabled /><span>Very Satisfied</span></label>
-              <label class="radio-pill"><input type="radio" name="src_q2" value="Satisfied" disabled /><span>Satisfied</span></label>
-              <label class="radio-pill"><input type="radio" name="src_q2" value="Neutral" disabled /><span>Neutral</span></label>
-              <label class="radio-pill"><input type="radio" name="src_q2" value="Dissatisfied" disabled /><span>Dissatisfied</span></label>
-              <label class="radio-pill"><input type="radio" name="src_q2" value="Very Dissatisfied" disabled /><span>Very Dissatisfied</span></label>
-              <label class="radio-pill"><input type="radio" name="src_q2" value="N/A" disabled /><span>N/A</span></label>
-            </div>
-
-            <span class="sl-question-label">3. How effective was the collaboration?</span>
-            <div class="ratings">
-              <label class="radio-pill"><input type="radio" name="src_q3" value="Very Satisfied" disabled /><span>Very Satisfied</span></label>
-              <label class="radio-pill"><input type="radio" name="src_q3" value="Satisfied" disabled /><span>Satisfied</span></label>
-              <label class="radio-pill"><input type="radio" name="src_q3" value="Neutral" disabled /><span>Neutral</span></label>
-              <label class="radio-pill"><input type="radio" name="src_q3" value="Dissatisfied" disabled /><span>Dissatisfied</span></label>
-              <label class="radio-pill"><input type="radio" name="src_q3" value="Very Dissatisfied" disabled /><span>Very Dissatisfied</span></label>
-              <label class="radio-pill"><input type="radio" name="src_q3" value="N/A" disabled /><span>N/A</span></label>
-            </div>
-
-            <label class="sl-text-label">4. What could be improved?</label>
-            <textarea name="src_improve" rows="3" placeholder="Your suggestions..."></textarea>
-          </div>
-
-          <!-- ===== RISK SCREENING ===== -->
-          <div class="rating-group" data-slkey="risk_screening">
-            <p class="sl-label">Risk Screening</p>
-
-            <span class="sl-question-label">1. How satisfied are you with Risk Screening services?</span>
-            <div class="ratings">
-              <label class="radio-pill"><input type="radio" name="rs_q1" value="Very Satisfied" disabled /><span>Very Satisfied</span></label>
-              <label class="radio-pill"><input type="radio" name="rs_q1" value="Satisfied" disabled /><span>Satisfied</span></label>
-              <label class="radio-pill"><input type="radio" name="rs_q1" value="Neutral" disabled /><span>Neutral</span></label>
-              <label class="radio-pill"><input type="radio" name="rs_q1" value="Dissatisfied" disabled /><span>Dissatisfied</span></label>
-              <label class="radio-pill"><input type="radio" name="rs_q1" value="Very Dissatisfied" disabled /><span>Very Dissatisfied</span></label>
-              <label class="radio-pill"><input type="radio" name="rs_q1" value="N/A" disabled /><span>N/A</span></label>
-            </div>
-
-            <span class="sl-question-label">2. How easy was it to submit a Risk Screening request?</span>
-            <div class="ratings">
-              <label class="radio-pill"><input type="radio" name="rs_q2" value="Very Satisfied" disabled /><span>Very Satisfied</span></label>
-              <label class="radio-pill"><input type="radio" name="rs_q2" value="Satisfied" disabled /><span>Satisfied</span></label>
-              <label class="radio-pill"><input type="radio" name="rs_q2" value="Neutral" disabled /><span>Neutral</span></label>
-              <label class="radio-pill"><input type="radio" name="rs_q2" value="Dissatisfied" disabled /><span>Dissatisfied</span></label>
-              <label class="radio-pill"><input type="radio" name="rs_q2" value="Very Dissatisfied" disabled /><span>Very Dissatisfied</span></label>
-              <label class="radio-pill"><input type="radio" name="rs_q2" value="N/A" disabled /><span>N/A</span></label>
-            </div>
-
-            <span class="sl-question-label">3. Were your requests handled in a timely manner?</span>
-            <div class="ratings">
-              <label class="radio-pill"><input type="radio" name="rs_q3" value="Very Satisfied" disabled /><span>Very Satisfied</span></label>
-              <label class="radio-pill"><input type="radio" name="rs_q3" value="Satisfied" disabled /><span>Satisfied</span></label>
-              <label class="radio-pill"><input type="radio" name="rs_q3" value="Neutral" disabled /><span>Neutral</span></label>
-              <label class="radio-pill"><input type="radio" name="rs_q3" value="Dissatisfied" disabled /><span>Dissatisfied</span></label>
-              <label class="radio-pill"><input type="radio" name="rs_q3" value="Very Dissatisfied" disabled /><span>Very Dissatisfied</span></label>
-              <label class="radio-pill"><input type="radio" name="rs_q3" value="N/A" disabled /><span>N/A</span></label>
-            </div>
-
-            <label class="sl-text-label">4. What could be improved?</label>
-            <textarea name="rs_improve" rows="3" placeholder="Your suggestions..."></textarea>
-          </div>
-
-          <div class="page-nav">
-            <button type="button" class="btn btn-outline" onclick="goToPage(2)">&larr; Back</button>
-            <button type="button" class="btn" onclick="goToPage(4)">Next &rarr;</button>
+          <div class="nav-row">
+            <button type="button" class="btn btn-outline btn-back">Back</button>
+            <button type="button" class="btn btn-next">Next</button>
           </div>
         </section>
 
-        <!-- PAGE 4: Recognition -->
-        <section class="survey-page hidden" id="surveyPage4">
+        <!-- STEP: per-service-line detailed questions -->
+        <section class="step" data-step="details">
+          <h2>Tell us more</h2>
+          
+          <div class="sl-block" data-slkey="supplier_onboarding">
+            <h3>Supplier Onboarding</h3>
+            
+            
+            <div class="question">
+              <p><strong>How clear were the onboarding process and guidelines/training provided?</strong></p>
+              <div class="ratings">
+                
+                <label class="radio-pill">
+                  <input type="radio" name="supplier_onboarding_q1" value="Very Satisfied" />
+                  <span>Very Satisfied</span>
+                </label>
+                <label class="radio-pill">
+                  <input type="radio" name="supplier_onboarding_q1" value="Satisfied" />
+                  <span>Satisfied</span>
+                </label>
+                <label class="radio-pill">
+                  <input type="radio" name="supplier_onboarding_q1" value="Neutral" />
+                  <span>Neutral</span>
+                </label>
+                <label class="radio-pill">
+                  <input type="radio" name="supplier_onboarding_q1" value="Dissatisfied" />
+                  <span>Dissatisfied</span>
+                </label>
+                <label class="radio-pill">
+                  <input type="radio" name="supplier_onboarding_q1" value="Very Dissatisfied" />
+                  <span>Very Dissatisfied</span>
+                </label>
+              </div>
+            </div>
+            <div class="question">
+              <p><strong>How effectively did the Onboarding team support you throughout the process?</strong></p>
+              <div class="ratings">
+                
+                <label class="radio-pill">
+                  <input type="radio" name="supplier_onboarding_q2" value="Very Satisfied" />
+                  <span>Very Satisfied</span>
+                </label>
+                <label class="radio-pill">
+                  <input type="radio" name="supplier_onboarding_q2" value="Satisfied" />
+                  <span>Satisfied</span>
+                </label>
+                <label class="radio-pill">
+                  <input type="radio" name="supplier_onboarding_q2" value="Neutral" />
+                  <span>Neutral</span>
+                </label>
+                <label class="radio-pill">
+                  <input type="radio" name="supplier_onboarding_q2" value="Dissatisfied" />
+                  <span>Dissatisfied</span>
+                </label>
+                <label class="radio-pill">
+                  <input type="radio" name="supplier_onboarding_q2" value="Very Dissatisfied" />
+                  <span>Very Dissatisfied</span>
+                </label>
+              </div>
+            </div>
+            <div class="question">
+              <p><strong>Was the turn-around time aligned with your expectations?</strong></p>
+              <div class="ratings">
+                
+                <label class="radio-pill">
+                  <input type="radio" name="supplier_onboarding_q3" value="Very Satisfied" />
+                  <span>Very Satisfied</span>
+                </label>
+                <label class="radio-pill">
+                  <input type="radio" name="supplier_onboarding_q3" value="Satisfied" />
+                  <span>Satisfied</span>
+                </label>
+                <label class="radio-pill">
+                  <input type="radio" name="supplier_onboarding_q3" value="Neutral" />
+                  <span>Neutral</span>
+                </label>
+                <label class="radio-pill">
+                  <input type="radio" name="supplier_onboarding_q3" value="Dissatisfied" />
+                  <span>Dissatisfied</span>
+                </label>
+                <label class="radio-pill">
+                  <input type="radio" name="supplier_onboarding_q3" value="Very Dissatisfied" />
+                  <span>Very Dissatisfied</span>
+                </label>
+              </div>
+            </div>
+            <div class="question">
+              <label for="supplier_onboarding_q4"><strong>What went well and what could be improved?</strong></label>
+              <textarea id="supplier_onboarding_q4" name="supplier_onboarding_q4" rows="3" placeholder="Your feedback..."></textarea>
+            </div>
+          </div>
+          <div class="sl-block" data-slkey="service_desk">
+            <h3>Service Desk</h3>
+            
+            
+            <div class="question">
+              <p><strong>How effective was the Service Desk team in addressing your queries?</strong></p>
+              <div class="ratings">
+                
+                <label class="radio-pill">
+                  <input type="radio" name="service_desk_q1" value="Very Satisfied" />
+                  <span>Very Satisfied</span>
+                </label>
+                <label class="radio-pill">
+                  <input type="radio" name="service_desk_q1" value="Satisfied" />
+                  <span>Satisfied</span>
+                </label>
+                <label class="radio-pill">
+                  <input type="radio" name="service_desk_q1" value="Neutral" />
+                  <span>Neutral</span>
+                </label>
+                <label class="radio-pill">
+                  <input type="radio" name="service_desk_q1" value="Dissatisfied" />
+                  <span>Dissatisfied</span>
+                </label>
+                <label class="radio-pill">
+                  <input type="radio" name="service_desk_q1" value="Very Dissatisfied" />
+                  <span>Very Dissatisfied</span>
+                </label>
+              </div>
+            </div>
+            <div class="question">
+              <p><strong>How responsive was the Service Desk team to your queries?</strong></p>
+              <div class="ratings">
+                
+                <label class="radio-pill">
+                  <input type="radio" name="service_desk_q2" value="Very Satisfied" />
+                  <span>Very Satisfied</span>
+                </label>
+                <label class="radio-pill">
+                  <input type="radio" name="service_desk_q2" value="Satisfied" />
+                  <span>Satisfied</span>
+                </label>
+                <label class="radio-pill">
+                  <input type="radio" name="service_desk_q2" value="Neutral" />
+                  <span>Neutral</span>
+                </label>
+                <label class="radio-pill">
+                  <input type="radio" name="service_desk_q2" value="Dissatisfied" />
+                  <span>Dissatisfied</span>
+                </label>
+                <label class="radio-pill">
+                  <input type="radio" name="service_desk_q2" value="Very Dissatisfied" />
+                  <span>Very Dissatisfied</span>
+                </label>
+              </div>
+            </div>
+            <div class="question">
+              <label for="service_desk_q3"><strong>What went well and what could be improved?</strong></label>
+              <textarea id="service_desk_q3" name="service_desk_q3" rows="3" placeholder="Your feedback..."></textarea>
+            </div>
+          </div>
+          <div class="sl-block" data-slkey="accounts_payable">
+            <h3>Accounts Payable</h3>
+            
+            
+            <div class="question">
+              <p><strong>How easy was it to review and/or approve the invoices?</strong></p>
+              <div class="ratings">
+                
+                <label class="radio-pill">
+                  <input type="radio" name="accounts_payable_q1" value="Very Satisfied" />
+                  <span>Very Satisfied</span>
+                </label>
+                <label class="radio-pill">
+                  <input type="radio" name="accounts_payable_q1" value="Satisfied" />
+                  <span>Satisfied</span>
+                </label>
+                <label class="radio-pill">
+                  <input type="radio" name="accounts_payable_q1" value="Neutral" />
+                  <span>Neutral</span>
+                </label>
+                <label class="radio-pill">
+                  <input type="radio" name="accounts_payable_q1" value="Dissatisfied" />
+                  <span>Dissatisfied</span>
+                </label>
+                <label class="radio-pill">
+                  <input type="radio" name="accounts_payable_q1" value="Very Dissatisfied" />
+                  <span>Very Dissatisfied</span>
+                </label>
+              </div>
+            </div>
+            <div class="question">
+              <p><strong>How clear was the process to check the status of your invoice?</strong></p>
+              <div class="ratings">
+                
+                <label class="radio-pill">
+                  <input type="radio" name="accounts_payable_q2" value="Very Satisfied" />
+                  <span>Very Satisfied</span>
+                </label>
+                <label class="radio-pill">
+                  <input type="radio" name="accounts_payable_q2" value="Satisfied" />
+                  <span>Satisfied</span>
+                </label>
+                <label class="radio-pill">
+                  <input type="radio" name="accounts_payable_q2" value="Neutral" />
+                  <span>Neutral</span>
+                </label>
+                <label class="radio-pill">
+                  <input type="radio" name="accounts_payable_q2" value="Dissatisfied" />
+                  <span>Dissatisfied</span>
+                </label>
+                <label class="radio-pill">
+                  <input type="radio" name="accounts_payable_q2" value="Very Dissatisfied" />
+                  <span>Very Dissatisfied</span>
+                </label>
+              </div>
+            </div>
+            <div class="question">
+              <p><strong>Were the invoices you submitted and/or approved processed on time?</strong></p>
+              <div class="ratings">
+                
+                <label class="radio-pill">
+                  <input type="radio" name="accounts_payable_q3" value="Very Satisfied" />
+                  <span>Very Satisfied</span>
+                </label>
+                <label class="radio-pill">
+                  <input type="radio" name="accounts_payable_q3" value="Satisfied" />
+                  <span>Satisfied</span>
+                </label>
+                <label class="radio-pill">
+                  <input type="radio" name="accounts_payable_q3" value="Neutral" />
+                  <span>Neutral</span>
+                </label>
+                <label class="radio-pill">
+                  <input type="radio" name="accounts_payable_q3" value="Dissatisfied" />
+                  <span>Dissatisfied</span>
+                </label>
+                <label class="radio-pill">
+                  <input type="radio" name="accounts_payable_q3" value="Very Dissatisfied" />
+                  <span>Very Dissatisfied</span>
+                </label>
+              </div>
+            </div>
+            <div class="question">
+              <label for="accounts_payable_q4"><strong>What went well and what could be improved?</strong></label>
+              <textarea id="accounts_payable_q4" name="accounts_payable_q4" rows="3" placeholder="Your feedback..."></textarea>
+            </div>
+          </div>
+          <div class="sl-block" data-slkey="buy_desk">
+            <h3>Buy Desk</h3>
+            <p class="sl-reminder">Sourcing support for purchases below CNY 700k. Provides purchase order support, requisition processing, and transactional buying assistance to enable efficient procurement execution.</p>
+            
+            <div class="question">
+              <p><strong>How easy was it to submit a Sourcing Support Request Form (SSRF)?</strong></p>
+              <div class="ratings">
+                
+                <label class="radio-pill">
+                  <input type="radio" name="buy_desk_q1" value="Very Satisfied" />
+                  <span>Very Satisfied</span>
+                </label>
+                <label class="radio-pill">
+                  <input type="radio" name="buy_desk_q1" value="Satisfied" />
+                  <span>Satisfied</span>
+                </label>
+                <label class="radio-pill">
+                  <input type="radio" name="buy_desk_q1" value="Neutral" />
+                  <span>Neutral</span>
+                </label>
+                <label class="radio-pill">
+                  <input type="radio" name="buy_desk_q1" value="Dissatisfied" />
+                  <span>Dissatisfied</span>
+                </label>
+                <label class="radio-pill">
+                  <input type="radio" name="buy_desk_q1" value="Very Dissatisfied" />
+                  <span>Very Dissatisfied</span>
+                </label>
+              </div>
+            </div>
+            <div class="question">
+              <p><strong>How helpful was the Buy Desk in supporting your request?</strong></p>
+              <div class="ratings">
+                
+                <label class="radio-pill">
+                  <input type="radio" name="buy_desk_q2" value="Very Satisfied" />
+                  <span>Very Satisfied</span>
+                </label>
+                <label class="radio-pill">
+                  <input type="radio" name="buy_desk_q2" value="Satisfied" />
+                  <span>Satisfied</span>
+                </label>
+                <label class="radio-pill">
+                  <input type="radio" name="buy_desk_q2" value="Neutral" />
+                  <span>Neutral</span>
+                </label>
+                <label class="radio-pill">
+                  <input type="radio" name="buy_desk_q2" value="Dissatisfied" />
+                  <span>Dissatisfied</span>
+                </label>
+                <label class="radio-pill">
+                  <input type="radio" name="buy_desk_q2" value="Very Dissatisfied" />
+                  <span>Very Dissatisfied</span>
+                </label>
+              </div>
+            </div>
+            <div class="question">
+              <p><strong>If you submitted a SSRF before agreeing the commercials with the supplier, was the Buy Desk able to negotiate a better deal?</strong></p>
+              <div class="ratings">
+                
+                <label class="radio-pill">
+                  <input type="radio" name="buy_desk_q3" value="Yes" />
+                  <span>Yes</span>
+                </label>
+                <label class="radio-pill">
+                  <input type="radio" name="buy_desk_q3" value="No" />
+                  <span>No</span>
+                </label>
+                <label class="radio-pill">
+                  <input type="radio" name="buy_desk_q3" value="Not Applicable" />
+                  <span>Not Applicable</span>
+                </label>
+              </div>
+            </div>
+            <div class="question">
+              <label for="buy_desk_q4"><strong>What went well and what could be improved?</strong></label>
+              <textarea id="buy_desk_q4" name="buy_desk_q4" rows="3" placeholder="Your feedback..."></textarea>
+            </div>
+          </div>
+          <div class="sl-block" data-slkey="sourcing">
+            <h3>Sourcing</h3>
+            <p class="sl-reminder">Sourcing support for purchases above CNY 700k. Supports supplier selection, contract negotiations, renewals, and competitive bidding to help you achieve optimal value.</p>
+            
+            <div class="question">
+              <p><strong>How well did the Sourcing team understand your business needs?</strong></p>
+              <div class="ratings">
+                
+                <label class="radio-pill">
+                  <input type="radio" name="sourcing_q1" value="Very Satisfied" />
+                  <span>Very Satisfied</span>
+                </label>
+                <label class="radio-pill">
+                  <input type="radio" name="sourcing_q1" value="Satisfied" />
+                  <span>Satisfied</span>
+                </label>
+                <label class="radio-pill">
+                  <input type="radio" name="sourcing_q1" value="Neutral" />
+                  <span>Neutral</span>
+                </label>
+                <label class="radio-pill">
+                  <input type="radio" name="sourcing_q1" value="Dissatisfied" />
+                  <span>Dissatisfied</span>
+                </label>
+                <label class="radio-pill">
+                  <input type="radio" name="sourcing_q1" value="Very Dissatisfied" />
+                  <span>Very Dissatisfied</span>
+                </label>
+              </div>
+            </div>
+            <div class="question">
+              <p><strong>How effective was the collaboration and communication with the team?</strong></p>
+              <div class="ratings">
+                
+                <label class="radio-pill">
+                  <input type="radio" name="sourcing_q2" value="Very Satisfied" />
+                  <span>Very Satisfied</span>
+                </label>
+                <label class="radio-pill">
+                  <input type="radio" name="sourcing_q2" value="Satisfied" />
+                  <span>Satisfied</span>
+                </label>
+                <label class="radio-pill">
+                  <input type="radio" name="sourcing_q2" value="Neutral" />
+                  <span>Neutral</span>
+                </label>
+                <label class="radio-pill">
+                  <input type="radio" name="sourcing_q2" value="Dissatisfied" />
+                  <span>Dissatisfied</span>
+                </label>
+                <label class="radio-pill">
+                  <input type="radio" name="sourcing_q2" value="Very Dissatisfied" />
+                  <span>Very Dissatisfied</span>
+                </label>
+              </div>
+            </div>
+            <div class="question">
+              <p><strong>If you submitted a SSRF before agreeing the commercials with the supplier, was the Sourcing team able to negotiate a better deal?</strong></p>
+              <div class="ratings">
+                
+                <label class="radio-pill">
+                  <input type="radio" name="sourcing_q3" value="Yes" />
+                  <span>Yes</span>
+                </label>
+                <label class="radio-pill">
+                  <input type="radio" name="sourcing_q3" value="No" />
+                  <span>No</span>
+                </label>
+                <label class="radio-pill">
+                  <input type="radio" name="sourcing_q3" value="Not Applicable" />
+                  <span>Not Applicable</span>
+                </label>
+              </div>
+            </div>
+            <div class="question">
+              <label for="sourcing_q4"><strong>What went well and what could be improved?</strong></label>
+              <textarea id="sourcing_q4" name="sourcing_q4" rows="3" placeholder="Your feedback..."></textarea>
+            </div>
+          </div>
+          <div class="sl-block" data-slkey="risk_screening">
+            <h3>Risk Screening</h3>
+            
+            
+            <div class="question">
+              <p><strong>How easy was it to submit a Risk Screening request?</strong></p>
+              <div class="ratings">
+                
+                <label class="radio-pill">
+                  <input type="radio" name="risk_screening_q1" value="Very Satisfied" />
+                  <span>Very Satisfied</span>
+                </label>
+                <label class="radio-pill">
+                  <input type="radio" name="risk_screening_q1" value="Satisfied" />
+                  <span>Satisfied</span>
+                </label>
+                <label class="radio-pill">
+                  <input type="radio" name="risk_screening_q1" value="Neutral" />
+                  <span>Neutral</span>
+                </label>
+                <label class="radio-pill">
+                  <input type="radio" name="risk_screening_q1" value="Dissatisfied" />
+                  <span>Dissatisfied</span>
+                </label>
+                <label class="radio-pill">
+                  <input type="radio" name="risk_screening_q1" value="Very Dissatisfied" />
+                  <span>Very Dissatisfied</span>
+                </label>
+              </div>
+            </div>
+            <div class="question">
+              <p><strong>Were your requests handled in a timely manner?</strong></p>
+              <div class="ratings">
+                
+                <label class="radio-pill">
+                  <input type="radio" name="risk_screening_q2" value="Very Satisfied" />
+                  <span>Very Satisfied</span>
+                </label>
+                <label class="radio-pill">
+                  <input type="radio" name="risk_screening_q2" value="Satisfied" />
+                  <span>Satisfied</span>
+                </label>
+                <label class="radio-pill">
+                  <input type="radio" name="risk_screening_q2" value="Neutral" />
+                  <span>Neutral</span>
+                </label>
+                <label class="radio-pill">
+                  <input type="radio" name="risk_screening_q2" value="Dissatisfied" />
+                  <span>Dissatisfied</span>
+                </label>
+                <label class="radio-pill">
+                  <input type="radio" name="risk_screening_q2" value="Very Dissatisfied" />
+                  <span>Very Dissatisfied</span>
+                </label>
+              </div>
+            </div>
+            <div class="question">
+              <label for="risk_screening_q3"><strong>What went well and what could be improved?</strong></label>
+              <textarea id="risk_screening_q3" name="risk_screening_q3" rows="3" placeholder="Your feedback..."></textarea>
+            </div>
+          </div>
+          <div class="nav-row">
+            <button type="button" class="btn btn-outline btn-back">Back</button>
+            <button type="button" class="btn btn-next">Next</button>
+          </div>
+        </section>
+
+        <!-- STEP: recognition (final, always shown) -->
+        <section class="step" data-step="recognition">
           <h2>Recognition</h2>
           <div class="question">
-            <label for="recognition"><strong>Would you like to highlight any EP&amp;P members who have gone above and beyond in providing you with exceptional service?</strong></label>
+            <label for="recognition"><strong>Would you like to highlight any EP&P members who have gone above and beyond in providing you with exceptional service?</strong></label>
             <textarea id="recognition" name="recognition" rows="4" placeholder="Name any team members..."></textarea>
           </div>
-
-          <div class="page-nav">
-            <button type="button" class="btn btn-outline" onclick="goToPage(3)">&larr; Back</button>
-            <button type="submit" class="btn">Submit Survey</button>
+          <div class="nav-row">
+            <button type="button" class="btn btn-outline btn-back">Back</button>
+            <button type="submit" class="btn">Submit survey</button>
           </div>
         </section>
 
       </form>
 
-      <div id="thankYou" class="hidden success" style="text-align:center;">
-        <h2 style="color:#178a4b;">Thank you! &#127881;</h2>
-        <p style="font-size:17px;">Your response has been recorded. We appreciate your feedback.</p>
-        <p style="margin-top:12px; color:#64748b;">You may now close this tab.</p>
+      <div id="thankYou" class="hidden success">
+        <h2>Thank you!</h2>
+        <p>Your response has been recorded. We appreciate your feedback.</p>
+        <p style="margin-top:16px"><a href="/output/dashboard.html" class="btn" style="text-decoration:none;display:inline-block">View Dashboard</a></p>
       </div>
     </div>
   </div>
 
-  <script>
-    (function() {
-      var currentPage = 1;
-      var totalPages = 4;
-      var form = document.getElementById("surveyForm");
-      var thankYou = document.getElementById("thankYou");
-      var checkboxes = form.querySelectorAll(".sl-checkbox");
-
-      function syncRatingGroups() {
-        checkboxes.forEach(function(cb) {
-          var key = cb.dataset.slkey;
-          var group = form.querySelector('.rating-group[data-slkey="' + key + '"]');
-          if (!group) return;
-          var radios = group.querySelectorAll('input[type="radio"]');
-          var textareas = group.querySelectorAll('textarea');
-          if (cb.checked) {
-            group.style.display = "";
-            group.classList.remove("hidden");
-            radios.forEach(function(r) { r.disabled = false; });
-          } else {
-            group.style.display = "none";
-            group.classList.add("hidden");
-            radios.forEach(function(r) { r.disabled = true; r.checked = false; });
-            textareas.forEach(function(t) { t.value = ""; });
-          }
-        });
-      }
-
-      checkboxes.forEach(function(cb) { cb.addEventListener("change", syncRatingGroups); });
-      syncRatingGroups();
-
-      function showPage(n) {
-        for (var i = 1; i <= totalPages; i++) {
-          var el = document.getElementById("surveyPage" + i);
-          if (el) el.classList.toggle("hidden", i !== n);
-        }
-        currentPage = n;
-        document.getElementById("pageIndicator").textContent = "Page " + n + " of " + totalPages;
-        document.getElementById("progressBar").style.width = (n / totalPages * 100) + "%";
-        window.scrollTo({ top: 0, behavior: "smooth" });
-      }
-
-      function validatePage(n) {
-        if (n === 1) {
-          var emailInput = document.getElementById("email");
-          var emailError = document.getElementById("emailError");
-          var emailVal = emailInput.value.trim();
-          if (!emailVal || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailVal)) {
-            emailError.classList.remove("hidden");
-            emailInput.focus();
-            return false;
-          }
-          emailError.classList.add("hidden");
-        }
-        return true;
-      }
-
-      window.goToPage = function(n) {
-        if (n > currentPage) {
-          if (!validatePage(currentPage)) return;
-        }
-        showPage(n);
-        if (n === 3) syncRatingGroups();
-      };
-
-      form.addEventListener("submit", function(e) {
-        e.preventDefault();
-        if (!validatePage(currentPage)) return;
-
-        form.classList.add("hidden");
-        document.getElementById("pageIndicator").classList.add("hidden");
-        document.querySelector(".progress-bar-container").classList.add("hidden");
-        thankYou.classList.remove("hidden");
-        window.scrollTo({ top: 0, behavior: "smooth" });
-      });
-
-      showPage(1);
-    })();
-  </script>
+  <script src="/app.js"></script>
 </body>
 </html>
