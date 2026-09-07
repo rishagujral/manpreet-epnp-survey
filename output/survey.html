@@ -2,22 +2,22 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <title>EP&P CSAT Survey - Source to Pay & Coupa</title>
+  <title>EP&P CSAT Survey</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="stylesheet" href="/styles.css" />
 </head>
 <body>
   <div class="page">
     <div class="card">
-      <div class="brand">EP&P</div>
-      <h1>EP&P CSAT Survey - Source to Pay & Coupa</h1>
+      <div class="brand">Enterprise Procurement & Payables</div>
+      <h1>EP&P CSAT Survey</h1>
 
       <form id="surveyForm">
 
         <!-- STEP: landing -->
         <section class="step active-step" data-step="landing">
           <p>As an important internal client of EP&P in GCH, your input is critical to help us improve our services and measure our impact to you.</p>
-          <p>Please take two minutes to complete this CSAT survey about the Source to Pay process and Coupa and share your feedback.</p>
+          <p>Please take two minutes to complete this survey and share your feedback.</p>
           <label for="email">Please enter your email.</label>
           <input id="email" name="email" type="email" required placeholder="name@bcg.com" />
           <div class="nav-row nav-row-end">
@@ -25,41 +25,7 @@
           </div>
         </section>
 
-        <!-- STEP: general S2P / Coupa question -->
-        <section class="step" data-step="general">
-          <h2>Source to Pay & Coupa</h2>
-          <div class="question">
-            <p><strong>Overall, are you satisfied with the Source-to-Pay process and the Coupa platform?</strong></p>
-            <div class="ratings">
-              <label class="radio-pill">
-                <input type="radio" name="overall_s2p" value="Very Satisfied" required />
-                <span>Very Satisfied</span>
-              </label>
-              <label class="radio-pill">
-                <input type="radio" name="overall_s2p" value="Satisfied" required />
-                <span>Satisfied</span>
-              </label>
-              <label class="radio-pill">
-                <input type="radio" name="overall_s2p" value="Neutral" required />
-                <span>Neutral</span>
-              </label>
-              <label class="radio-pill">
-                <input type="radio" name="overall_s2p" value="Dissatisfied" required />
-                <span>Dissatisfied</span>
-              </label>
-              <label class="radio-pill">
-                <input type="radio" name="overall_s2p" value="Very Dissatisfied" required />
-                <span>Very Dissatisfied</span>
-              </label>
-            </div>
-          </div>
-          <div class="nav-row">
-            <button type="button" class="btn btn-outline btn-back">Back</button>
-            <button type="button" class="btn btn-next">Next</button>
-          </div>
-        </section>
-
-        <!-- STEP: service line selection (shown only if dissatisfied) -->
+        <!-- STEP: service line selection -->
         <section class="step" data-step="servicelines">
           <h2>Service Lines</h2>
           <p>Please mark below the Service Line(s) you have used and help us answer the related questions</p>
@@ -90,14 +56,14 @@
                 <input type="checkbox" name="serviceLines" value="Buy Desk" data-slkey="buy_desk" class="sl-checkbox" />
                 <span><strong>Buy Desk</strong></span>
               </label>
-              <p class="service-desc">Sourcing support for purchases below CNY 700k. Provides purchase order support, requisition processing, and transactional buying assistance to enable efficient procurement execution.</p>
+              <p class="service-desc">Sourcing support for purchases below USD 100k. Provides purchase order support, requisition processing, and transactional buying assistance to enable efficient procurement execution.</p>
             </div>
             <div class="service-block">
               <label class="checkbox-row">
                 <input type="checkbox" name="serviceLines" value="Sourcing" data-slkey="sourcing" class="sl-checkbox" />
                 <span><strong>Sourcing</strong></span>
               </label>
-              <p class="service-desc">Sourcing support for purchases above CNY 700k. Supports supplier selection, contract negotiations, renewals, and competitive bidding to help you achieve optimal value.</p>
+              <p class="service-desc">Sourcing support for purchases above USD 100k. Supports supplier selection, contract negotiations, renewals, and competitive bidding to help you achieve optimal value.</p>
             </div>
             <div class="service-block">
               <label class="checkbox-row">
@@ -112,14 +78,40 @@
           </div>
         </section>
 
-        <!-- STEP: per-service-line detailed questions -->
+        <!-- STEP: per-service-line satisfaction + conditional follow-up -->
         <section class="step" data-step="details">
           <h2>Tell us more</h2>
           
           <div class="sl-block" data-slkey="supplier_onboarding">
             <h3>Supplier Onboarding</h3>
             
-            
+            <div class="question">
+              <p><strong>How satisfied are you with Supplier Onboarding?</strong></p>
+              <div class="ratings">
+                <label class="radio-pill">
+                  <input type="radio" name="supplier_onboarding_gate" value="Satisfied" />
+                  <span>Satisfied</span>
+                </label>
+                <label class="radio-pill">
+                  <input type="radio" name="supplier_onboarding_gate" value="Neutral" />
+                  <span>Neutral</span>
+                </label>
+                <label class="radio-pill">
+                  <input type="radio" name="supplier_onboarding_gate" value="Dissatisfied" />
+                  <span>Dissatisfied</span>
+                </label>
+              </div>
+            </div>
+
+            <div class="sl-subblock sl-neutral-block hidden" data-slkey="supplier_onboarding">
+              <div class="question">
+                <label for="supplier_onboarding_improvement"><strong>What could we have done better?</strong></label>
+                <textarea id="supplier_onboarding_improvement" name="supplier_onboarding_improvement" rows="3" placeholder="Your feedback..."></textarea>
+              </div>
+            </div>
+
+            <div class="sl-subblock sl-dissatisfied-block hidden" data-slkey="supplier_onboarding">
+              
             <div class="question">
               <p><strong>How clear were the onboarding process and guidelines/training provided?</strong></p>
               <div class="ratings">
@@ -202,11 +194,38 @@
               <label for="supplier_onboarding_q4"><strong>What went well and what could be improved?</strong></label>
               <textarea id="supplier_onboarding_q4" name="supplier_onboarding_q4" rows="3" placeholder="Your feedback..."></textarea>
             </div>
+            </div>
           </div>
           <div class="sl-block" data-slkey="service_desk">
             <h3>Service Desk</h3>
             
-            
+            <div class="question">
+              <p><strong>How satisfied are you with Service Desk?</strong></p>
+              <div class="ratings">
+                <label class="radio-pill">
+                  <input type="radio" name="service_desk_gate" value="Satisfied" />
+                  <span>Satisfied</span>
+                </label>
+                <label class="radio-pill">
+                  <input type="radio" name="service_desk_gate" value="Neutral" />
+                  <span>Neutral</span>
+                </label>
+                <label class="radio-pill">
+                  <input type="radio" name="service_desk_gate" value="Dissatisfied" />
+                  <span>Dissatisfied</span>
+                </label>
+              </div>
+            </div>
+
+            <div class="sl-subblock sl-neutral-block hidden" data-slkey="service_desk">
+              <div class="question">
+                <label for="service_desk_improvement"><strong>What could we have done better?</strong></label>
+                <textarea id="service_desk_improvement" name="service_desk_improvement" rows="3" placeholder="Your feedback..."></textarea>
+              </div>
+            </div>
+
+            <div class="sl-subblock sl-dissatisfied-block hidden" data-slkey="service_desk">
+              
             <div class="question">
               <p><strong>How effective was the Service Desk team in addressing your queries?</strong></p>
               <div class="ratings">
@@ -263,11 +282,38 @@
               <label for="service_desk_q3"><strong>What went well and what could be improved?</strong></label>
               <textarea id="service_desk_q3" name="service_desk_q3" rows="3" placeholder="Your feedback..."></textarea>
             </div>
+            </div>
           </div>
           <div class="sl-block" data-slkey="accounts_payable">
             <h3>Accounts Payable</h3>
             
-            
+            <div class="question">
+              <p><strong>How satisfied are you with Accounts Payable?</strong></p>
+              <div class="ratings">
+                <label class="radio-pill">
+                  <input type="radio" name="accounts_payable_gate" value="Satisfied" />
+                  <span>Satisfied</span>
+                </label>
+                <label class="radio-pill">
+                  <input type="radio" name="accounts_payable_gate" value="Neutral" />
+                  <span>Neutral</span>
+                </label>
+                <label class="radio-pill">
+                  <input type="radio" name="accounts_payable_gate" value="Dissatisfied" />
+                  <span>Dissatisfied</span>
+                </label>
+              </div>
+            </div>
+
+            <div class="sl-subblock sl-neutral-block hidden" data-slkey="accounts_payable">
+              <div class="question">
+                <label for="accounts_payable_improvement"><strong>What could we have done better?</strong></label>
+                <textarea id="accounts_payable_improvement" name="accounts_payable_improvement" rows="3" placeholder="Your feedback..."></textarea>
+              </div>
+            </div>
+
+            <div class="sl-subblock sl-dissatisfied-block hidden" data-slkey="accounts_payable">
+              
             <div class="question">
               <p><strong>How easy was it to review and/or approve the invoices?</strong></p>
               <div class="ratings">
@@ -350,11 +396,38 @@
               <label for="accounts_payable_q4"><strong>What went well and what could be improved?</strong></label>
               <textarea id="accounts_payable_q4" name="accounts_payable_q4" rows="3" placeholder="Your feedback..."></textarea>
             </div>
+            </div>
           </div>
           <div class="sl-block" data-slkey="buy_desk">
             <h3>Buy Desk</h3>
-            <p class="sl-reminder">Sourcing support for purchases below CNY 700k. Provides purchase order support, requisition processing, and transactional buying assistance to enable efficient procurement execution.</p>
-            
+            <p class="sl-reminder">Sourcing support for purchases below USD 100k. Provides purchase order support, requisition processing, and transactional buying assistance to enable efficient procurement execution.</p>
+            <div class="question">
+              <p><strong>How satisfied are you with Buy Desk?</strong></p>
+              <div class="ratings">
+                <label class="radio-pill">
+                  <input type="radio" name="buy_desk_gate" value="Satisfied" />
+                  <span>Satisfied</span>
+                </label>
+                <label class="radio-pill">
+                  <input type="radio" name="buy_desk_gate" value="Neutral" />
+                  <span>Neutral</span>
+                </label>
+                <label class="radio-pill">
+                  <input type="radio" name="buy_desk_gate" value="Dissatisfied" />
+                  <span>Dissatisfied</span>
+                </label>
+              </div>
+            </div>
+
+            <div class="sl-subblock sl-neutral-block hidden" data-slkey="buy_desk">
+              <div class="question">
+                <label for="buy_desk_improvement"><strong>What could we have done better?</strong></label>
+                <textarea id="buy_desk_improvement" name="buy_desk_improvement" rows="3" placeholder="Your feedback..."></textarea>
+              </div>
+            </div>
+
+            <div class="sl-subblock sl-dissatisfied-block hidden" data-slkey="buy_desk">
+              
             <div class="question">
               <p><strong>How easy was it to submit a Sourcing Support Request Form (SSRF)?</strong></p>
               <div class="ratings">
@@ -429,11 +502,38 @@
               <label for="buy_desk_q4"><strong>What went well and what could be improved?</strong></label>
               <textarea id="buy_desk_q4" name="buy_desk_q4" rows="3" placeholder="Your feedback..."></textarea>
             </div>
+            </div>
           </div>
           <div class="sl-block" data-slkey="sourcing">
             <h3>Sourcing</h3>
-            <p class="sl-reminder">Sourcing support for purchases above CNY 700k. Supports supplier selection, contract negotiations, renewals, and competitive bidding to help you achieve optimal value.</p>
-            
+            <p class="sl-reminder">Sourcing support for purchases above USD 100k. Supports supplier selection, contract negotiations, renewals, and competitive bidding to help you achieve optimal value.</p>
+            <div class="question">
+              <p><strong>How satisfied are you with Sourcing?</strong></p>
+              <div class="ratings">
+                <label class="radio-pill">
+                  <input type="radio" name="sourcing_gate" value="Satisfied" />
+                  <span>Satisfied</span>
+                </label>
+                <label class="radio-pill">
+                  <input type="radio" name="sourcing_gate" value="Neutral" />
+                  <span>Neutral</span>
+                </label>
+                <label class="radio-pill">
+                  <input type="radio" name="sourcing_gate" value="Dissatisfied" />
+                  <span>Dissatisfied</span>
+                </label>
+              </div>
+            </div>
+
+            <div class="sl-subblock sl-neutral-block hidden" data-slkey="sourcing">
+              <div class="question">
+                <label for="sourcing_improvement"><strong>What could we have done better?</strong></label>
+                <textarea id="sourcing_improvement" name="sourcing_improvement" rows="3" placeholder="Your feedback..."></textarea>
+              </div>
+            </div>
+
+            <div class="sl-subblock sl-dissatisfied-block hidden" data-slkey="sourcing">
+              
             <div class="question">
               <p><strong>How well did the Sourcing team understand your business needs?</strong></p>
               <div class="ratings">
@@ -508,11 +608,38 @@
               <label for="sourcing_q4"><strong>What went well and what could be improved?</strong></label>
               <textarea id="sourcing_q4" name="sourcing_q4" rows="3" placeholder="Your feedback..."></textarea>
             </div>
+            </div>
           </div>
           <div class="sl-block" data-slkey="risk_screening">
             <h3>Risk Screening</h3>
             
-            
+            <div class="question">
+              <p><strong>How satisfied are you with Risk Screening?</strong></p>
+              <div class="ratings">
+                <label class="radio-pill">
+                  <input type="radio" name="risk_screening_gate" value="Satisfied" />
+                  <span>Satisfied</span>
+                </label>
+                <label class="radio-pill">
+                  <input type="radio" name="risk_screening_gate" value="Neutral" />
+                  <span>Neutral</span>
+                </label>
+                <label class="radio-pill">
+                  <input type="radio" name="risk_screening_gate" value="Dissatisfied" />
+                  <span>Dissatisfied</span>
+                </label>
+              </div>
+            </div>
+
+            <div class="sl-subblock sl-neutral-block hidden" data-slkey="risk_screening">
+              <div class="question">
+                <label for="risk_screening_improvement"><strong>What could we have done better?</strong></label>
+                <textarea id="risk_screening_improvement" name="risk_screening_improvement" rows="3" placeholder="Your feedback..."></textarea>
+              </div>
+            </div>
+
+            <div class="sl-subblock sl-dissatisfied-block hidden" data-slkey="risk_screening">
+              
             <div class="question">
               <p><strong>How easy was it to submit a Risk Screening request?</strong></p>
               <div class="ratings">
@@ -568,6 +695,7 @@
             <div class="question">
               <label for="risk_screening_q3"><strong>What went well and what could be improved?</strong></label>
               <textarea id="risk_screening_q3" name="risk_screening_q3" rows="3" placeholder="Your feedback..."></textarea>
+            </div>
             </div>
           </div>
           <div class="nav-row">

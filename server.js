@@ -84,21 +84,23 @@ async function addResponse(submission) {
 
 // --------------- Helpers ---------------
 
-const SATISFACTION_SCORES = {
-  "Very Satisfied": 5,
-  "Satisfied": 4,
-  "Neutral": 3,
-  "Dissatisfied": 2,
-  "Very Dissatisfied": 1
+const GATE_SCORES = {
+  "Satisfied": 3,
+  "Neutral": 2,
+  "Dissatisfied": 1
 };
 
 function averageOverallSatisfaction(responses) {
-  const scores = responses
-    .map((r) => SATISFACTION_SCORES[r.overallSatisfaction])
-    .filter((s) => s !== undefined);
+  const scores = [];
+  responses.forEach((r) => {
+    Object.values(r.serviceLineResponses || {}).forEach((sl) => {
+      const score = sl && GATE_SCORES[sl.gate];
+      if (score !== undefined) scores.push(score);
+    });
+  });
   if (!scores.length) return "-";
   const avg = scores.reduce((a, b) => a + b, 0) / scores.length;
-  return avg.toFixed(1) + " / 5";
+  return avg.toFixed(1) + " / 3";
 }
 
 function buildDashboardLink() {
@@ -144,8 +146,6 @@ app.post("/api/submit", async (req, res) => {
     const submission = {
       id: uuidv4(),
       email: String(body.email).trim(),
-      overallSatisfaction: body.overallSatisfaction || "",
-      branch: body.branch === "detailed" ? "detailed" : "quick",
       serviceLines: Array.isArray(body.serviceLines) ? body.serviceLines : [],
       serviceLineResponses:
         body.serviceLineResponses && typeof body.serviceLineResponses === "object"
@@ -176,8 +176,6 @@ app.post("/api/submit", async (req, res) => {
         html: `
           <h2>New EP&P CSAT response</h2>
           <p><strong>Email:</strong> ${submission.email}</p>
-          <p><strong>Overall satisfaction:</strong> ${submission.overallSatisfaction || "-"}</p>
-          <p><strong>Branch:</strong> ${submission.branch}</p>
           <p><strong>Service lines:</strong> ${serviceLines}</p>
           <p><strong>Detailed responses:</strong> ${detailText}</p>
           <p><strong>Recognition:</strong> ${submission.recognition || "-"}</p>

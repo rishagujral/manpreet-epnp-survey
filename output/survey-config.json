@@ -1,21 +1,11 @@
 {
-  "title": "EP&P CSAT Survey - Source to Pay & Coupa",
+  "title": "EP&P CSAT Survey",
+  "brandFull": "Enterprise Procurement & Payables",
   "introText": "As an important internal client of EP&P in GCH, your input is critical to help us improve our services and measure our impact to you.",
-  "instructionText": "Please take two minutes to complete this CSAT survey about the Source to Pay process and Coupa and share your feedback.",
+  "instructionText": "Please take two minutes to complete this survey and share your feedback.",
   "emailPrompt": "Please enter your email.",
-  "overallQuestion": {
-    "id": "overall_s2p",
-    "text": "Overall, are you satisfied with the Source-to-Pay process and the Coupa platform?",
-    "options": [
-      "Very Satisfied",
-      "Satisfied",
-      "Neutral",
-      "Dissatisfied",
-      "Very Dissatisfied"
-    ]
-  },
-  "additionalGeneralQuestions": [],
   "serviceLinePrompt": "Please mark below the Service Line(s) you have used and help us answer the related questions",
+  "improvementQuestion": "What could we have done better?",
   "serviceLines": [
     {
       "key": "supplier_onboarding",
@@ -96,7 +86,7 @@
     {
       "key": "buy_desk",
       "label": "Buy Desk",
-      "description": "Sourcing support for purchases below CNY 700k. Provides purchase order support, requisition processing, and transactional buying assistance to enable efficient procurement execution.",
+      "description": "Sourcing support for purchases below USD 100k. Provides purchase order support, requisition processing, and transactional buying assistance to enable efficient procurement execution.",
       "questions": [
         {
           "id": "q1",
@@ -123,7 +113,7 @@
     {
       "key": "sourcing",
       "label": "Sourcing",
-      "description": "Sourcing support for purchases above CNY 700k. Supports supplier selection, contract negotiations, renewals, and competitive bidding to help you achieve optimal value.",
+      "description": "Sourcing support for purchases above USD 100k. Supports supplier selection, contract negotiations, renewals, and competitive bidding to help you achieve optimal value.",
       "questions": [
         {
           "id": "q1",
@@ -181,6 +171,11 @@
     "Yes",
     "No",
     "Not Applicable"
+  ],
+  "gateOptions": [
+    "Satisfied",
+    "Neutral",
+    "Dissatisfied"
   ],
   "recognitionQuestion": "Would you like to highlight any EP&P members who have gone above and beyond in providing you with exceptional service?",
   "rawImportedText": "EP&P GCH region Questionnaire \n\n\n\nPage:1\n\nIntroduction:\n\nAs an important internal client of EP&P GCH region, your input is critical to help us improve our services and measure our impact to you.\n\nPlease take two minutes to complete this CSAT survey and share your feedback by October 15th, 2026.\n\nPlease enter your email.Space for text\n\n\n\n--------------------------------------------------------------------------------------------------------------------------------\n\n\n\nPage2:\n\nWe are soliciting input across all service lines of EP&P; please mark below which ones you have used and help us answer the following questions\n\nSupplier Onboarding\n\nService Desk\n\nAccounts Payable\n\nBuy Desk\n\nSourcing\n\nRisk Screening\n\n\n\n---------------------------------------------------------------------------------------------------------------------------------\n\nPage 3:\n\nHow satisfied are you with the services offered by the EP&P team in your market?\n\nResponse options: Very Satisfied, Satisfied, Neutral, Dissatisfied, Very Dissatisfied, N/A\n\n\n\nIf satisfied, what worked well. \n\nSpace for text\n\n\n\nIf dissatisfied, what could be improved. \n\nSpace for text\n\n\n\nPlaceholder question:\n\nSpace for text\n\n\n\nPlaceholder question:\n\nSpace for text\n\n---------------------------------------------------------------------------------------------------------------------------\n\nPage 4:\n\nWould you like to highlight any EP&P members who have gone above and beyond in providing you with exceptional service?Space for text\n\n\n\n\n\n"

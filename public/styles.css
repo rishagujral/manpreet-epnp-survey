@@ -317,6 +317,16 @@ textarea {
   color: #7c4a03;
 }
 
+.sl-subblock {
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px dashed #d1d5db;
+}
+
+.sl-subblock.hidden {
+  display: none;
+}
+
 /* --------- Dashboard: per-question response detail --------- */
 
 .sl-response {

@@ -6,7 +6,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const steps = Array.from(form.querySelectorAll(".step"));
   let currentIndex = 0;
-  let branchToDetails = false;
 
   function stepIdAt(index) {
     return steps[index] ? steps[index].dataset.step : null;
@@ -24,9 +23,25 @@ document.addEventListener("DOMContentLoaded", () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   }
 
-  function getOverallAnswer() {
-    const checked = form.querySelector('input[name="overall_s2p"]:checked');
-    return checked ? checked.value : null;
+  function toggleSubBlock(block, show) {
+    if (!block) return;
+    block.classList.toggle("hidden", !show);
+    block.querySelectorAll("input, textarea").forEach((el) => {
+      el.disabled = !show;
+      if (!show) {
+        if (el.type === "radio") el.checked = false;
+        if (el.tagName === "TEXTAREA") el.value = "";
+      }
+    });
+  }
+
+  function updateGateVisibility(key) {
+    const gateChecked = form.querySelector(`input[name="${key}_gate"]:checked`);
+    const value = gateChecked ? gateChecked.value : null;
+    const neutralBlock = form.querySelector(`.sl-neutral-block[data-slkey="${key}"]`);
+    const dissatisfiedBlock = form.querySelector(`.sl-dissatisfied-block[data-slkey="${key}"]`);
+    toggleSubBlock(neutralBlock, value === "Neutral");
+    toggleSubBlock(dissatisfiedBlock, value === "Dissatisfied");
   }
 
   function syncServiceLineBlocks() {
@@ -38,6 +53,9 @@ document.addEventListener("DOMContentLoaded", () => {
       if (cb.checked) {
         block.classList.remove("hidden");
         block.querySelectorAll("input, textarea").forEach((el) => (el.disabled = false));
+        // Re-apply gate-driven visibility so neutral/dissatisfied sub-blocks
+        // stay hidden/disabled until the gate question is actually answered.
+        updateGateVisibility(key);
       } else {
         block.classList.add("hidden");
         block.querySelectorAll("input, textarea").forEach((el) => {
@@ -49,6 +67,17 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
+  form.addEventListener("change", (e) => {
+    const name = e.target.name || "";
+    if (name.endsWith("_gate")) {
+      const key = name.slice(0, -"_gate".length);
+      updateGateVisibility(key);
+    }
+    if (e.target.classList.contains("sl-checkbox")) {
+      syncServiceLineBlocks();
+    }
+  });
+
   function goNext() {
     const id = currentStepId();
 
@@ -58,29 +87,13 @@ document.addEventListener("DOMContentLoaded", () => {
         email.reportValidity();
         return;
       }
-      showStep("general");
-      return;
-    }
-
-    if (id === "general") {
-      const answer = getOverallAnswer();
-      if (!answer) {
-        alert("Please select an option.");
-        return;
-      }
-      if (answer === "Dissatisfied" || answer === "Very Dissatisfied") {
-        branchToDetails = true;
-        showStep("servicelines");
-      } else {
-        branchToDetails = false;
-        showStep("recognition");
-      }
+      showStep("servicelines");
       return;
     }
 
     if (id === "servicelines") {
-      const anyChecked = form.querySelectorAll(".sl-checkbox:checked").length > 0;
-      if (!anyChecked) {
+      const checkedBoxes = Array.from(form.querySelectorAll(".sl-checkbox:checked"));
+      if (!checkedBoxes.length) {
         alert("Please select at least one service line.");
         return;
       }
@@ -90,6 +103,16 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     if (id === "details") {
+      const checkedKeys = Array.from(form.querySelectorAll(".sl-checkbox:checked")).map(
+        (cb) => cb.dataset.slkey
+      );
+      const missing = checkedKeys.find(
+        (key) => !form.querySelector(`input[name="${key}_gate"]:checked`)
+      );
+      if (missing) {
+        alert("Please answer the satisfaction question for each selected service line.");
+        return;
+      }
       showStep("recognition");
       return;
     }
@@ -98,14 +121,12 @@ document.addEventListener("DOMContentLoaded", () => {
   function goBack() {
     const id = currentStepId();
 
-    if (id === "general") {
+    if (id === "servicelines") {
       showStep("landing");
-    } else if (id === "servicelines") {
-      showStep("general");
     } else if (id === "details") {
       showStep("servicelines");
     } else if (id === "recognition") {
-      showStep(branchToDetails ? "details" : "general");
+      showStep("details");
     }
   }
 
@@ -116,28 +137,26 @@ document.addEventListener("DOMContentLoaded", () => {
     e.preventDefault();
 
     const formData = new FormData(form);
+    const checkedKeys = Array.from(form.querySelectorAll(".sl-checkbox:checked")).map(
+      (cb) => cb.dataset.slkey
+    );
+
     const payload = {
       email: formData.get("email"),
-      overallSatisfaction: formData.get("overall_s2p"),
-      branch: branchToDetails ? "detailed" : "quick",
-      serviceLines: branchToDetails ? formData.getAll("serviceLines") : [],
+      serviceLines: formData.getAll("serviceLines"),
       serviceLineResponses: {},
       recognition: (formData.get("recognition") || "").trim()
     };
 
-    if (branchToDetails) {
-      const checkedKeys = Array.from(form.querySelectorAll(".sl-checkbox:checked")).map(
-        (cb) => cb.dataset.slkey
-      );
-      checkedKeys.forEach((key) => {
-        payload.serviceLineResponses[key] = {};
-      });
-      for (const [name, value] of formData.entries()) {
-        const match = checkedKeys.find((key) => name.startsWith(key + "_"));
-        if (match) {
-          const qid = name.slice(match.length + 1);
-          payload.serviceLineResponses[match][qid] = value;
-        }
+    checkedKeys.forEach((key) => {
+      payload.serviceLineResponses[key] = {};
+    });
+
+    for (const [name, value] of formData.entries()) {
+      const match = checkedKeys.find((key) => name.startsWith(key + "_"));
+      if (match) {
+        const qid = name.slice(match.length + 1);
+        payload.serviceLineResponses[match][qid] = value;
       }
     }
 

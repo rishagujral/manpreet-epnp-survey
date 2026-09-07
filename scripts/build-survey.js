@@ -12,26 +12,21 @@ function ensureDir(dir) {
 
 const RATING_OPTIONS = ["Very Satisfied", "Satisfied", "Neutral", "Dissatisfied", "Very Dissatisfied"];
 const YES_NO_OPTIONS = ["Yes", "No", "Not Applicable"];
+const GATE_OPTIONS = ["Satisfied", "Neutral", "Dissatisfied"];
 
 function defaultConfig(rawText) {
   return {
-    title: "EP&P CSAT Survey - Source to Pay & Coupa",
+    title: "EP&P CSAT Survey",
+    brandFull: "Enterprise Procurement & Payables",
     introText:
       "As an important internal client of EP&P in GCH, your input is critical to help us improve our services and measure our impact to you.",
-    instructionText:
-      "Please take two minutes to complete this CSAT survey about the Source to Pay process and Coupa and share your feedback.",
+    instructionText: "Please take two minutes to complete this survey and share your feedback.",
     emailPrompt: "Please enter your email.",
-
-    overallQuestion: {
-      id: "overall_s2p",
-      text: "Overall, are you satisfied with the Source-to-Pay process and the Coupa platform?",
-      options: RATING_OPTIONS
-    },
-    // Additional general questions (TBC) can be appended here later without touching the template.
-    additionalGeneralQuestions: [],
 
     serviceLinePrompt:
       "Please mark below the Service Line(s) you have used and help us answer the related questions",
+
+    improvementQuestion: "What could we have done better?",
 
     serviceLines: [
       {
@@ -73,7 +68,7 @@ function defaultConfig(rawText) {
         key: "buy_desk",
         label: "Buy Desk",
         description:
-          "Sourcing support for purchases below CNY 700k. Provides purchase order support, requisition processing, and transactional buying assistance to enable efficient procurement execution.",
+          "Sourcing support for purchases below USD 100k. Provides purchase order support, requisition processing, and transactional buying assistance to enable efficient procurement execution.",
         questions: [
           { id: "q1", type: "rating", text: "How easy was it to submit a Sourcing Support Request Form (SSRF)?" },
           { id: "q2", type: "rating", text: "How helpful was the Buy Desk in supporting your request?" },
@@ -89,7 +84,7 @@ function defaultConfig(rawText) {
         key: "sourcing",
         label: "Sourcing",
         description:
-          "Sourcing support for purchases above CNY 700k. Supports supplier selection, contract negotiations, renewals, and competitive bidding to help you achieve optimal value.",
+          "Sourcing support for purchases above USD 100k. Supports supplier selection, contract negotiations, renewals, and competitive bidding to help you achieve optimal value.",
         questions: [
           { id: "q1", type: "rating", text: "How well did the Sourcing team understand your business needs?" },
           { id: "q2", type: "rating", text: "How effective was the collaboration and communication with the team?" },
@@ -116,6 +111,7 @@ function defaultConfig(rawText) {
 
     ratingOptions: RATING_OPTIONS,
     yesNoOptions: YES_NO_OPTIONS,
+    gateOptions: GATE_OPTIONS,
 
     recognitionQuestion:
       "Would you like to highlight any EP&P members who have gone above and beyond in providing you with exceptional service?",
@@ -174,6 +170,8 @@ async function build() {
     "utf8"
   );
 
+  const REMINDER_KEYS = ["buy_desk", "sourcing"];
+
   const serviceLineCheckboxesHtml = config.serviceLines
     .map(
       (sl) => `
@@ -187,7 +185,16 @@ async function build() {
     )
     .join("");
 
-  const REMINDER_KEYS = ["buy_desk", "sourcing"];
+  const gateOptionsHtml = (key) =>
+    config.gateOptions
+      .map(
+        (opt) => `
+                <label class="radio-pill">
+                  <input type="radio" name="${key}_gate" value="${opt}" />
+                  <span>${opt}</span>
+                </label>`
+      )
+      .join("");
 
   const serviceLineQuestionBlocksHtml = config.serviceLines
     .map(
@@ -195,18 +202,23 @@ async function build() {
           <div class="sl-block" data-slkey="${sl.key}">
             <h3>${sl.label}</h3>
             ${REMINDER_KEYS.includes(sl.key) ? `<p class="sl-reminder">${sl.description}</p>` : ""}
-            ${sl.questions.map((q) => renderQuestion(config, q, sl.key)).join("")}
-          </div>`
-    )
-    .join("");
+            <div class="question">
+              <p><strong>How satisfied are you with ${sl.label}?</strong></p>
+              <div class="ratings">${gateOptionsHtml(sl.key)}
+              </div>
+            </div>
 
-  const overallOptionsHtml = config.overallQuestion.options
-    .map(
-      (opt) => `
-              <label class="radio-pill">
-                <input type="radio" name="overall_s2p" value="${opt}" required />
-                <span>${opt}</span>
-              </label>`
+            <div class="sl-subblock sl-neutral-block hidden" data-slkey="${sl.key}">
+              <div class="question">
+                <label for="${sl.key}_improvement"><strong>${config.improvementQuestion}</strong></label>
+                <textarea id="${sl.key}_improvement" name="${sl.key}_improvement" rows="3" placeholder="Your feedback..."></textarea>
+              </div>
+            </div>
+
+            <div class="sl-subblock sl-dissatisfied-block hidden" data-slkey="${sl.key}">
+              ${sl.questions.map((q) => renderQuestion(config, q, sl.key)).join("")}
+            </div>
+          </div>`
     )
     .join("");
 
@@ -221,7 +233,7 @@ async function build() {
 <body>
   <div class="page">
     <div class="card">
-      <div class="brand">EP&P</div>
+      <div class="brand">${config.brandFull}</div>
       <h1>${config.title}</h1>
 
       <form id="surveyForm">
@@ -237,21 +249,7 @@ async function build() {
           </div>
         </section>
 
-        <!-- STEP: general S2P / Coupa question -->
-        <section class="step" data-step="general">
-          <h2>Source to Pay & Coupa</h2>
-          <div class="question">
-            <p><strong>${config.overallQuestion.text}</strong></p>
-            <div class="ratings">${overallOptionsHtml}
-            </div>
-          </div>
-          <div class="nav-row">
-            <button type="button" class="btn btn-outline btn-back">Back</button>
-            <button type="button" class="btn btn-next">Next</button>
-          </div>
-        </section>
-
-        <!-- STEP: service line selection (shown only if dissatisfied) -->
+        <!-- STEP: service line selection -->
         <section class="step" data-step="servicelines">
           <h2>Service Lines</h2>
           <p>${config.serviceLinePrompt}</p>
@@ -262,7 +260,7 @@ async function build() {
           </div>
         </section>
 
-        <!-- STEP: per-service-line detailed questions -->
+        <!-- STEP: per-service-line satisfaction + conditional follow-up -->
         <section class="step" data-step="details">
           <h2>Tell us more</h2>
           ${serviceLineQuestionBlocksHtml}
@@ -317,7 +315,7 @@ async function build() {
 <body>
   <div class="page">
     <div class="card">
-      <div class="brand">EP&P</div>
+      <div class="brand">${config.brandFull}</div>
       <h1>EP&P CSAT Dashboard</h1>
       <p class="muted">Refresh this page anytime to see the latest results</p>
       <p style="margin-top:12px"><a href="/output/invite.html" class="btn" style="text-decoration:none;display:inline-block">Share Survey</a></p>
@@ -330,17 +328,17 @@ async function build() {
         <h2>Key Highlights</h2>
         <div class="chart-row">
           <div class="chart-box">
-            <h3>Overall S2P / Coupa Satisfaction</h3>
+            <h3>Overall Satisfaction (Service Lines)</h3>
             <canvas id="chartOverall"></canvas>
           </div>
           <div class="chart-box">
-            <h3>Service Line Usage (Detailed Feedback)</h3>
+            <h3>Service Line Usage</h3>
             <canvas id="chartUsage"></canvas>
           </div>
         </div>
         <div class="chart-row">
           <div class="chart-box">
-            <h3>Per Service Line Avg Rating</h3>
+            <h3>Per Service Line Avg Rating (Dissatisfied Follow-up)</h3>
             <canvas id="chartServiceLine"></canvas>
           </div>
           <div class="chart-box" id="recognitionBox">
@@ -360,7 +358,8 @@ async function build() {
 
   <script>
     const SCORE_MAP = { "Very Satisfied": 5, "Satisfied": 4, "Neutral": 3, "Dissatisfied": 2, "Very Dissatisfied": 1 };
-    const COLORS = ["#178a4b","#34d399","#fbbf24","#f87171","#9333ea","#3b82f6"];
+    const GATE_SCORE_MAP = { "Satisfied": 3, "Neutral": 2, "Dissatisfied": 1 };
+    const COLORS = ["#178a4b","#fbbf24","#f87171","#34d399","#9333ea","#3b82f6"];
     const SL_DEFS = ${JSON.stringify(slDefsForDashboard)};
 
     function nameFromEmail(email) {
@@ -378,30 +377,40 @@ async function build() {
       if (!res.ok) { document.body.innerHTML = '<div class="page"><div class="card"><h1>No data yet</h1></div></div>'; return; }
       const data = await res.json();
       const responses = data.responses || [];
-      const detailedResponses = responses.filter(r => r.branch === "detailed");
+
+      // --- Gate value counts (across all service line selections) ---
+      let gateCount = 0, dissatisfiedCount = 0;
+      const gateCounts = { "Satisfied": 0, "Neutral": 0, "Dissatisfied": 0 };
+      responses.forEach(r => {
+        Object.values(r.serviceLineResponses || {}).forEach(sl => {
+          if (sl && sl.gate && gateCounts[sl.gate] !== undefined) {
+            gateCounts[sl.gate]++;
+            gateCount++;
+            if (sl.gate === "Dissatisfied") dissatisfiedCount++;
+          }
+        });
+      });
 
       // --- Stats ---
       document.getElementById("stats").innerHTML =
         '<div class="stat"><div class="stat-number">' + data.totalResponses + '</div><div class="stat-label">Total Responses</div></div>' +
-        '<div class="stat"><div class="stat-number">' + data.averageScore + '</div><div class="stat-label">Avg Overall Satisfaction</div></div>' +
-        '<div class="stat"><div class="stat-number">' + detailedResponses.length + '</div><div class="stat-label">Detailed Feedback Given</div></div>';
+        '<div class="stat"><div class="stat-number">' + data.averageScore + '</div><div class="stat-label">Avg Satisfaction (Service Lines)</div></div>' +
+        '<div class="stat"><div class="stat-number">' + dissatisfiedCount + '</div><div class="stat-label">Dissatisfied Flags</div></div>';
 
-      // --- Overall satisfaction doughnut ---
-      const overallCounts = {};
-      responses.forEach(r => { const v = r.overallSatisfaction || "N/A"; overallCounts[v] = (overallCounts[v] || 0) + 1; });
+      // --- Overall satisfaction doughnut (gate values) ---
       new Chart(document.getElementById("chartOverall"), {
         type: "doughnut",
         data: {
-          labels: Object.keys(overallCounts),
-          datasets: [{ data: Object.values(overallCounts), backgroundColor: COLORS }]
+          labels: Object.keys(gateCounts),
+          datasets: [{ data: Object.values(gateCounts), backgroundColor: COLORS }]
         },
         options: { responsive: true, plugins: { legend: { position: "bottom" } } }
       });
 
-      // --- Service line usage bar (only detailed-branch responses) ---
+      // --- Service line usage bar ---
       const usageCounts = {};
       SL_DEFS.forEach(sl => usageCounts[sl.label] = 0);
-      detailedResponses.forEach(r => (r.serviceLines || []).forEach(s => { if (usageCounts[s] !== undefined) usageCounts[s]++; }));
+      responses.forEach(r => (r.serviceLines || []).forEach(s => { if (usageCounts[s] !== undefined) usageCounts[s]++; }));
       new Chart(document.getElementById("chartUsage"), {
         type: "bar",
         data: {
@@ -411,14 +420,15 @@ async function build() {
         options: { responsive: true, indexAxis: "y", plugins: { legend: { display: false } } }
       });
 
-      // --- Per service line avg rating bar (rating-type questions only) ---
+      // --- Per service line avg rating bar (only from Dissatisfied follow-up questions) ---
       const slAvgs = SL_DEFS.map(sl => {
         const ratingQIds = sl.questions.filter(q => q.type === "rating").map(q => q.id);
         const scores = [];
-        detailedResponses.forEach(r => {
-          const answers = (r.serviceLineResponses || {})[sl.key] || {};
+        responses.forEach(r => {
+          const slResp = (r.serviceLineResponses || {})[sl.key];
+          if (!slResp || slResp.gate !== "Dissatisfied") return;
           ratingQIds.forEach(qid => {
-            const score = SCORE_MAP[answers[qid]];
+            const score = SCORE_MAP[slResp[qid]];
             if (score !== undefined) scores.push(score);
           });
         });
@@ -447,26 +457,29 @@ async function build() {
       container.innerHTML = responses.map(r => {
         const name = nameFromEmail(r.email);
         let detailHtml = "";
-        if (r.branch === "detailed" && (r.serviceLines || []).length) {
+        if ((r.serviceLines || []).length) {
           detailHtml = (r.serviceLines || []).map(label => {
             const sl = SL_DEFS.find(s => s.label === label);
             if (!sl) return "";
-            const answers = (r.serviceLineResponses || {})[sl.key] || {};
-            const qaHtml = sl.questions.map(q => {
-              const ans = answers[q.id];
-              if (!ans) return "";
-              return '<div class="qa-row"><span class="qa-q">' + q.text + '</span><span class="qa-a">' + ans + '</span></div>';
-            }).join("");
-            return '<div class="sl-response"><div class="sl-response-title">' + label + '</div>' + qaHtml + '</div>';
+            const slResp = (r.serviceLineResponses || {})[sl.key] || {};
+            const gate = slResp.gate || "-";
+            let extraHtml = "";
+            if (gate === "Neutral" && slResp.improvement) {
+              extraHtml = '<div class="qa-row"><span class="qa-q">What could we have done better?</span><span class="qa-a">' + slResp.improvement + '</span></div>';
+            } else if (gate === "Dissatisfied") {
+              extraHtml = sl.questions.map(q => {
+                const ans = slResp[q.id];
+                if (!ans) return "";
+                return '<div class="qa-row"><span class="qa-q">' + q.text + '</span><span class="qa-a">' + ans + '</span></div>';
+              }).join("");
+            }
+            return '<div class="sl-response"><div class="sl-response-title">' + label + ' &mdash; ' + gate + '</div>' + extraHtml + '</div>';
           }).join("");
         }
         return '<div class="response-card">' +
           '<div class="response-header"><strong>' + name + '</strong> <span class="muted">' + r.email + '</span></div>' +
           '<div class="response-meta">' + formatDate(r.submittedAt) + '</div>' +
-          '<div><strong>Overall S2P/Coupa satisfaction:</strong> ' + (r.overallSatisfaction || "-") + '</div>' +
-          (r.branch === "detailed"
-            ? '<div><strong>Service lines used:</strong> ' + ((r.serviceLines || []).join(", ") || "-") + '</div>' + detailHtml
-            : '<div class="muted">No detailed feedback requested (satisfied/neutral response).</div>') +
+          '<div><strong>Service lines used:</strong> ' + ((r.serviceLines || []).join(", ") || "-") + '</div>' + detailHtml +
           (r.recognition ? '<div><strong>Recognition:</strong> ' + r.recognition + '</div>' : '') +
         '</div>';
       }).join("");
@@ -487,7 +500,7 @@ async function build() {
 <body>
   <div class="page">
     <div class="card">
-      <div class="brand">EP&P</div>
+      <div class="brand">${config.brandFull}</div>
       <h1>Share the Survey</h1>
       <p>Copy the survey link below and share it with your colleagues via email, Teams, or any channel.</p>
 
@@ -546,7 +559,7 @@ async function build() {
 
     function getEmailBody() {
       const link = document.getElementById("surveyLink").value;
-      return "Hi,\\n\\nAs an important internal client of EP&P in GCH, your input is critical to help us improve our services.\\n\\nPlease take two minutes to complete this CSAT survey about the Source to Pay process and Coupa and share your feedback:\\n\\n" + link + "\\n\\nThank you!\\nEP&P Team";
+      return "Hi,\\n\\nAs an important internal client of EP&P in GCH, your input is critical to help us improve our services.\\n\\nPlease take two minutes to complete this survey and share your feedback:\\n\\n" + link + "\\n\\nThank you!\\nEP&P Team";
     }
 
     function openMailto() {
