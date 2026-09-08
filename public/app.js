@@ -38,10 +38,8 @@ document.addEventListener("DOMContentLoaded", () => {
   function updateGateVisibility(key) {
     const gateChecked = form.querySelector(`input[name="${key}_gate"]:checked`);
     const value = gateChecked ? gateChecked.value : null;
-    const neutralBlock = form.querySelector(`.sl-neutral-block[data-slkey="${key}"]`);
-    const dissatisfiedBlock = form.querySelector(`.sl-dissatisfied-block[data-slkey="${key}"]`);
-    toggleSubBlock(neutralBlock, value === "Neutral");
-    toggleSubBlock(dissatisfiedBlock, value === "Dissatisfied");
+    const followUpBlock = form.querySelector(`.sl-followup-block[data-slkey="${key}"]`);
+    toggleSubBlock(followUpBlock, value === "Neutral" || value === "Dissatisfied");
   }
 
   function syncServiceLineBlocks() {

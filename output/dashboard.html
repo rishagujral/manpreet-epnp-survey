@@ -33,7 +33,7 @@
         </div>
         <div class="chart-row">
           <div class="chart-box">
-            <h3>Per Service Line Avg Rating (Dissatisfied Follow-up)</h3>
+            <h3>Per Service Line Avg Rating (Follow-up Questions)</h3>
             <canvas id="chartServiceLine"></canvas>
           </div>
           <div class="chart-box" id="recognitionBox">
@@ -74,14 +74,14 @@
       const responses = data.responses || [];
 
       // --- Gate value counts (across all service line selections) ---
-      let gateCount = 0, dissatisfiedCount = 0;
+      let gateCount = 0, followUpCount = 0;
       const gateCounts = { "Satisfied": 0, "Neutral": 0, "Dissatisfied": 0 };
       responses.forEach(r => {
         Object.values(r.serviceLineResponses || {}).forEach(sl => {
           if (sl && sl.gate && gateCounts[sl.gate] !== undefined) {
             gateCounts[sl.gate]++;
             gateCount++;
-            if (sl.gate === "Dissatisfied") dissatisfiedCount++;
+            if (sl.gate === "Dissatisfied" || sl.gate === "Neutral") followUpCount++;
           }
         });
       });
@@ -90,7 +90,7 @@
       document.getElementById("stats").innerHTML =
         '<div class="stat"><div class="stat-number">' + data.totalResponses + '</div><div class="stat-label">Total Responses</div></div>' +
         '<div class="stat"><div class="stat-number">' + data.averageScore + '</div><div class="stat-label">Avg Satisfaction (Service Lines)</div></div>' +
-        '<div class="stat"><div class="stat-number">' + dissatisfiedCount + '</div><div class="stat-label">Dissatisfied Flags</div></div>';
+        '<div class="stat"><div class="stat-number">' + followUpCount + '</div><div class="stat-label">Neutral/Dissatisfied Flags</div></div>';
 
       // --- Overall satisfaction doughnut (gate values) ---
       new Chart(document.getElementById("chartOverall"), {
@@ -115,13 +115,13 @@
         options: { responsive: true, indexAxis: "y", plugins: { legend: { display: false } } }
       });
 
-      // --- Per service line avg rating bar (only from Dissatisfied follow-up questions) ---
+      // --- Per service line avg rating bar (from Neutral/Dissatisfied follow-up questions) ---
       const slAvgs = SL_DEFS.map(sl => {
         const ratingQIds = sl.questions.filter(q => q.type === "rating").map(q => q.id);
         const scores = [];
         responses.forEach(r => {
           const slResp = (r.serviceLineResponses || {})[sl.key];
-          if (!slResp || slResp.gate !== "Dissatisfied") return;
+          if (!slResp || (slResp.gate !== "Dissatisfied" && slResp.gate !== "Neutral")) return;
           ratingQIds.forEach(qid => {
             const score = SCORE_MAP[slResp[qid]];
             if (score !== undefined) scores.push(score);
@@ -159,9 +159,7 @@
             const slResp = (r.serviceLineResponses || {})[sl.key] || {};
             const gate = slResp.gate || "-";
             let extraHtml = "";
-            if (gate === "Neutral" && slResp.improvement) {
-              extraHtml = '<div class="qa-row"><span class="qa-q">What could we have done better?</span><span class="qa-a">' + slResp.improvement + '</span></div>';
-            } else if (gate === "Dissatisfied") {
+            if (gate === "Neutral" || gate === "Dissatisfied") {
               extraHtml = sl.questions.map(q => {
                 const ans = slResp[q.id];
                 if (!ans) return "";

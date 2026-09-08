@@ -5,7 +5,6 @@
   "instructionText": "Please take two minutes to complete this survey and share your feedback.",
   "emailPrompt": "Please enter your email.",
   "serviceLinePrompt": "Please mark below the Service Line(s) you have used and help us answer the related questions",
-  "improvementQuestion": "What could we have done better?",
   "serviceLines": [
     {
       "key": "supplier_onboarding",

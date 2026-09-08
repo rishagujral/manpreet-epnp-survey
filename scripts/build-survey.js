@@ -26,8 +26,6 @@ function defaultConfig(rawText) {
     serviceLinePrompt:
       "Please mark below the Service Line(s) you have used and help us answer the related questions",
 
-    improvementQuestion: "What could we have done better?",
-
     serviceLines: [
       {
         key: "supplier_onboarding",
@@ -208,14 +206,7 @@ async function build() {
               </div>
             </div>
 
-            <div class="sl-subblock sl-neutral-block hidden" data-slkey="${sl.key}">
-              <div class="question">
-                <label for="${sl.key}_improvement"><strong>${config.improvementQuestion}</strong></label>
-                <textarea id="${sl.key}_improvement" name="${sl.key}_improvement" rows="3" placeholder="Your feedback..."></textarea>
-              </div>
-            </div>
-
-            <div class="sl-subblock sl-dissatisfied-block hidden" data-slkey="${sl.key}">
+            <div class="sl-subblock sl-followup-block hidden" data-slkey="${sl.key}">
               ${sl.questions.map((q) => renderQuestion(config, q, sl.key)).join("")}
             </div>
           </div>`
@@ -338,7 +329,7 @@ async function build() {
         </div>
         <div class="chart-row">
           <div class="chart-box">
-            <h3>Per Service Line Avg Rating (Dissatisfied Follow-up)</h3>
+            <h3>Per Service Line Avg Rating (Follow-up Questions)</h3>
             <canvas id="chartServiceLine"></canvas>
           </div>
           <div class="chart-box" id="recognitionBox">
@@ -379,14 +370,14 @@ async function build() {
       const responses = data.responses || [];
 
       // --- Gate value counts (across all service line selections) ---
-      let gateCount = 0, dissatisfiedCount = 0;
+      let gateCount = 0, followUpCount = 0;
       const gateCounts = { "Satisfied": 0, "Neutral": 0, "Dissatisfied": 0 };
       responses.forEach(r => {
         Object.values(r.serviceLineResponses || {}).forEach(sl => {
           if (sl && sl.gate && gateCounts[sl.gate] !== undefined) {
             gateCounts[sl.gate]++;
             gateCount++;
-            if (sl.gate === "Dissatisfied") dissatisfiedCount++;
+            if (sl.gate === "Dissatisfied" || sl.gate === "Neutral") followUpCount++;
           }
         });
       });
@@ -395,7 +386,7 @@ async function build() {
       document.getElementById("stats").innerHTML =
         '<div class="stat"><div class="stat-number">' + data.totalResponses + '</div><div class="stat-label">Total Responses</div></div>' +
         '<div class="stat"><div class="stat-number">' + data.averageScore + '</div><div class="stat-label">Avg Satisfaction (Service Lines)</div></div>' +
-        '<div class="stat"><div class="stat-number">' + dissatisfiedCount + '</div><div class="stat-label">Dissatisfied Flags</div></div>';
+        '<div class="stat"><div class="stat-number">' + followUpCount + '</div><div class="stat-label">Neutral/Dissatisfied Flags</div></div>';
 
       // --- Overall satisfaction doughnut (gate values) ---
       new Chart(document.getElementById("chartOverall"), {
@@ -420,13 +411,13 @@ async function build() {
         options: { responsive: true, indexAxis: "y", plugins: { legend: { display: false } } }
       });
 
-      // --- Per service line avg rating bar (only from Dissatisfied follow-up questions) ---
+      // --- Per service line avg rating bar (from Neutral/Dissatisfied follow-up questions) ---
       const slAvgs = SL_DEFS.map(sl => {
         const ratingQIds = sl.questions.filter(q => q.type === "rating").map(q => q.id);
         const scores = [];
         responses.forEach(r => {
           const slResp = (r.serviceLineResponses || {})[sl.key];
-          if (!slResp || slResp.gate !== "Dissatisfied") return;
+          if (!slResp || (slResp.gate !== "Dissatisfied" && slResp.gate !== "Neutral")) return;
           ratingQIds.forEach(qid => {
             const score = SCORE_MAP[slResp[qid]];
             if (score !== undefined) scores.push(score);
@@ -464,9 +455,7 @@ async function build() {
             const slResp = (r.serviceLineResponses || {})[sl.key] || {};
             const gate = slResp.gate || "-";
             let extraHtml = "";
-            if (gate === "Neutral" && slResp.improvement) {
-              extraHtml = '<div class="qa-row"><span class="qa-q">What could we have done better?</span><span class="qa-a">' + slResp.improvement + '</span></div>';
-            } else if (gate === "Dissatisfied") {
+            if (gate === "Neutral" || gate === "Dissatisfied") {
               extraHtml = sl.questions.map(q => {
                 const ans = slResp[q.id];
                 if (!ans) return "";
