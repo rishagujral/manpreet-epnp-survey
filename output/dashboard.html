@@ -138,8 +138,13 @@
         options: { responsive: true, scales: { y: { min: 0, max: 5 } }, plugins: { legend: { display: false } } }
       });
 
-      // --- Recognition list ---
-      const recognitions = responses.map(r => r.recognition).filter(Boolean);
+      // --- Recognition list (collected per service line now) ---
+      const recognitions = [];
+      responses.forEach(r => {
+        Object.values(r.serviceLineResponses || {}).forEach(sl => {
+          if (sl && sl.recognition) recognitions.push(sl.recognition);
+        });
+      });
       const recList = document.getElementById("recognitionList");
       if (recognitions.length) {
         recList.innerHTML = recognitions.map(r => '<li>' + r + '</li>').join("");
@@ -166,6 +171,9 @@
                 return '<div class="qa-row"><span class="qa-q">' + q.text + '</span><span class="qa-a">' + ans + '</span></div>';
               }).join("");
             }
+            if (slResp.recognition) {
+              extraHtml += '<div class="qa-row"><span class="qa-q">Recognition</span><span class="qa-a">' + slResp.recognition + '</span></div>';
+            }
             return '<div class="sl-response"><div class="sl-response-title">' + label + ' &mdash; ' + gate + '</div>' + extraHtml + '</div>';
           }).join("");
         }
@@ -173,7 +181,6 @@
           '<div class="response-header"><strong>' + name + '</strong> <span class="muted">' + r.email + '</span></div>' +
           '<div class="response-meta">' + formatDate(r.submittedAt) + '</div>' +
           '<div><strong>Service lines used:</strong> ' + ((r.serviceLines || []).join(", ") || "-") + '</div>' + detailHtml +
-          (r.recognition ? '<div><strong>Recognition:</strong> ' + r.recognition + '</div>' : '') +
         '</div>';
       }).join("");
     }

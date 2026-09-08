@@ -151,7 +151,6 @@ app.post("/api/submit", async (req, res) => {
         body.serviceLineResponses && typeof body.serviceLineResponses === "object"
           ? body.serviceLineResponses
           : {},
-      recognition: String(body.recognition || "").trim(),
       submittedAt: new Date().toISOString()
     };
 
@@ -177,8 +176,7 @@ app.post("/api/submit", async (req, res) => {
           <h2>New EP&P CSAT response</h2>
           <p><strong>Email:</strong> ${submission.email}</p>
           <p><strong>Service lines:</strong> ${serviceLines}</p>
-          <p><strong>Detailed responses:</strong> ${detailText}</p>
-          <p><strong>Recognition:</strong> ${submission.recognition || "-"}</p>
+          <p><strong>Detailed responses (incl. recognition):</strong> ${detailText}</p>
           <p><strong>Dashboard:</strong> <a href="${dashboardLink}">${dashboardLink}</a></p>
         `
       }).catch((err) => console.error("Admin email failed:", err.message));

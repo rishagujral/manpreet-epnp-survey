@@ -39,7 +39,12 @@ document.addEventListener("DOMContentLoaded", () => {
     const gateChecked = form.querySelector(`input[name="${key}_gate"]:checked`);
     const value = gateChecked ? gateChecked.value : null;
     const followUpBlock = form.querySelector(`.sl-followup-block[data-slkey="${key}"]`);
+    const recognitionBlock = form.querySelector(`.sl-recognition-block[data-slkey="${key}"]`);
     toggleSubBlock(followUpBlock, value === "Neutral" || value === "Dissatisfied");
+    // Recognition appears as soon as any satisfaction answer is given for this line:
+    // immediately under the gate when Satisfied, or after the follow-up questions
+    // when Neutral/Dissatisfied.
+    toggleSubBlock(recognitionBlock, value !== null);
   }
 
   function syncServiceLineBlocks() {
@@ -133,8 +138,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const payload = {
       email: formData.get("email"),
       serviceLines: formData.getAll("serviceLines"),
-      serviceLineResponses: {},
-      recognition: (formData.get("recognition") || "").trim()
+      serviceLineResponses: {}
     };
 
     checkedKeys.forEach((key) => {

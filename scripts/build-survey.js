@@ -209,6 +209,13 @@ async function build() {
             <div class="sl-subblock sl-followup-block hidden" data-slkey="${sl.key}">
               ${sl.questions.map((q) => renderQuestion(config, q, sl.key)).join("")}
             </div>
+
+            <div class="sl-subblock sl-recognition-block hidden" data-slkey="${sl.key}">
+              <div class="question">
+                <label for="${sl.key}_recognition"><strong>${config.recognitionQuestion}</strong></label>
+                <textarea id="${sl.key}_recognition" name="${sl.key}_recognition" rows="3" placeholder="Name any team members..."></textarea>
+              </div>
+            </div>
           </div>`
     )
     .join("");
@@ -251,15 +258,10 @@ async function build() {
           </div>
         </section>
 
-        <!-- STEP: per-service-line satisfaction + conditional follow-up + recognition (final) -->
+        <!-- STEP: per-service-line satisfaction + conditional follow-up + recognition -->
         <section class="step" data-step="details">
           <h2>Tell us more</h2>
           ${serviceLineQuestionBlocksHtml}
-
-          <div class="question">
-            <label for="recognition"><strong>${config.recognitionQuestion}</strong></label>
-            <textarea id="recognition" name="recognition" rows="4" placeholder="Name any team members..."></textarea>
-          </div>
 
           <div class="nav-row">
             <button type="button" class="btn btn-outline btn-back">Back</button>
@@ -427,8 +429,13 @@ async function build() {
         options: { responsive: true, scales: { y: { min: 0, max: 5 } }, plugins: { legend: { display: false } } }
       });
 
-      // --- Recognition list ---
-      const recognitions = responses.map(r => r.recognition).filter(Boolean);
+      // --- Recognition list (collected per service line now) ---
+      const recognitions = [];
+      responses.forEach(r => {
+        Object.values(r.serviceLineResponses || {}).forEach(sl => {
+          if (sl && sl.recognition) recognitions.push(sl.recognition);
+        });
+      });
       const recList = document.getElementById("recognitionList");
       if (recognitions.length) {
         recList.innerHTML = recognitions.map(r => '<li>' + r + '</li>').join("");
@@ -455,6 +462,9 @@ async function build() {
                 return '<div class="qa-row"><span class="qa-q">' + q.text + '</span><span class="qa-a">' + ans + '</span></div>';
               }).join("");
             }
+            if (slResp.recognition) {
+              extraHtml += '<div class="qa-row"><span class="qa-q">Recognition</span><span class="qa-a">' + slResp.recognition + '</span></div>';
+            }
             return '<div class="sl-response"><div class="sl-response-title">' + label + ' &mdash; ' + gate + '</div>' + extraHtml + '</div>';
           }).join("");
         }
@@ -462,7 +472,6 @@ async function build() {
           '<div class="response-header"><strong>' + name + '</strong> <span class="muted">' + r.email + '</span></div>' +
           '<div class="response-meta">' + formatDate(r.submittedAt) + '</div>' +
           '<div><strong>Service lines used:</strong> ' + ((r.serviceLines || []).join(", ") || "-") + '</div>' + detailHtml +
-          (r.recognition ? '<div><strong>Recognition:</strong> ' + r.recognition + '</div>' : '') +
         '</div>';
       }).join("");
     }
