@@ -251,23 +251,16 @@ async function build() {
           </div>
         </section>
 
-        <!-- STEP: per-service-line satisfaction + conditional follow-up -->
+        <!-- STEP: per-service-line satisfaction + conditional follow-up + recognition (final) -->
         <section class="step" data-step="details">
           <h2>Tell us more</h2>
           ${serviceLineQuestionBlocksHtml}
-          <div class="nav-row">
-            <button type="button" class="btn btn-outline btn-back">Back</button>
-            <button type="button" class="btn btn-next">Next</button>
-          </div>
-        </section>
 
-        <!-- STEP: recognition (final, always shown) -->
-        <section class="step" data-step="recognition">
-          <h2>Recognition</h2>
           <div class="question">
             <label for="recognition"><strong>${config.recognitionQuestion}</strong></label>
             <textarea id="recognition" name="recognition" rows="4" placeholder="Name any team members..."></textarea>
           </div>
+
           <div class="nav-row">
             <button type="button" class="btn btn-outline btn-back">Back</button>
             <button type="submit" class="btn">Submit survey</button>

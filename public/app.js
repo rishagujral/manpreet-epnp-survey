@@ -99,21 +99,6 @@ document.addEventListener("DOMContentLoaded", () => {
       showStep("details");
       return;
     }
-
-    if (id === "details") {
-      const checkedKeys = Array.from(form.querySelectorAll(".sl-checkbox:checked")).map(
-        (cb) => cb.dataset.slkey
-      );
-      const missing = checkedKeys.find(
-        (key) => !form.querySelector(`input[name="${key}_gate"]:checked`)
-      );
-      if (missing) {
-        alert("Please answer the satisfaction question for each selected service line.");
-        return;
-      }
-      showStep("recognition");
-      return;
-    }
   }
 
   function goBack() {
@@ -123,8 +108,6 @@ document.addEventListener("DOMContentLoaded", () => {
       showStep("landing");
     } else if (id === "details") {
       showStep("servicelines");
-    } else if (id === "recognition") {
-      showStep("details");
     }
   }
 
@@ -134,10 +117,18 @@ document.addEventListener("DOMContentLoaded", () => {
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
 
-    const formData = new FormData(form);
     const checkedKeys = Array.from(form.querySelectorAll(".sl-checkbox:checked")).map(
       (cb) => cb.dataset.slkey
     );
+    const missing = checkedKeys.find(
+      (key) => !form.querySelector(`input[name="${key}_gate"]:checked`)
+    );
+    if (missing) {
+      alert("Please answer the satisfaction question for each selected service line.");
+      return;
+    }
+
+    const formData = new FormData(form);
 
     const payload = {
       email: formData.get("email"),
