@@ -36,7 +36,7 @@
     {
       "key": "service_desk",
       "label": "Service Desk",
-      "description": "Acts as the first point of contact for procurement-related queries, issue resolution, and general support to ensure smooth operations.",
+      "description": "Acts as the first point of contact for procurement-related queries, issue resolution, and general support via the BCGProcPay email service desk to ensure smooth operations.",
       "questions": [
         {
           "id": "q1",

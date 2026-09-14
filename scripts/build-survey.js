@@ -43,7 +43,7 @@ function defaultConfig(rawText) {
         key: "service_desk",
         label: "Service Desk",
         description:
-          "Acts as the first point of contact for procurement-related queries, issue resolution, and general support to ensure smooth operations.",
+          "Acts as the first point of contact for procurement-related queries, issue resolution, and general support via the BCGProcPay email service desk to ensure smooth operations.",
         questions: [
           { id: "q1", type: "rating", text: "How effective was the Service Desk team in addressing your queries?" },
           { id: "q2", type: "rating", text: "How responsive was the Service Desk team to your queries?" },
